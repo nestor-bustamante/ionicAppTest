@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">a.basemaps.cartocdn.com</domain>
+        <domain includeSubdomains="true">b.basemaps.cartocdn.com</domain>
+        <domain includeSubdomains="true">c.basemaps.cartocdn.com</domain>
+        <domain includeSubdomains="true">d.basemaps.cartocdn.com</domain>
+        <domain includeSubdomains="true">e.basemaps.cartocdn.com</domain>
+        <domain includeSubdomains="true">f.basemaps.cartocdn.com</domain>
+    </domain-config>
+</network-security-config>

@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-card>
+    <div class="ion-padding"><h3>Regístrate en la aplicación</h3></div>
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Correo</ion-label>
+        <ion-input type="mail" [(ngModel)]="username"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Contraseña</ion-label>
+        <ion-input type="password" [(ngModel)]="password"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button expand="block" fill="solid" color="primary" (click)="register()">Registrarme</ion-button>
+    </div>
+  </ion-card>
+  
+</ion-content>

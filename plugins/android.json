@@ -1,0 +1,70 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-browsertab": {
+      "PACKAGE_NAME": "com.ionicmaptest.miapp"
+    },
+    "cordova-plugin-buildinfo": {
+      "PACKAGE_NAME": "com.ionicmaptest.miapp"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.ionicmaptest.miapp"
+    },
+    "cordova-plugin-email-composer": {
+      "ANDROID_SUPPORT_V4_VERSION": "27.+",
+      "PACKAGE_NAME": "com.ionicmaptest.miapp"
+    },
+    "cordova-plugin-facebook4": {
+      "APP_ID": "529097207953458",
+      "APP_NAME": "IonicMapTest",
+      "FACEBOOK_HYBRID_APP_EVENTS": "false",
+      "FACEBOOK_ANDROID_SDK_VERSION": "5.5.2",
+      "PACKAGE_NAME": "com.ionicmaptest.miapp"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.ionicmaptest.miapp"
+    },
+    "cordova-plugin-googleplus": {
+      "PLAY_SERVICES_VERSION": "15.0.1",
+      "PACKAGE_NAME": "com.ionicmaptest.miapp"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "com.ionicmaptest.miapp"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "com.ionicmaptest.miapp"
+    },
+    "cordova-plugin-ionic-webview": {
+      "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+",
+      "PACKAGE_NAME": "com.ionicmaptest.miapp"
+    },
+    "cordova-plugin-native-spinner": {
+      "PACKAGE_NAME": "com.ionicmaptest.miapp"
+    },
+    "cordova-plugin-sim": {
+      "PACKAGE_NAME": "com.ionicmaptest.miapp"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.ionicmaptest.miapp"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.ionicmaptest.miapp"
+    },
+    "cordova-plugin-streaming-media": {
+      "PACKAGE_NAME": "com.ionicmaptest.miapp"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.ionicmaptest.miapp"
+    },
+    "cordova-universal-links-plugin": {
+      "PACKAGE_NAME": "com.ionicmaptest.miapp"
+    }
+  },
+  "dependent_plugins": {}
+}

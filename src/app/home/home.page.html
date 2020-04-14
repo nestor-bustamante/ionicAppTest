@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title (changeValue)="message = $event">{{message}}</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div id="mapId" style="width: 100%; height: calc(100% - 52px);"></div>
+
+  <ul>
+    <li>
+      <ion-button expand="full" (click)="presentModal()">Publicar un comentario</ion-button>
+    </li>
+  </ul>
+  
+</ion-content>
+
+
+<app-modal></app-modal>

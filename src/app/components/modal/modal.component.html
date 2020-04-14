@@ -1,0 +1,22 @@
+<ion-content class="ion-padding">
+  <ion-grid size="12">
+    <ion-row>
+      <ion-col>
+        <ion-header >
+          <ion-toolbar>
+            <ion-title size="large">Publica! {{ message }}</ion-title>
+          </ion-toolbar>
+        </ion-header>
+
+        <ion-textarea maxlength="100" rows="4" placeholder="Escribe tu comentario aquí..." [(ngModel)]="comment"></ion-textarea>
+        <div class="count-chars">{{ comment.length }} / 100</div>
+
+
+        <ion-button color="primary" (click)="saveMessage(comment)">Aceptar</ion-button>
+        <ion-button color="medium" fill="outline" (click)="close()">Cancelar</ion-button>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
