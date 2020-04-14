@@ -1,254 +1,208 @@
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[64], {
   /***/
-  "./node_modules/@ionic/core/dist/esm/ion-spinner.entry.js":
-  /*!****************************************************************!*\
-    !*** ./node_modules/@ionic/core/dist/esm/ion-spinner.entry.js ***!
-    \****************************************************************/
+  "./node_modules/@ionic/core/dist/esm/ion-split-pane-ios.entry.js":
+  /*!***********************************************************************!*\
+    !*** ./node_modules/@ionic/core/dist/esm/ion-split-pane-ios.entry.js ***!
+    \***********************************************************************/
 
-  /*! exports provided: ion_spinner */
+  /*! exports provided: ion_split_pane */
 
   /***/
-  function node_modulesIonicCoreDistEsmIonSpinnerEntryJs(module, __webpack_exports__, __webpack_require__) {
+  function node_modulesIonicCoreDistEsmIonSplitPaneIosEntryJs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
     /* harmony export (binding) */
 
 
-    __webpack_require__.d(__webpack_exports__, "ion_spinner", function () {
-      return Spinner;
+    __webpack_require__.d(__webpack_exports__, "ion_split_pane", function () {
+      return SplitPane;
     });
     /* harmony import */
 
 
-    var _core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! ./core-feeeff0d.js */
-    "./node_modules/@ionic/core/dist/esm/core-feeeff0d.js");
+    var _core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! ./core-0a8d4d2e.js */
+    "./node_modules/@ionic/core/dist/esm/core-0a8d4d2e.js");
     /* harmony import */
 
 
     var _config_3c7f3790_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! ./config-3c7f3790.js */
     "./node_modules/@ionic/core/dist/esm/config-3c7f3790.js");
-    /* harmony import */
 
-
-    var _theme_18cbe2cc_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! ./theme-18cbe2cc.js */
-    "./node_modules/@ionic/core/dist/esm/theme-18cbe2cc.js");
-
-    var spinners = {
-      'bubbles': {
-        dur: 1000,
-        circles: 9,
-        fn: function fn(dur, index, total) {
-          var animationDelay = "".concat(dur * index / total - dur, "ms");
-          var angle = 2 * Math.PI * index / total;
-          return {
-            r: 5,
-            style: {
-              'top': "".concat(9 * Math.sin(angle), "px"),
-              'left': "".concat(9 * Math.cos(angle), "px"),
-              'animation-delay': animationDelay
-            }
-          };
-        }
-      },
-      'circles': {
-        dur: 1000,
-        circles: 8,
-        fn: function fn(dur, index, total) {
-          var step = index / total;
-          var animationDelay = "".concat(dur * step - dur, "ms");
-          var angle = 2 * Math.PI * step;
-          return {
-            r: 5,
-            style: {
-              'top': "".concat(9 * Math.sin(angle), "px"),
-              'left': "".concat(9 * Math.cos(angle), "px"),
-              'animation-delay': animationDelay
-            }
-          };
-        }
-      },
-      'circular': {
-        dur: 1400,
-        elmDuration: true,
-        circles: 1,
-        fn: function fn() {
-          return {
-            r: 20,
-            cx: 44,
-            cy: 44,
-            fill: 'none',
-            viewBox: '22 22 44 44',
-            transform: 'translate(0,0)',
-            style: {}
-          };
-        }
-      },
-      'crescent': {
-        dur: 750,
-        circles: 1,
-        fn: function fn() {
-          return {
-            r: 26,
-            style: {}
-          };
-        }
-      },
-      'dots': {
-        dur: 750,
-        circles: 3,
-        fn: function fn(_, index) {
-          var animationDelay = -(110 * index) + 'ms';
-          return {
-            r: 6,
-            style: {
-              'left': "".concat(9 - 9 * index, "px"),
-              'animation-delay': animationDelay
-            }
-          };
-        }
-      },
-      'lines': {
-        dur: 1000,
-        lines: 12,
-        fn: function fn(dur, index, total) {
-          var transform = "rotate(".concat(30 * index + (index < 6 ? 180 : -180), "deg)");
-          var animationDelay = "".concat(dur * index / total - dur, "ms");
-          return {
-            y1: 17,
-            y2: 29,
-            style: {
-              'transform': transform,
-              'animation-delay': animationDelay
-            }
-          };
-        }
-      },
-      'lines-small': {
-        dur: 1000,
-        lines: 12,
-        fn: function fn(dur, index, total) {
-          var transform = "rotate(".concat(30 * index + (index < 6 ? 180 : -180), "deg)");
-          var animationDelay = "".concat(dur * index / total - dur, "ms");
-          return {
-            y1: 12,
-            y2: 20,
-            style: {
-              'transform': transform,
-              'animation-delay': animationDelay
-            }
-          };
-        }
-      }
+    const SPLIT_PANE_MAIN = 'split-pane-main';
+    const SPLIT_PANE_SIDE = 'split-pane-side';
+    const QUERY = {
+      'xs': '(min-width: 0px)',
+      'sm': '(min-width: 576px)',
+      'md': '(min-width: 768px)',
+      'lg': '(min-width: 992px)',
+      'xl': '(min-width: 1200px)',
+      'never': ''
     };
-    var SPINNERS = spinners;
-
-    var Spinner =
-    /*#__PURE__*/
-    function () {
-      function Spinner(hostRef) {
-        _classCallCheck(this, Spinner);
-
-        Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
+    const SplitPane = class {
+      constructor(hostRef) {
+        Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
+        this.visible = false;
         /**
-         * If `true`, the spinner's animation will be paused.
+         * If `true`, the split pane will be hidden.
          */
 
-        this.paused = false;
+        this.disabled = false;
+        /**
+         * When the split-pane should be shown.
+         * Can be a CSS media query expression, or a shortcut expression.
+         * Can also be a boolean expression.
+         */
+
+        this.when = QUERY['lg'];
+        this.ionSplitPaneVisible = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionSplitPaneVisible", 7);
       }
 
-      _createClass(Spinner, [{
-        key: "getName",
-        value: function getName() {
-          var spinnerName = this.name || _config_3c7f3790_js__WEBPACK_IMPORTED_MODULE_1__["b"].get('spinner');
+      visibleChanged(visible) {
+        const detail = {
+          visible,
+          isPane: this.isPane.bind(this)
+        };
+        this.ionSplitPaneVisible.emit(detail);
+      }
 
-          var mode = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["c"])(this);
+      connectedCallback() {
+        this.styleChildren();
+        this.updateState();
+      }
 
-          if (spinnerName) {
-            return spinnerName;
+      disconnectedCallback() {
+        if (this.rmL) {
+          this.rmL();
+          this.rmL = undefined;
+        }
+      }
+
+      updateState() {
+        if (this.rmL) {
+          this.rmL();
+          this.rmL = undefined;
+        } // Check if the split-pane is disabled
+
+
+        if (this.disabled) {
+          this.visible = false;
+          return;
+        } // When query is a boolean
+
+
+        const query = this.when;
+
+        if (typeof query === 'boolean') {
+          this.visible = query;
+          return;
+        } // When query is a string, let's find first if it is a shortcut
+
+
+        const mediaQuery = QUERY[query] || query; // Media query is empty or null, we hide it
+
+        if (mediaQuery.length === 0) {
+          this.visible = false;
+          return;
+        }
+
+        if (window.matchMedia) {
+          // Listen on media query
+          const callback = q => {
+            this.visible = q.matches;
+          };
+
+          const mediaList = window.matchMedia(mediaQuery);
+          mediaList.addListener(callback);
+
+          this.rmL = () => mediaList.removeListener(callback);
+
+          this.visible = mediaList.matches;
+        }
+      }
+
+      isPane(element) {
+        if (!this.visible) {
+          return false;
+        }
+
+        return element.parentElement === this.el && element.classList.contains(SPLIT_PANE_SIDE);
+      }
+
+      styleChildren() {
+        const contentId = this.contentId;
+        const children = this.el.children;
+        const nu = this.el.childElementCount;
+        let foundMain = false;
+
+        for (let i = 0; i < nu; i++) {
+          const child = children[i];
+          const isMain = contentId !== undefined && child.id === contentId;
+
+          if (isMain) {
+            if (foundMain) {
+              console.warn('split pane cannot have more than one main node');
+              return;
+            }
+
+            foundMain = true;
           }
 
-          return mode === 'ios' ? 'lines' : 'circular';
+          setPaneClass(child, isMain);
         }
-      }, {
-        key: "render",
-        value: function render() {
-          var _Object$assign;
 
-          var self = this;
-          var mode = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["c"])(self);
-          var spinnerName = self.getName();
-          var spinner = SPINNERS[spinnerName] || SPINNERS['lines'];
-          var duration = typeof self.duration === 'number' && self.duration > 10 ? self.duration : spinner.dur;
-          var svgs = [];
+        if (!foundMain) {
+          console.warn('split pane does not have a specified main node');
+        }
+      }
 
-          if (spinner.circles !== undefined) {
-            for (var i = 0; i < spinner.circles; i++) {
-              svgs.push(buildCircle(spinner, duration, i, spinner.circles));
-            }
-          } else if (spinner.lines !== undefined) {
-            for (var _i = 0; _i < spinner.lines; _i++) {
-              svgs.push(buildLine(spinner, duration, _i, spinner.lines));
-            }
+      render() {
+        const mode = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["c"])(this);
+        return Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
+          class: {
+            [mode]: true,
+            // Used internally for styling
+            ["split-pane-".concat(mode)]: true,
+            'split-pane-visible': this.visible
           }
+        }, Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null));
+      }
 
-          return Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
-            class: Object.assign(Object.assign({}, Object(_theme_18cbe2cc_js__WEBPACK_IMPORTED_MODULE_2__["c"])(self.color)), (_Object$assign = {}, _defineProperty(_Object$assign, mode, true), _defineProperty(_Object$assign, "spinner-".concat(spinnerName), true), _defineProperty(_Object$assign, 'spinner-paused', !!self.paused || _config_3c7f3790_js__WEBPACK_IMPORTED_MODULE_1__["b"].getBoolean('_testing')), _Object$assign)),
-            role: "progressbar",
-            style: spinner.elmDuration ? {
-              animationDuration: duration + 'ms'
-            } : {}
-          }, svgs);
-        }
-      }], [{
-        key: "style",
-        get: function get() {
-          return ":host{display:inline-block;position:relative;width:28px;height:28px;color:var(--color);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}:host(.ion-color){color:var(--ion-color-base)}svg{left:0;top:0;-webkit-transform-origin:center;transform-origin:center;position:absolute;width:100%;height:100%;-webkit-transform:translateZ(0);transform:translateZ(0)}:host-context([dir=rtl]) svg,[dir=rtl] svg{left:unset;right:unset;right:0;-webkit-transform-origin:calc(100% - center);transform-origin:calc(100% - center)}:host(.spinner-lines) line,:host(.spinner-lines-small) line{stroke-width:4px;stroke-linecap:round;stroke:currentColor}:host(.spinner-lines) svg,:host(.spinner-lines-small) svg{-webkit-animation:spinner-fade-out 1s linear infinite;animation:spinner-fade-out 1s linear infinite}:host(.spinner-bubbles) svg{-webkit-animation:spinner-scale-out 1s linear infinite;animation:spinner-scale-out 1s linear infinite;fill:currentColor}:host(.spinner-circles) svg{-webkit-animation:spinner-fade-out 1s linear infinite;animation:spinner-fade-out 1s linear infinite;fill:currentColor}:host(.spinner-crescent) circle{fill:transparent;stroke-width:4px;stroke-dasharray:128px;stroke-dashoffset:82px;stroke:currentColor}:host(.spinner-crescent) svg{-webkit-animation:spinner-rotate 1s linear infinite;animation:spinner-rotate 1s linear infinite}:host(.spinner-dots) circle{stroke-width:0;fill:currentColor}:host(.spinner-dots) svg{-webkit-animation:spinner-dots 1s linear infinite;animation:spinner-dots 1s linear infinite}:host(.spinner-circular){-webkit-animation:spinner-circular linear infinite;animation:spinner-circular linear infinite}:host(.spinner-circular) circle{-webkit-animation:spinner-circular-inner ease-in-out infinite;animation:spinner-circular-inner ease-in-out infinite;stroke:currentColor;stroke-dasharray:80px,200px;stroke-dashoffset:0px;stroke-width:3.6;fill:none}:host(.spinner-paused),:host(.spinner-paused) circle,:host(.spinner-paused) svg{-webkit-animation-play-state:paused;animation-play-state:paused}\@-webkit-keyframes spinner-fade-out{0%{opacity:1}to{opacity:0}}\@keyframes spinner-fade-out{0%{opacity:1}to{opacity:0}}\@-webkit-keyframes spinner-scale-out{0%{-webkit-transform:scale(1);transform:scale(1)}to{-webkit-transform:scale(0);transform:scale(0)}}\@keyframes spinner-scale-out{0%{-webkit-transform:scale(1);transform:scale(1)}to{-webkit-transform:scale(0);transform:scale(0)}}\@-webkit-keyframes spinner-rotate{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}\@keyframes spinner-rotate{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}\@-webkit-keyframes spinner-dots{0%{-webkit-transform:scale(1);transform:scale(1);opacity:.9}50%{-webkit-transform:scale(.4);transform:scale(.4);opacity:.3}to{-webkit-transform:scale(1);transform:scale(1);opacity:.9}}\@keyframes spinner-dots{0%{-webkit-transform:scale(1);transform:scale(1);opacity:.9}50%{-webkit-transform:scale(.4);transform:scale(.4);opacity:.3}to{-webkit-transform:scale(1);transform:scale(1);opacity:.9}}\@-webkit-keyframes spinner-circular{to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}\@keyframes spinner-circular{to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}\@-webkit-keyframes spinner-circular-inner{0%{stroke-dasharray:1px,200px;stroke-dashoffset:0px}50%{stroke-dasharray:100px,200px;stroke-dashoffset:-15px}to{stroke-dasharray:100px,200px;stroke-dashoffset:-125px}}\@keyframes spinner-circular-inner{0%{stroke-dasharray:1px,200px;stroke-dashoffset:0px}50%{stroke-dasharray:100px,200px;stroke-dashoffset:-15px}to{stroke-dasharray:100px,200px;stroke-dashoffset:-125px}}";
-        }
-      }]);
+      get el() {
+        return Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this);
+      }
 
-      return Spinner;
-    }();
+      static get watchers() {
+        return {
+          "visible": ["visibleChanged"],
+          "disabled": ["updateState"],
+          "when": ["updateState"]
+        };
+      }
 
-    var buildCircle = function buildCircle(spinner, duration, index, total) {
-      var data = spinner.fn(duration, index, total);
-      data.style['animation-duration'] = duration + 'ms';
-      return Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])("svg", {
-        viewBox: data.viewBox || '0 0 64 64',
-        style: data.style
-      }, Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])("circle", {
-        transform: data.transform || 'translate(32,32)',
-        cx: data.cx,
-        cy: data.cy,
-        r: data.r,
-        style: spinner.elmDuration ? {
-          animationDuration: duration + 'ms'
-        } : {}
-      }));
+      static get style() {
+        return ":host{--side-width:100%;left:0;right:0;top:0;bottom:0;display:-ms-flexbox;display:flex;position:absolute;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:nowrap;flex-wrap:nowrap;contain:strict}::slotted(ion-menu.menu-pane-visible){-ms-flex:0 1 auto;flex:0 1 auto;width:var(--side-width);min-width:var(--side-min-width);max-width:var(--side-max-width)}:host(.split-pane-visible) ::slotted(.split-pane-main),:host(.split-pane-visible) ::slotted(.split-pane-side){left:0;right:0;top:0;bottom:0;position:relative;-webkit-box-shadow:none!important;box-shadow:none!important;z-index:0}:host(.split-pane-visible) ::slotted(.split-pane-main){-ms-flex:1;flex:1}:host(.split-pane-visible) ::slotted(.split-pane-side:not(ion-menu)),:host(.split-pane-visible) ::slotted(ion-menu.split-pane-side.menu-enabled){display:-ms-flexbox;display:flex;-ms-flex-negative:0;flex-shrink:0}::slotted(.split-pane-side:not(ion-menu)){display:none}:host(.split-pane-visible) ::slotted(.split-pane-side){-ms-flex-order:-1;order:-1}:host(.split-pane-visible) ::slotted(.split-pane-side[side=end]){-ms-flex-order:1;order:1}:host{--border:0.55px solid var(--ion-item-border-color,var(--ion-border-color,var(--ion-color-step-250,#c8c7cc)));--side-min-width:270px;--side-max-width:28%}:host(.split-pane-visible) ::slotted(.split-pane-side){min-width:var(--side-min-width);max-width:var(--side-max-width);border-right:var(--border);border-left:0}:host(.split-pane-visible) ::slotted(.split-pane-side[side=end]){min-width:var(--side-min-width);max-width:var(--side-max-width);border-right:0;border-left:var(--border)}";
+      }
+
     };
 
-    var buildLine = function buildLine(spinner, duration, index, total) {
-      var data = spinner.fn(duration, index, total);
-      data.style['animation-duration'] = duration + 'ms';
-      return Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])("svg", {
-        viewBox: data.viewBox || '0 0 64 64',
-        style: data.style
-      }, Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])("line", {
-        transform: "translate(32,32)",
-        y1: data.y1,
-        y2: data.y2
-      }));
+    const setPaneClass = (el, isMain) => {
+      let toAdd;
+      let toRemove;
+
+      if (isMain) {
+        toAdd = SPLIT_PANE_MAIN;
+        toRemove = SPLIT_PANE_SIDE;
+      } else {
+        toAdd = SPLIT_PANE_SIDE;
+        toRemove = SPLIT_PANE_MAIN;
+      }
+
+      const classList = el.classList;
+      classList.add(toAdd);
+      classList.remove(toRemove);
     };
     /***/
 

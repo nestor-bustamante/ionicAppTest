@@ -1,41 +1,35 @@
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[57], {
   /***/
-  "./node_modules/@ionic/core/dist/esm/ion-searchbar-md.entry.js":
-  /*!*********************************************************************!*\
-    !*** ./node_modules/@ionic/core/dist/esm/ion-searchbar-md.entry.js ***!
-    \*********************************************************************/
+  "./node_modules/@ionic/core/dist/esm/ion-segment_2-ios.entry.js":
+  /*!**********************************************************************!*\
+    !*** ./node_modules/@ionic/core/dist/esm/ion-segment_2-ios.entry.js ***!
+    \**********************************************************************/
 
-  /*! exports provided: ion_searchbar */
+  /*! exports provided: ion_segment, ion_segment_button */
 
   /***/
-  function node_modulesIonicCoreDistEsmIonSearchbarMdEntryJs(module, __webpack_exports__, __webpack_require__) {
+  function node_modulesIonicCoreDistEsmIonSegment_2IosEntryJs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
     /* harmony export (binding) */
 
 
-    __webpack_require__.d(__webpack_exports__, "ion_searchbar", function () {
-      return Searchbar;
+    __webpack_require__.d(__webpack_exports__, "ion_segment", function () {
+      return Segment;
+    });
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ion_segment_button", function () {
+      return SegmentButton;
     });
     /* harmony import */
 
 
-    var _core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! ./core-feeeff0d.js */
-    "./node_modules/@ionic/core/dist/esm/core-feeeff0d.js");
+    var _core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! ./core-0a8d4d2e.js */
+    "./node_modules/@ionic/core/dist/esm/core-0a8d4d2e.js");
     /* harmony import */
 
 
@@ -54,547 +48,490 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var _theme_18cbe2cc_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! ./theme-18cbe2cc.js */
     "./node_modules/@ionic/core/dist/esm/theme-18cbe2cc.js");
-    /* harmony import */
 
-
-    var _index_3476b023_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-    /*! ./index-3476b023.js */
-    "./node_modules/@ionic/core/dist/esm/index-3476b023.js");
-
-    var Searchbar =
-    /*#__PURE__*/
-    function () {
-      function Searchbar(hostRef) {
-        var _this = this;
-
-        _classCallCheck(this, Searchbar);
-
-        Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
-        this.isCancelVisible = false;
-        this.shouldAlignLeft = true;
-        this.focused = false;
-        this.noAnimate = true;
+    const Segment = class {
+      constructor(hostRef) {
+        Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
+        this.didInit = false;
+        this.activated = false;
         /**
-         * If `true`, enable searchbar animation.
-         */
-
-        this.animated = false;
-        /**
-         * Set the input's autocomplete property.
-         */
-
-        this.autocomplete = 'off';
-        /**
-         * Set the input's autocorrect property.
-         */
-
-        this.autocorrect = 'off';
-        /**
-         * Set the cancel button icon. Only applies to `md` mode.
-         */
-
-        this.cancelButtonIcon = 'md-arrow-back';
-        /**
-         * Set the the cancel button text. Only applies to `ios` mode.
-         */
-
-        this.cancelButtonText = 'Cancel';
-        /**
-         * Set the amount of time, in milliseconds, to wait to trigger the `ionChange` event after each keystroke.
-         */
-
-        this.debounce = 250;
-        /**
-         * If `true`, the user cannot interact with the input.
+         * If `true`, the user cannot interact with the segment.
          */
 
         this.disabled = false;
         /**
-         * A hint to the browser for which keyboard to display.
-         * Possible values: `"none"`, `"text"`, `"tel"`, `"url"`,
-         * `"email"`, `"numeric"`, `"decimal"`, and `"search"`.
+         * If `true`, the segment buttons will overflow and the user can swipe to see them.
+         * In addition, this will disable the gesture to drag the indicator between the buttons
+         * in order to swipe to see hidden buttons.
          */
 
-        this.inputmode = 'search';
-        /**
-         * Set the input's placeholder.
-         * `placeholder` can accept either plaintext or HTML as a string.
-         * To display characters normally reserved for HTML, they
-         * must be escaped. For example `<Ionic>` would become
-         * `&lt;Ionic&gt;`
-         *
-         * For more information: [Security Documentation](https://ionicframework.com/docs/faq/security)
-         */
+        this.scrollable = false;
 
-        this.placeholder = 'Search';
-        /**
-         * The icon to use as the search icon.
-         */
+        this.onClick = ev => {
+          const current = ev.target;
+          const previous = this.checked;
+          this.value = current.value;
 
-        this.searchIcon = 'search';
-        /**
-         * Sets the behavior for the cancel button. Defaults to `"never"`.
-         * Setting to `"focus"` shows the cancel button on focus.
-         * Setting to `"never"` hides the cancel button.
-         * Setting to `"always"` shows the cancel button regardless
-         * of focus state.
-         */
-
-        this.showCancelButton = 'never';
-        /**
-         * If `true`, enable spellcheck on the input.
-         */
-
-        this.spellcheck = false;
-        /**
-         * Set the type of the input.
-         */
-
-        this.type = 'search';
-        /**
-         * the value of the searchbar.
-         */
-
-        this.value = '';
-        /**
-         * Clears the input field and triggers the control change.
-         */
-
-        this.onClearInput = function (ev) {
-          _this.ionClear.emit();
-
-          if (ev) {
-            ev.preventDefault();
-            ev.stopPropagation();
-          } // setTimeout() fixes https://github.com/ionic-team/ionic/issues/7527
-          // wait for 4 frames
-
-
-          setTimeout(function () {
-            var value = _this.getValue();
-
-            if (value !== '') {
-              _this.value = '';
-
-              _this.ionInput.emit();
-            }
-          }, 16 * 4);
-        };
-        /**
-         * Clears the input field and tells the input to blur since
-         * the clearInput function doesn't want the input to blur
-         * then calls the custom cancel function if the user passed one in.
-         */
-
-
-        this.onCancelSearchbar = function (ev) {
-          if (ev) {
-            ev.preventDefault();
-            ev.stopPropagation();
+          if (previous && this.scrollable) {
+            this.checkButton(previous, current);
           }
 
-          _this.ionCancel.emit();
-
-          _this.onClearInput();
-
-          if (_this.nativeInput) {
-            _this.nativeInput.blur();
-          }
-        };
-        /**
-         * Update the Searchbar input value when the input changes
-         */
-
-
-        this.onInput = function (ev) {
-          var input = ev.target;
-
-          if (input) {
-            _this.value = input.value;
-          }
-
-          _this.ionInput.emit(ev);
-        };
-        /**
-         * Sets the Searchbar to not focused and checks if it should align left
-         * based on whether there is a value in the searchbar or not.
-         */
-
-
-        this.onBlur = function () {
-          _this.focused = false;
-
-          _this.ionBlur.emit();
-
-          _this.positionElements();
-        };
-        /**
-         * Sets the Searchbar to focused and active on input focus.
-         */
-
-
-        this.onFocus = function () {
-          _this.focused = true;
-
-          _this.ionFocus.emit();
-
-          _this.positionElements();
+          this.checked = current;
         };
 
-        this.ionInput = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionInput", 7);
-        this.ionChange = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionChange", 7);
-        this.ionCancel = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionCancel", 7);
-        this.ionClear = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionClear", 7);
-        this.ionBlur = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionBlur", 7);
-        this.ionFocus = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionFocus", 7);
-        this.ionStyle = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionStyle", 7);
+        this.ionChange = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionChange", 7);
+        this.ionSelect = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionSelect", 7);
+        this.ionStyle = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionStyle", 7);
       }
 
-      _createClass(Searchbar, [{
-        key: "debounceChanged",
-        value: function debounceChanged() {
-          this.ionChange = Object(_helpers_46f4a262_js__WEBPACK_IMPORTED_MODULE_2__["d"])(this.ionChange, this.debounce);
-        }
-      }, {
-        key: "valueChanged",
-        value: function valueChanged() {
-          var inputEl = this.nativeInput;
-          var value = this.getValue();
+      valueChanged(value, oldValue) {
+        this.ionSelect.emit({
+          value
+        });
 
-          if (inputEl && inputEl.value !== value) {
-            inputEl.value = value;
-          }
-
-          this.ionChange.emit({
-            value: value
-          });
-        }
-      }, {
-        key: "showCancelButtonChanged",
-        value: function showCancelButtonChanged() {
-          var _this2 = this;
-
-          requestAnimationFrame(function () {
-            _this2.positionElements();
-
-            _this2.el.forceUpdate();
-          });
-        }
-      }, {
-        key: "connectedCallback",
-        value: function connectedCallback() {
-          this.emitStyle();
-        }
-      }, {
-        key: "componentDidLoad",
-        value: function componentDidLoad() {
-          var _this3 = this;
-
-          if (this.showCancelButton === 'false' || this.showCancelButton === false) {
-            console.warn('The boolean values of showCancelButton are deprecated. Please use "never" instead of "false".');
-          }
-
-          if (this.showCancelButton === '' || this.showCancelButton === 'true' || this.showCancelButton === true) {
-            console.warn('The boolean values of showCancelButton are deprecated. Please use "focus" instead of "true".');
-          }
-
-          this.positionElements();
-          this.debounceChanged();
-          setTimeout(function () {
-            _this3.noAnimate = false;
-          }, 300);
-        }
-      }, {
-        key: "emitStyle",
-        value: function emitStyle() {
-          this.ionStyle.emit({
-            'searchbar': true
-          });
-        }
-        /**
-         * Sets focus on the specified `ion-searchbar`. Use this method instead of the global
-         * `input.focus()`.
-         */
-
-      }, {
-        key: "setFocus",
-        value: function () {
-          var _setFocus = _asyncToGenerator(
-          /*#__PURE__*/
-          regeneratorRuntime.mark(function _callee() {
-            return regeneratorRuntime.wrap(function _callee$(_context) {
-              while (1) {
-                switch (_context.prev = _context.next) {
-                  case 0:
-                    if (this.nativeInput) {
-                      this.nativeInput.focus();
-                    }
-
-                  case 1:
-                  case "end":
-                    return _context.stop();
-                }
-              }
-            }, _callee, this);
-          }));
-
-          function setFocus() {
-            return _setFocus.apply(this, arguments);
-          }
-
-          return setFocus;
-        }()
-        /**
-         * Returns the native `<input>` element used under the hood.
-         */
-
-      }, {
-        key: "getInputElement",
-        value: function getInputElement() {
-          return Promise.resolve(this.nativeInput);
-        }
-        /**
-         * Positions the input search icon, placeholder, and the cancel button
-         * based on the input value and if it is focused. (ios only)
-         */
-
-      }, {
-        key: "positionElements",
-        value: function positionElements() {
-          var value = this.getValue();
-          var prevAlignLeft = this.shouldAlignLeft;
-          var mode = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["c"])(this);
-          var shouldAlignLeft = !this.animated || value.trim() !== '' || !!this.focused;
-          this.shouldAlignLeft = shouldAlignLeft;
-
-          if (mode !== 'ios') {
-            return;
-          }
-
-          if (prevAlignLeft !== shouldAlignLeft) {
-            this.positionPlaceholder();
-          }
-
-          if (this.animated) {
-            this.positionCancelButton();
-          }
-        }
-        /**
-         * Positions the input placeholder
-         */
-
-      }, {
-        key: "positionPlaceholder",
-        value: function positionPlaceholder() {
-          var inputEl = this.nativeInput;
-
-          if (!inputEl) {
-            return;
-          }
-
-          var isRTL = document.dir === 'rtl';
-          var iconEl = (this.el.shadowRoot || this.el).querySelector('.searchbar-search-icon');
-
-          if (this.shouldAlignLeft) {
-            inputEl.removeAttribute('style');
-            iconEl.removeAttribute('style');
+        if (oldValue !== '' || this.didInit) {
+          if (!this.activated) {
+            this.ionChange.emit({
+              value
+            });
           } else {
-            // Create a dummy span to get the placeholder width
-            var doc = document;
-            var tempSpan = doc.createElement('span');
-            tempSpan.innerHTML = Object(_index_3476b023_js__WEBPACK_IMPORTED_MODULE_4__["s"])(this.placeholder) || '';
-            doc.body.appendChild(tempSpan); // Get the width of the span then remove it
-
-            var textWidth = tempSpan.offsetWidth;
-            tempSpan.remove(); // Calculate the input padding
-
-            var inputLeft = 'calc(50% - ' + textWidth / 2 + 'px)'; // Calculate the icon margin
-
-            var iconLeft = 'calc(50% - ' + (textWidth / 2 + 30) + 'px)'; // Set the input padding start and icon margin start
-
-            if (isRTL) {
-              inputEl.style.paddingRight = inputLeft;
-              iconEl.style.marginRight = iconLeft;
-            } else {
-              inputEl.style.paddingLeft = inputLeft;
-              iconEl.style.marginLeft = iconLeft;
-            }
+            this.valueAfterGesture = value;
           }
         }
-        /**
-         * Show the iOS Cancel button on focus, hide it offscreen otherwise
-         */
+      }
 
-      }, {
-        key: "positionCancelButton",
-        value: function positionCancelButton() {
-          var isRTL = document.dir === 'rtl';
-          var cancelButton = (this.el.shadowRoot || this.el).querySelector('.searchbar-cancel-button');
-          var shouldShowCancel = this.shouldShowCancelButton();
+      disabledChanged() {
+        this.gestureChanged();
+        const buttons = this.getButtons();
 
-          if (cancelButton && shouldShowCancel !== this.isCancelVisible) {
-            var cancelStyle = cancelButton.style;
-            this.isCancelVisible = shouldShowCancel;
+        for (const button of buttons) {
+          button.disabled = this.disabled;
+        }
+      }
 
-            if (shouldShowCancel) {
-              if (isRTL) {
-                cancelStyle.marginLeft = '0';
-              } else {
-                cancelStyle.marginRight = '0';
-              }
-            } else {
-              var offset = cancelButton.offsetWidth;
+      gestureChanged() {
+        if (this.gesture && !this.scrollable) {
+          this.gesture.enable(!this.disabled);
+        }
+      }
 
-              if (offset > 0) {
-                if (isRTL) {
-                  cancelStyle.marginLeft = -offset + 'px';
-                } else {
-                  cancelStyle.marginRight = -offset + 'px';
-                }
+      connectedCallback() {
+        this.emitStyle();
+      }
+
+      componentWillLoad() {
+        this.emitStyle();
+      }
+
+      async componentDidLoad() {
+        this.setCheckedClasses();
+        this.gesture = (await Promise.resolve().then(__webpack_require__.bind(null,
+        /*! ./index-c38df685.js */
+        "./node_modules/@ionic/core/dist/esm/index-c38df685.js"))).createGesture({
+          el: this.el,
+          gestureName: 'segment',
+          gesturePriority: 100,
+          threshold: 0,
+          passive: false,
+          onStart: ev => this.onStart(ev),
+          onMove: ev => this.onMove(ev),
+          onEnd: ev => this.onEnd(ev)
+        });
+        this.gesture.enable(!this.scrollable);
+        this.gestureChanged();
+
+        if (this.disabled) {
+          this.disabledChanged();
+        }
+
+        this.didInit = true;
+      }
+
+      onStart(detail) {
+        this.activate(detail);
+      }
+
+      onMove(detail) {
+        this.setNextIndex(detail);
+      }
+
+      onEnd(detail) {
+        this.setActivated(false);
+        const checkedValidButton = this.setNextIndex(detail, true);
+        detail.event.preventDefault();
+        detail.event.stopImmediatePropagation();
+
+        if (checkedValidButton) {
+          this.addRipple(detail);
+        }
+
+        const value = this.valueAfterGesture;
+
+        if (value !== undefined) {
+          this.ionChange.emit({
+            value
+          });
+          this.valueAfterGesture = undefined;
+        }
+      }
+
+      getButtons() {
+        return Array.from(this.el.querySelectorAll('ion-segment-button'));
+      }
+      /**
+       * The gesture blocks the segment button ripple. This
+       * function adds the ripple based on the checked segment
+       * and where the cursor ended.
+       */
+
+
+      addRipple(detail) {
+        const useRippleEffect = _config_3c7f3790_js__WEBPACK_IMPORTED_MODULE_1__["b"].getBoolean('animated', true) && _config_3c7f3790_js__WEBPACK_IMPORTED_MODULE_1__["b"].getBoolean('rippleEffect', true);
+
+        if (!useRippleEffect) {
+          return;
+        }
+
+        const buttons = this.getButtons();
+        const checked = buttons.find(button => button.value === this.value);
+        const root = checked.shadowRoot || checked;
+        const ripple = root.querySelector('ion-ripple-effect');
+
+        if (!ripple) {
+          return;
+        }
+
+        const {
+          x,
+          y
+        } = Object(_helpers_46f4a262_js__WEBPACK_IMPORTED_MODULE_2__["p"])(detail.event);
+        ripple.addRipple(x, y).then(remove => remove());
+      }
+      /*
+       * Activate both the segment and the buttons
+       * due to a bug with ::slotted in Safari
+       */
+
+
+      setActivated(activated) {
+        const buttons = this.getButtons();
+        buttons.forEach(button => {
+          if (activated) {
+            button.classList.add('segment-button-activated');
+          } else {
+            button.classList.remove('segment-button-activated');
+          }
+        });
+        this.activated = activated;
+      }
+
+      activate(detail) {
+        const clicked = detail.event.target;
+        const buttons = this.getButtons();
+        const checked = buttons.find(button => button.value === this.value); // Make sure we are only checking for activation on a segment button
+        // since disabled buttons will get the click on the segment
+
+        if (clicked.tagName !== 'ION-SEGMENT-BUTTON') {
+          return;
+        } // If there are no checked buttons, set the current button to checked
+
+
+        if (!checked) {
+          this.value = clicked.value;
+        } // If the gesture began on the clicked button with the indicator
+        // then we should activate the indicator
+
+
+        if (this.value === clicked.value) {
+          this.setActivated(true);
+        }
+      }
+
+      getIndicator(button) {
+        const root = button.shadowRoot || button;
+        return root.querySelector('.segment-button-indicator');
+      }
+
+      checkButton(previous, current) {
+        const previousIndicator = this.getIndicator(previous);
+        const currentIndicator = this.getIndicator(current);
+
+        if (previousIndicator === null || currentIndicator === null) {
+          return;
+        }
+
+        const previousClientRect = previousIndicator.getBoundingClientRect();
+        const currentClientRect = currentIndicator.getBoundingClientRect();
+        const widthDelta = previousClientRect.width / currentClientRect.width;
+        const xPosition = previousClientRect.left - currentClientRect.left; // Scale the indicator width to match the previous indicator width
+        // and translate it on top of the previous indicator
+
+        const transform = "translate3d(".concat(xPosition, "px, 0, 0) scaleX(").concat(widthDelta, ")");
+        Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["w"])(() => {
+          // Remove the transition before positioning on top of the previous indicator
+          currentIndicator.classList.remove('segment-button-indicator-animated');
+          currentIndicator.style.setProperty('transform', transform); // Force a repaint to ensure the transform happens
+
+          currentIndicator.getBoundingClientRect(); // Add the transition to move the indicator into place
+
+          currentIndicator.classList.add('segment-button-indicator-animated'); // Remove the transform to slide the indicator back to the button clicked
+
+          currentIndicator.style.setProperty('transform', '');
+        });
+        this.value = current.value;
+        this.setCheckedClasses();
+      }
+
+      setCheckedClasses() {
+        const buttons = this.getButtons();
+        const index = buttons.findIndex(button => button.value === this.value);
+        const next = index + 1; // Keep track of the currently checked button
+
+        this.checked = buttons.find(button => button.value === this.value);
+
+        for (const button of buttons) {
+          button.classList.remove('segment-button-after-checked');
+        }
+
+        if (next < buttons.length) {
+          buttons[next].classList.add('segment-button-after-checked');
+        }
+      }
+
+      setNextIndex(detail, isEnd = false) {
+        const isRTL = document.dir === 'rtl';
+        const activated = this.activated;
+        const buttons = this.getButtons();
+        const index = buttons.findIndex(button => button.value === this.value);
+        const previous = buttons[index];
+        let current;
+        let nextIndex;
+
+        if (index === -1) {
+          return;
+        } // Get the element that the touch event started on in case
+        // it was the checked button, then we will move the indicator
+
+
+        const rect = previous.getBoundingClientRect();
+        const left = rect.left;
+        const width = rect.width; // Get the element that the gesture is on top of based on the currentX of the
+        // gesture event and the Y coordinate of the starting element, since the gesture
+        // can move up and down off of the segment
+
+        const currentX = detail.currentX;
+        const previousY = rect.top + rect.height / 2;
+        const nextEl = document.elementFromPoint(currentX, previousY);
+        const decreaseIndex = isRTL ? currentX > left + width : currentX < left;
+        const increaseIndex = isRTL ? currentX < left : currentX > left + width; // If the indicator is currently activated then we have started the gesture
+        // on top of the checked button so we need to slide the indicator
+        // by checking the button next to it as we move
+
+        if (activated && !isEnd) {
+          // Decrease index, move left in LTR & right in RTL
+          if (decreaseIndex) {
+            const newIndex = index - 1;
+
+            if (newIndex >= 0) {
+              nextIndex = newIndex;
+            } // Increase index, moves right in LTR & left in RTL
+
+          } else if (increaseIndex) {
+            if (activated && !isEnd) {
+              const newIndex = index + 1;
+
+              if (newIndex < buttons.length) {
+                nextIndex = newIndex;
               }
             }
           }
-        }
-      }, {
-        key: "getValue",
-        value: function getValue() {
-          return this.value || '';
-        }
-      }, {
-        key: "hasValue",
-        value: function hasValue() {
-          return this.getValue() !== '';
-        }
-        /**
-         * Determines whether or not the cancel button should be visible onscreen.
-         * Cancel button should be shown if one of two conditions applies:
-         * 1. `showCancelButton` is set to `always`.
-         * 2. `showCancelButton` is set to `focus`, and the searchbar has been focused.
-         */
 
-      }, {
-        key: "shouldShowCancelButton",
-        value: function shouldShowCancelButton() {
-          if (isCancelButtonSetToNever(this.showCancelButton) || isCancelButtonSetToFocus(this.showCancelButton) && !this.focused) {
+          if (nextIndex !== undefined && !buttons[nextIndex].disabled) {
+            current = buttons[nextIndex];
+          }
+        } // If the indicator is not activated then we will just set the indicator
+        // to the element where the gesture ended
+
+
+        if (!activated && isEnd) {
+          current = nextEl;
+        }
+        /* tslint:disable-next-line */
+
+
+        if (current != null) {
+          /**
+           * If current element is ion-segment then that means
+           * user tried to select a disabled ion-segment-button,
+           * and we should not update the ripple.
+           */
+          if (current.tagName === 'ION-SEGMENT') {
             return false;
           }
 
-          return true;
+          if (previous !== current) {
+            this.checkButton(previous, current);
+          }
         }
-      }, {
-        key: "render",
-        value: function render() {
-          var _Object$assign,
-              _this4 = this;
 
-          var animated = this.animated && _config_3c7f3790_js__WEBPACK_IMPORTED_MODULE_1__["b"].getBoolean('animated', true);
+        return true;
+      }
 
-          var mode = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["c"])(this);
-          var clearIcon = this.clearIcon || (mode === 'ios' ? 'ios-close-circle' : 'md-close');
-          var searchIcon = this.searchIcon;
-          var cancelButton = !isCancelButtonSetToNever(this.showCancelButton) && Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])("button", {
-            "aria-label": "cancel",
-            type: "button",
-            tabIndex: mode === 'ios' && !this.shouldShowCancelButton() ? -1 : undefined,
-            onMouseDown: this.onCancelSearchbar,
-            onTouchStart: this.onCancelSearchbar,
-            class: "searchbar-cancel-button"
-          }, Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", null, mode === 'md' ? Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-icon", {
-            "aria-hidden": "true",
-            mode: mode,
-            icon: this.cancelButtonIcon,
-            lazy: false
-          }) : this.cancelButtonText));
-          return Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
-            role: "search",
-            "aria-disabled": this.disabled ? 'true' : null,
-            class: Object.assign(Object.assign({}, Object(_theme_18cbe2cc_js__WEBPACK_IMPORTED_MODULE_3__["c"])(this.color)), (_Object$assign = {}, _defineProperty(_Object$assign, mode, true), _defineProperty(_Object$assign, 'searchbar-animated', animated), _defineProperty(_Object$assign, 'searchbar-disabled', this.disabled), _defineProperty(_Object$assign, 'searchbar-no-animate', animated && this.noAnimate), _defineProperty(_Object$assign, 'searchbar-has-value', this.hasValue()), _defineProperty(_Object$assign, 'searchbar-left-aligned', this.shouldAlignLeft), _defineProperty(_Object$assign, 'searchbar-has-focus', this.focused), _defineProperty(_Object$assign, 'searchbar-should-show-cancel', this.shouldShowCancelButton()), _Object$assign))
-          }, Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
-            class: "searchbar-input-container"
-          }, Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])("input", {
-            "aria-label": "search text",
-            disabled: this.disabled,
-            ref: function ref(el) {
-              return _this4.nativeInput = el;
-            },
-            class: "searchbar-input",
-            inputMode: this.inputmode,
-            onInput: this.onInput,
-            onBlur: this.onBlur,
-            onFocus: this.onFocus,
-            placeholder: this.placeholder,
-            type: this.type,
-            value: this.getValue(),
-            autoComplete: this.autocomplete,
-            autoCorrect: this.autocorrect,
-            spellCheck: this.spellcheck
-          }), mode === 'md' && cancelButton, Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-icon", {
-            mode: mode,
-            icon: searchIcon,
-            lazy: false,
-            class: "searchbar-search-icon"
-          }), Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])("button", {
-            "aria-label": "reset",
-            type: "button",
-            "no-blur": true,
-            class: "searchbar-clear-button",
-            onMouseDown: this.onClearInput,
-            onTouchStart: this.onClearInput
-          }, Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-icon", {
-            "aria-hidden": "true",
-            mode: mode,
-            icon: clearIcon,
-            lazy: false,
-            class: "searchbar-clear-icon"
-          }))), mode === 'ios' && cancelButton);
-        }
-      }, {
-        key: "el",
-        get: function get() {
-          return Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this);
-        }
-      }], [{
-        key: "watchers",
-        get: function get() {
-          return {
-            "debounce": ["debounceChanged"],
-            "value": ["valueChanged"],
-            "showCancelButton": ["showCancelButtonChanged"]
-          };
-        }
-      }, {
-        key: "style",
-        get: function get() {
-          return ".sc-ion-searchbar-md-h{--placeholder-color:initial;--placeholder-font-style:initial;--placeholder-font-weight:initial;--placeholder-opacity:.5;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:-ms-flexbox;display:flex;position:relative;-ms-flex-align:center;align-items:center;width:100%;color:var(--color);font-family:var(--ion-font-family,inherit);-webkit-box-sizing:border-box;box-sizing:border-box}.ion-color.sc-ion-searchbar-md-h{color:var(--ion-color-contrast)}.ion-color.sc-ion-searchbar-md-h .searchbar-input.sc-ion-searchbar-md{background:var(--ion-color-base)}.ion-color.sc-ion-searchbar-md-h .searchbar-cancel-button.sc-ion-searchbar-md, .ion-color.sc-ion-searchbar-md-h .searchbar-clear-button.sc-ion-searchbar-md, .ion-color.sc-ion-searchbar-md-h .searchbar-search-icon.sc-ion-searchbar-md{color:inherit}.searchbar-search-icon.sc-ion-searchbar-md{color:var(--icon-color);pointer-events:none}.searchbar-input-container.sc-ion-searchbar-md{display:block;position:relative;-ms-flex-negative:1;flex-shrink:1;width:100%}.searchbar-input.sc-ion-searchbar-md{font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;-webkit-box-sizing:border-box;box-sizing:border-box;display:block;width:100%;border:0;outline:none;background:var(--background);font-family:inherit;-webkit-appearance:none;-moz-appearance:none;appearance:none}.searchbar-input.sc-ion-searchbar-md::-webkit-input-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.searchbar-input.sc-ion-searchbar-md::-moz-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.searchbar-input.sc-ion-searchbar-md:-ms-input-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.searchbar-input.sc-ion-searchbar-md::-ms-input-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.searchbar-input.sc-ion-searchbar-md::placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.searchbar-input.sc-ion-searchbar-md::-ms-clear, .searchbar-input.sc-ion-searchbar-md::-webkit-search-cancel-button{display:none}.searchbar-cancel-button.sc-ion-searchbar-md{margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;display:none;height:100%;border:0;outline:none;color:var(--cancel-button-color);cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none}.searchbar-cancel-button.sc-ion-searchbar-md > div.sc-ion-searchbar-md{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;width:100%;height:100%}.searchbar-clear-button.sc-ion-searchbar-md{margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;display:none;min-height:0;outline:none;color:var(--clear-button-color);-webkit-appearance:none;-moz-appearance:none;appearance:none}.searchbar-has-value.searchbar-has-focus.sc-ion-searchbar-md-h .searchbar-clear-button.sc-ion-searchbar-md{display:block}.searchbar-disabled.sc-ion-searchbar-md-h{cursor:default;opacity:.4;pointer-events:none}.sc-ion-searchbar-md-h{--clear-button-color:initial;--cancel-button-color:var(--ion-color-step-900,#1a1a1a);--color:var(--ion-color-step-850,#262626);--icon-color:var(--ion-color-step-600,#666);--background:var(--ion-background-color,#fff);padding-left:8px;padding-right:8px;padding-top:8px;padding-bottom:8px;background:inherit}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.sc-ion-searchbar-md-h{padding-left:unset;padding-right:unset;-webkit-padding-start:8px;padding-inline-start:8px;-webkit-padding-end:8px;padding-inline-end:8px}}.searchbar-search-icon.sc-ion-searchbar-md{left:16px;top:11px;width:21px;height:21px}[dir=rtl].sc-ion-searchbar-md-h .searchbar-search-icon.sc-ion-searchbar-md, [dir=rtl] .sc-ion-searchbar-md-h .searchbar-search-icon.sc-ion-searchbar-md, [dir=rtl].sc-ion-searchbar-md .searchbar-search-icon.sc-ion-searchbar-md{left:unset;right:unset;right:16px}.searchbar-cancel-button.sc-ion-searchbar-md{left:5px;top:0;background-color:transparent;font-size:1.6em}[dir=rtl].sc-ion-searchbar-md-h .searchbar-cancel-button.sc-ion-searchbar-md, [dir=rtl] .sc-ion-searchbar-md-h .searchbar-cancel-button.sc-ion-searchbar-md, [dir=rtl].sc-ion-searchbar-md .searchbar-cancel-button.sc-ion-searchbar-md{left:unset;right:unset;right:5px}.searchbar-cancel-button.sc-ion-searchbar-md, .searchbar-search-icon.sc-ion-searchbar-md{position:absolute}.searchbar-cancel-button.activated.sc-ion-searchbar-md, .searchbar-search-icon.activated.sc-ion-searchbar-md{background-color:transparent}.searchbar-input.sc-ion-searchbar-md{padding-left:55px;padding-right:55px;padding-top:6px;padding-bottom:6px;border-radius:2px;background-position:left 8px center;height:auto;font-size:16px;font-weight:400;line-height:30px;-webkit-box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12)}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.searchbar-input.sc-ion-searchbar-md{padding-left:unset;padding-right:unset;-webkit-padding-start:55px;padding-inline-start:55px;-webkit-padding-end:55px;padding-inline-end:55px}}[dir=rtl].sc-ion-searchbar-md-h .searchbar-input.sc-ion-searchbar-md, [dir=rtl] .sc-ion-searchbar-md-h .searchbar-input.sc-ion-searchbar-md, [dir=rtl].sc-ion-searchbar-md .searchbar-input.sc-ion-searchbar-md{background-position:right 8px center}.searchbar-clear-button.sc-ion-searchbar-md{right:13px;top:0;padding-left:0;padding-right:0;padding-top:0;padding-bottom:0;position:absolute;height:100%;border:0;background-color:transparent}[dir=rtl].sc-ion-searchbar-md-h .searchbar-clear-button.sc-ion-searchbar-md, [dir=rtl] .sc-ion-searchbar-md-h .searchbar-clear-button.sc-ion-searchbar-md, [dir=rtl].sc-ion-searchbar-md .searchbar-clear-button.sc-ion-searchbar-md{left:unset;right:unset;left:13px}.searchbar-clear-button.activated.sc-ion-searchbar-md{background-color:transparent}.searchbar-clear-icon.sc-ion-searchbar-md{width:22px;height:100%}.searchbar-has-focus.sc-ion-searchbar-md-h .searchbar-cancel-button.sc-ion-searchbar-md, .searchbar-has-focus.sc-ion-searchbar-md-h .searchbar-search-icon.sc-ion-searchbar-md, .searchbar-should-show-cancel.sc-ion-searchbar-md-h .searchbar-cancel-button.sc-ion-searchbar-md{display:block}.searchbar-has-focus.sc-ion-searchbar-md-h .searchbar-cancel-button.sc-ion-searchbar-md + .searchbar-search-icon.sc-ion-searchbar-md, .searchbar-should-show-cancel.sc-ion-searchbar-md-h .searchbar-cancel-button.sc-ion-searchbar-md + .searchbar-search-icon.sc-ion-searchbar-md{display:none}ion-toolbar.sc-ion-searchbar-md-h, ion-toolbar .sc-ion-searchbar-md-h{padding-left:7px;padding-right:7px;padding-top:3px;padding-bottom:3px}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){ion-toolbar.sc-ion-searchbar-md-h, ion-toolbar .sc-ion-searchbar-md-h{padding-left:unset;padding-right:unset;-webkit-padding-start:7px;padding-inline-start:7px;-webkit-padding-end:7px;padding-inline-end:7px}}";
-        }
-      }]);
+      emitStyle() {
+        this.ionStyle.emit({
+          'segment': true
+        });
+      }
 
-      return Searchbar;
-    }();
-    /**
-     * Check if the cancel button should never be shown.
-     *
-     * TODO: Remove this when the `true` and `false`
-     * options are removed.
-     */
+      render() {
+        const mode = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["c"])(this);
+        return Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
+          onClick: this.onClick,
+          class: Object.assign(Object.assign({}, Object(_theme_18cbe2cc_js__WEBPACK_IMPORTED_MODULE_3__["c"])(this.color)), {
+            [mode]: true,
+            'in-toolbar': Object(_theme_18cbe2cc_js__WEBPACK_IMPORTED_MODULE_3__["h"])('ion-toolbar', this.el),
+            'in-toolbar-color': Object(_theme_18cbe2cc_js__WEBPACK_IMPORTED_MODULE_3__["h"])('ion-toolbar[color]', this.el),
+            'segment-activated': this.activated,
+            'segment-disabled': this.disabled,
+            'segment-scrollable': this.scrollable
+          })
+        }, Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null));
+      }
 
+      get el() {
+        return Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this);
+      }
 
-    var isCancelButtonSetToNever = function isCancelButtonSetToNever(showCancelButton) {
-      return showCancelButton === 'never' || showCancelButton === 'false' || showCancelButton === false;
+      static get watchers() {
+        return {
+          "value": ["valueChanged"],
+          "disabled": ["disabledChanged"]
+        };
+      }
+
+      static get style() {
+        return ":host{--ripple-color:currentColor;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:-ms-flexbox;display:flex;position:relative;-ms-flex-align:stretch;align-items:stretch;-ms-flex-pack:center;justify-content:center;width:100%;background:var(--background);font-family:var(--ion-font-family,inherit);text-align:center;contain:paint}:host(.segment-scrollable){-ms-flex-pack:start;justify-content:start;width:auto;overflow-x:scroll}:host(.segment-scrollable::-webkit-scrollbar){display:none}:host{--background:rgba(var(--ion-text-color-rgb,0,0,0),0.065);border-radius:8px;overflow:hidden;z-index:0}:host(.ion-color){background:rgba(var(--ion-color-base-rgb),.065)}:host(.in-toolbar){margin-left:auto;margin-right:auto;margin-top:0;margin-bottom:0;width:auto}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){:host(.in-toolbar){margin-left:unset;margin-right:unset;-webkit-margin-start:auto;margin-inline-start:auto;-webkit-margin-end:auto;margin-inline-end:auto}}:host(.in-toolbar:not(.ion-color)){background:var(--ion-toolbar-segment-background,var(--background))}:host(.in-toolbar-color:not(.ion-color)){background:rgba(var(--ion-color-contrast-rgb),.11)}";
+      }
+
     };
-    /**
-     * Check if the cancel button should be shown on focus.
-     *
-     * TODO: Remove this when the `true` and `false`
-     * options are removed.
-     */
+    let ids = 0;
+    const SegmentButton = class {
+      constructor(hostRef) {
+        Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
+        this.segmentEl = null;
+        this.checked = false;
+        /**
+         * If `true`, the user cannot interact with the segment button.
+         */
 
+        this.disabled = false;
+        /**
+         * Set the layout of the text and icon in the segment.
+         */
 
-    var isCancelButtonSetToFocus = function isCancelButtonSetToFocus(showCancelButton) {
-      return showCancelButton === 'focus' || showCancelButton === 'true' || showCancelButton === true || showCancelButton === '';
+        this.layout = 'icon-top';
+        /**
+         * The type of the button.
+         */
+
+        this.type = 'button';
+        /**
+         * The value of the segment button.
+         */
+
+        this.value = 'ion-sb-' + ids++;
+
+        this.updateState = () => {
+          if (this.segmentEl) {
+            this.checked = this.segmentEl.value === this.value;
+          }
+        };
+      }
+
+      connectedCallback() {
+        const segmentEl = this.segmentEl = this.el.closest('ion-segment');
+
+        if (segmentEl) {
+          this.updateState();
+          segmentEl.addEventListener('ionSelect', this.updateState);
+        }
+      }
+
+      disconnectedCallback() {
+        const segmentEl = this.segmentEl;
+
+        if (segmentEl) {
+          segmentEl.removeEventListener('ionSelect', this.updateState);
+          this.segmentEl = null;
+        }
+      }
+
+      get hasLabel() {
+        return !!this.el.querySelector('ion-label');
+      }
+
+      get hasIcon() {
+        return !!this.el.querySelector('ion-icon');
+      }
+
+      render() {
+        const {
+          checked,
+          type,
+          disabled,
+          hasIcon,
+          hasLabel,
+          layout
+        } = this;
+        const mode = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["c"])(this);
+        return Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
+          "aria-disabled": disabled ? 'true' : null,
+          class: {
+            [mode]: true,
+            'in-toolbar': Object(_theme_18cbe2cc_js__WEBPACK_IMPORTED_MODULE_3__["h"])('ion-toolbar', this.el),
+            'in-toolbar-color': Object(_theme_18cbe2cc_js__WEBPACK_IMPORTED_MODULE_3__["h"])('ion-toolbar[color]', this.el),
+            'in-segment': Object(_theme_18cbe2cc_js__WEBPACK_IMPORTED_MODULE_3__["h"])('ion-segment', this.el),
+            'in-segment-color': Object(_theme_18cbe2cc_js__WEBPACK_IMPORTED_MODULE_3__["h"])('ion-segment[color]', this.el),
+            'segment-button-has-label': hasLabel,
+            'segment-button-has-icon': hasIcon,
+            'segment-button-has-label-only': hasLabel && !hasIcon,
+            'segment-button-has-icon-only': hasIcon && !hasLabel,
+            'segment-button-disabled': disabled,
+            'segment-button-checked': checked,
+            ["segment-button-layout-".concat(layout)]: true,
+            'ion-activatable': true,
+            'ion-activatable-instant': true,
+            'ion-focusable': true
+          }
+        }, Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("button", {
+          type: type,
+          "aria-pressed": checked ? 'true' : null,
+          class: "button-native",
+          disabled: disabled
+        }, Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("span", {
+          class: "button-inner"
+        }, Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null)), mode === 'md' && Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-ripple-effect", null)), Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+          part: "indicator",
+          class: {
+            'segment-button-indicator': true,
+            'segment-button-indicator-animated': true
+          }
+        }, Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+          part: "indicator-background",
+          class: "segment-button-indicator-background"
+        })));
+      }
+
+      get el() {
+        return Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this);
+      }
+
+      static get style() {
+        return ":host{--color:initial;--color-hover:var(--color);--color-checked:var(--color);--color-disabled:var(--color);--padding-start:0;--padding-end:0;border-radius:var(--border-radius);-ms-flex:1 1 auto;flex:1 1 auto;-ms-flex-direction:column;flex-direction:column;background:var(--background);color:var(--color);text-decoration:none;text-overflow:ellipsis;white-space:nowrap;-webkit-font-kerning:none;font-kerning:none;cursor:pointer}.button-native,:host{display:-ms-flexbox;display:flex;height:auto}.button-native{border-radius:0;font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-indent:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;margin-left:var(--margin-start);margin-right:var(--margin-end);margin-top:var(--margin-top);margin-bottom:var(--margin-bottom);padding-left:var(--padding-start);padding-right:var(--padding-end);padding-top:var(--padding-top);padding-bottom:var(--padding-bottom);-webkit-transform:translateZ(0);transform:translateZ(0);position:relative;-ms-flex-direction:inherit;flex-direction:inherit;-ms-flex-positive:1;flex-grow:1;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;width:100%;min-width:inherit;max-width:inherit;min-height:inherit;max-height:inherit;-webkit-transition:var(--transition);transition:var(--transition);border:none;outline:none;background:transparent;contain:content;pointer-events:none;overflow:hidden;z-index:2}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.button-native{margin-left:unset;margin-right:unset;-webkit-margin-start:var(--margin-start);margin-inline-start:var(--margin-start);-webkit-margin-end:var(--margin-end);margin-inline-end:var(--margin-end);padding-left:unset;padding-right:unset;-webkit-padding-start:var(--padding-start);padding-inline-start:var(--padding-start);-webkit-padding-end:var(--padding-end);padding-inline-end:var(--padding-end)}}.button-native:after{left:0;right:0;top:0;bottom:0;position:absolute;content:\"\";opacity:0}.button-inner{display:-ms-flexbox;display:flex;position:relative;-ms-flex-flow:inherit;flex-flow:inherit;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;width:100%;height:100%;z-index:1}:host(.segment-button-checked){background:var(--background-checked);color:var(--color-checked)}:host(.segment-button-disabled){cursor:default;pointer-events:none}:host(.ion-focused) .button-native{color:var(--color-focused)}:host(.ion-focused) .button-native:after{background:var(--background-focused);opacity:var(--background-focused-opacity)}\@media (any-hover:hover){:host(:hover) .button-native{color:var(--color-hover)}:host(:hover) .button-native:after{background:var(--background-hover);opacity:var(--background-hover-opacity)}:host(.segment-button-checked:hover) .button-native{color:var(--color-checked)}}::slotted(ion-icon){-ms-flex-negative:0;flex-shrink:0;-ms-flex-order:-1;order:-1;pointer-events:none}::slotted(ion-label){display:block;-ms-flex-item-align:center;align-self:center;line-height:22px;text-overflow:ellipsis;white-space:nowrap;-webkit-box-sizing:border-box;box-sizing:border-box;pointer-events:none}:host(.segment-button-layout-icon-top) .button-native{-ms-flex-direction:column;flex-direction:column}:host(.segment-button-layout-icon-start) .button-native{-ms-flex-direction:row;flex-direction:row}:host(.segment-button-layout-icon-end) .button-native{-ms-flex-direction:row-reverse;flex-direction:row-reverse}:host(.segment-button-layout-icon-bottom) .button-native{-ms-flex-direction:column-reverse;flex-direction:column-reverse}:host(.segment-button-layout-icon-hide) ::slotted(ion-icon),:host(.segment-button-layout-label-hide) ::slotted(ion-label){display:none}ion-ripple-effect{color:var(--ripple-color,var(--color-checked))}.segment-button-indicator{-webkit-transform-origin:left;transform-origin:left;position:absolute;opacity:0;-webkit-box-sizing:border-box;box-sizing:border-box;will-change:transform,opacity}.segment-button-indicator-background{width:100%;height:var(--indicator-height);-webkit-transform:var(--indicator-transform);transform:var(--indicator-transform);-webkit-box-shadow:var(--indicator-box-shadow);box-shadow:var(--indicator-box-shadow)}.segment-button-indicator-animated{-webkit-transition:var(--indicator-transition);transition:var(--indicator-transition)}:host(.segment-button-checked) .segment-button-indicator{opacity:1}\@media (prefers-reduced-motion:reduce){.segment-button-indicator-background{-webkit-transform:none;transform:none}.segment-button-indicator-animated{-webkit-transition:none;transition:none}}:host{--background:none;--background-checked:none;--background-hover:none;--background-hover-opacity:0;--background-focused:none;--background-focused-opacity:0;--border-radius:7px;--border-width:1px;--border-color:rgba(var(--ion-text-color-rgb,0,0,0),0.12);--border-style:solid;--indicator-box-shadow:0 0 5px rgba(0,0,0,0.16);--indicator-color:var(--ion-color-step-350,var(--ion-background-color,#fff));--indicator-height:100%;--indicator-transition:transform 260ms cubic-bezier(0.4,0,0.2,1);--indicator-transform:none;--transition:100ms all linear;--padding-top:0;--padding-end:13px;--padding-bottom:0;--padding-start:13px;margin-top:2px;margin-bottom:2px;position:relative;-ms-flex-preferred-size:0;flex-basis:0;-ms-flex-direction:row;flex-direction:row;min-width:70px;min-height:28px;-webkit-transform:translateZ(0);transform:translateZ(0);font-size:13px;font-weight:450;line-height:37px}:host:before{margin-left:0;margin-right:0;margin-top:5px;margin-bottom:5px;-webkit-transition:opacity .16s ease-in-out;transition:opacity .16s ease-in-out;-webkit-transition-delay:.1s;transition-delay:.1s;border-left:var(--border-width) var(--border-style) var(--border-color);content:\"\";opacity:1;will-change:opacity}:host(:first-of-type):before{border-left-color:transparent}:host(.segment-button-disabled){opacity:.3}::slotted(ion-icon){font-size:24px}:host(.segment-button-layout-icon-start) ::slotted(ion-label){margin-left:2px;margin-right:0}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){:host(.segment-button-layout-icon-start) ::slotted(ion-label){margin-left:unset;margin-right:unset;-webkit-margin-start:2px;margin-inline-start:2px;-webkit-margin-end:0;margin-inline-end:0}}:host(.segment-button-layout-icon-end) ::slotted(ion-label){margin-left:0;margin-right:2px}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){:host(.segment-button-layout-icon-end) ::slotted(ion-label){margin-left:unset;margin-right:unset;-webkit-margin-start:0;margin-inline-start:0;-webkit-margin-end:2px;margin-inline-end:2px}}.segment-button-indicator{padding-left:2px;padding-right:2px;left:0;right:0;top:0;bottom:0}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.segment-button-indicator{padding-left:unset;padding-right:unset;-webkit-padding-start:2px;padding-inline-start:2px;-webkit-padding-end:2px;padding-inline-end:2px}}.segment-button-indicator-background{border-radius:var(--border-radius);background:var(--indicator-color);-webkit-transition:var(--indicator-transition);transition:var(--indicator-transition)}:host(.segment-button-after-checked):before,:host(.segment-button-checked):before{opacity:0}:host(.segment-button-checked){z-index:-1}:host(.segment-button-activated){--indicator-transform:scale(0.95)}:host(.ion-focused) .button-native{opacity:.7}\@media (any-hover:hover){:host(:hover) .button-native{opacity:.5}:host(.segment-button-checked:hover) .button-native{opacity:1}}:host(.in-segment-color){background:none;color:var(--ion-text-color,#000)}:host(.in-segment-color) .segment-button-indicator-background{background:var(--ion-color-step-350,var(--ion-background-color,#fff))}\@media (any-hover:hover){:host(.in-segment-color.segment-button-checked:hover) .button-native,:host(.in-segment-color:hover) .button-native{color:var(--ion-text-color,#000)}}:host(.in-toolbar:not(.in-segment-color)){--background-checked:var(--ion-toolbar-segment-background-checked,none);--color:var(--ion-toolbar-segment-color,var(--ion-toolbar-color),initial);--color-checked:var(--ion-toolbar-segment-color-checked,var(--ion-toolbar-color),initial);--indicator-color:var(--ion-toolbar-segment-indicator-color,var(--ion-color-step-350,var(--ion-background-color,#fff)))}:host(.in-toolbar-color) .segment-button-indicator-background{background:#fff}:host(.in-toolbar-color:not(.in-segment-color)) .button-native{color:var(--ion-color-contrast)}:host(.in-toolbar-color.segment-button-checked:not(.in-segment-color)) .button-native{color:var(--ion-color-base)}\@media (any-hover:hover){:host(.in-toolbar-color:not(.in-segment-color):hover) .button-native{color:var(--ion-color-contrast)}:host(.in-toolbar-color.segment-button-checked:not(.in-segment-color):hover) .button-native{color:var(--ion-color-base)}}";
+      }
+
     };
     /***/
-
   }
 }]);
 //# sourceMappingURL=57-es5.js.map

@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title size="large">Publica!</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid size="12">
+    <ion-row>
+      <ion-col>
+        <ion-textarea maxlength="100" rows="4" placeholder="Escribe tu comentario aquí..." [(ngModel)]="description" (keyup)="getDescription()"></ion-textarea>
+        <div class="count-chars">{{ description.length }} / 100</div>
+
+        <ion-button color="primary" id="save" disabled (click)="saveDescription()">Aceptar</ion-button>
+        <ion-button color="medium" fill="outline" (click)="close()">Cancelar</ion-button>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

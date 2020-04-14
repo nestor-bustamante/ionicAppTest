@@ -22,7 +22,7 @@
   "_resolved": "https://registry.npmjs.org/cordova-plugin-googleplus/-/cordova-plugin-googleplus-8.4.0.tgz",
   "_shasum": "ee518fed0c7efb8ae3e7d8ffac16a1c261402aab",
   "_spec": "cordova-plugin-googleplus",
-  "_where": "/Users/nestorbustamante/Documents/PROJECTS/AppTest",
+  "_where": "/Users/nestorbustamante/Documents/PROJECTS/videoApp",
   "bundleDependencies": false,
   "cordova_name": "Google SignIn",
   "dependencies": {

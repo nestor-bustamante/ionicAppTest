@@ -25,11 +25,9 @@
     /*! ./helpers-46f4a262.js */
     "./node_modules/@ionic/core/dist/esm/helpers-46f4a262.js");
 
-    var cloneMap = new WeakMap();
+    const cloneMap = new WeakMap();
 
-    var relocateInput = function relocateInput(componentEl, inputEl, shouldRelocate) {
-      var inputRelativeY = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-
+    const relocateInput = (componentEl, inputEl, shouldRelocate, inputRelativeY = 0) => {
       if (cloneMap.has(componentEl) === shouldRelocate) {
         return;
       }
@@ -41,11 +39,11 @@
       }
     };
 
-    var isFocused = function isFocused(input) {
+    const isFocused = input => {
       return input === input.getRootNode().activeElement;
     };
 
-    var addClone = function addClone(componentEl, inputEl, inputRelativeY) {
+    const addClone = (componentEl, inputEl, inputRelativeY) => {
       // this allows for the actual input to receive the focus from
       // the user's touch event, but before it receives focus, it
       // moves the actual input to a location that will not screw
@@ -55,21 +53,21 @@
       // while the native input fakes out the browser by relocating itself
       // before it receives the actual focus event
       // We hide the focused input (with the visible caret) invisible by making it scale(0),
-      var parentEl = inputEl.parentNode; // DOM WRITES
+      const parentEl = inputEl.parentNode; // DOM WRITES
 
-      var clonedEl = inputEl.cloneNode(false);
+      const clonedEl = inputEl.cloneNode(false);
       clonedEl.classList.add('cloned-input');
       clonedEl.tabIndex = -1;
       parentEl.appendChild(clonedEl);
       cloneMap.set(componentEl, clonedEl);
-      var doc = componentEl.ownerDocument;
-      var tx = doc.dir === 'rtl' ? 9999 : -9999;
+      const doc = componentEl.ownerDocument;
+      const tx = doc.dir === 'rtl' ? 9999 : -9999;
       componentEl.style.pointerEvents = 'none';
       inputEl.style.transform = "translate3d(".concat(tx, "px,").concat(inputRelativeY, "px,0) scale(0)");
     };
 
-    var removeClone = function removeClone(componentEl, inputEl) {
-      var clone = cloneMap.get(componentEl);
+    const removeClone = (componentEl, inputEl) => {
+      const clone = cloneMap.get(componentEl);
 
       if (clone) {
         cloneMap.delete(componentEl);
@@ -80,64 +78,58 @@
       inputEl.style.transform = '';
     };
 
-    var enableHideCaretOnScroll = function enableHideCaretOnScroll(componentEl, inputEl, scrollEl) {
+    const enableHideCaretOnScroll = (componentEl, inputEl, scrollEl) => {
       if (!scrollEl || !inputEl) {
-        return function () {
+        return () => {
           return;
         };
       }
 
-      var scrollHideCaret = function scrollHideCaret(shouldHideCaret) {
+      const scrollHideCaret = shouldHideCaret => {
         if (isFocused(inputEl)) {
           relocateInput(componentEl, inputEl, shouldHideCaret);
         }
       };
 
-      var onBlur = function onBlur() {
-        return relocateInput(componentEl, inputEl, false);
-      };
+      const onBlur = () => relocateInput(componentEl, inputEl, false);
 
-      var hideCaret = function hideCaret() {
-        return scrollHideCaret(true);
-      };
+      const hideCaret = () => scrollHideCaret(true);
 
-      var showCaret = function showCaret() {
-        return scrollHideCaret(false);
-      };
+      const showCaret = () => scrollHideCaret(false);
 
       scrollEl.addEventListener('ionScrollStart', hideCaret);
       scrollEl.addEventListener('ionScrollEnd', showCaret);
       inputEl.addEventListener('blur', onBlur);
-      return function () {
+      return () => {
         scrollEl.removeEventListener('ionScrollStart', hideCaret);
         scrollEl.removeEventListener('ionScrollEnd', showCaret);
         inputEl.addEventListener('ionBlur', onBlur);
       };
     };
 
-    var SKIP_SELECTOR = 'input, textarea, [no-blur]';
+    const SKIP_SELECTOR = 'input, textarea, [no-blur]';
 
-    var enableInputBlurring = function enableInputBlurring() {
-      var focused = true;
-      var didScroll = false;
-      var doc = document;
+    const enableInputBlurring = () => {
+      let focused = true;
+      let didScroll = false;
+      const doc = document;
 
-      var onScroll = function onScroll() {
+      const onScroll = () => {
         didScroll = true;
       };
 
-      var onFocusin = function onFocusin() {
+      const onFocusin = () => {
         focused = true;
       };
 
-      var onTouchend = function onTouchend(ev) {
+      const onTouchend = ev => {
         // if app did scroll return early
         if (didScroll) {
           didScroll = false;
           return;
         }
 
-        var active = doc.activeElement;
+        const active = doc.activeElement;
 
         if (!active) {
           return;
@@ -149,7 +141,7 @@
         } // if the selected target is the active element, do not blur
 
 
-        var tapped = ev.target;
+        const tapped = ev.target;
 
         if (tapped === active) {
           return;
@@ -161,7 +153,7 @@
 
         focused = false; // TODO: find a better way, why 50ms?
 
-        setTimeout(function () {
+        setTimeout(() => {
           if (!focused) {
             active.blur();
           }
@@ -171,64 +163,64 @@
       doc.addEventListener('ionScrollStart', onScroll);
       doc.addEventListener('focusin', onFocusin, true);
       doc.addEventListener('touchend', onTouchend, false);
-      return function () {
+      return () => {
         doc.removeEventListener('ionScrollStart', onScroll, true);
         doc.removeEventListener('focusin', onFocusin, true);
         doc.removeEventListener('touchend', onTouchend, false);
       };
     };
 
-    var SCROLL_ASSIST_SPEED = 0.3;
+    const SCROLL_ASSIST_SPEED = 0.3;
 
-    var getScrollData = function getScrollData(componentEl, contentEl, keyboardHeight) {
-      var itemEl = componentEl.closest('ion-item,[ion-item]') || componentEl;
+    const getScrollData = (componentEl, contentEl, keyboardHeight) => {
+      const itemEl = componentEl.closest('ion-item,[ion-item]') || componentEl;
       return calcScrollData(itemEl.getBoundingClientRect(), contentEl.getBoundingClientRect(), keyboardHeight, componentEl.ownerDocument.defaultView.innerHeight);
     };
 
-    var calcScrollData = function calcScrollData(inputRect, contentRect, keyboardHeight, platformHeight) {
+    const calcScrollData = (inputRect, contentRect, keyboardHeight, platformHeight) => {
       // compute input's Y values relative to the body
-      var inputTop = inputRect.top;
-      var inputBottom = inputRect.bottom; // compute visible area
+      const inputTop = inputRect.top;
+      const inputBottom = inputRect.bottom; // compute visible area
 
-      var visibleAreaTop = contentRect.top;
-      var visibleAreaBottom = Math.min(contentRect.bottom, platformHeight - keyboardHeight); // compute safe area
+      const visibleAreaTop = contentRect.top;
+      const visibleAreaBottom = Math.min(contentRect.bottom, platformHeight - keyboardHeight); // compute safe area
 
-      var safeAreaTop = visibleAreaTop + 15;
-      var safeAreaBottom = visibleAreaBottom * 0.5; // figure out if each edge of the input is within the safe area
+      const safeAreaTop = visibleAreaTop + 15;
+      const safeAreaBottom = visibleAreaBottom * 0.5; // figure out if each edge of the input is within the safe area
 
-      var distanceToBottom = safeAreaBottom - inputBottom;
-      var distanceToTop = safeAreaTop - inputTop; // desiredScrollAmount is the negated distance to the safe area according to our calculations.
+      const distanceToBottom = safeAreaBottom - inputBottom;
+      const distanceToTop = safeAreaTop - inputTop; // desiredScrollAmount is the negated distance to the safe area according to our calculations.
 
-      var desiredScrollAmount = Math.round(distanceToBottom < 0 ? -distanceToBottom : distanceToTop > 0 ? -distanceToTop : 0); // our calculations make some assumptions that aren't always true, like the keyboard being closed when an input
+      const desiredScrollAmount = Math.round(distanceToBottom < 0 ? -distanceToBottom : distanceToTop > 0 ? -distanceToTop : 0); // our calculations make some assumptions that aren't always true, like the keyboard being closed when an input
       // gets focus, so make sure we don't scroll the input above the visible area
 
-      var scrollAmount = Math.min(desiredScrollAmount, inputTop - visibleAreaTop);
-      var distance = Math.abs(scrollAmount);
-      var duration = distance / SCROLL_ASSIST_SPEED;
-      var scrollDuration = Math.min(400, Math.max(150, duration));
+      const scrollAmount = Math.min(desiredScrollAmount, inputTop - visibleAreaTop);
+      const distance = Math.abs(scrollAmount);
+      const duration = distance / SCROLL_ASSIST_SPEED;
+      const scrollDuration = Math.min(400, Math.max(150, duration));
       return {
-        scrollAmount: scrollAmount,
-        scrollDuration: scrollDuration,
+        scrollAmount,
+        scrollDuration,
         scrollPadding: keyboardHeight,
         inputSafeY: -(inputTop - safeAreaTop) + 4
       };
     };
 
-    var enableScrollAssist = function enableScrollAssist(componentEl, inputEl, contentEl, keyboardHeight) {
-      var coord;
+    const enableScrollAssist = (componentEl, inputEl, contentEl, keyboardHeight) => {
+      let coord;
 
-      var touchStart = function touchStart(ev) {
+      const touchStart = ev => {
         coord = Object(_helpers_46f4a262_js__WEBPACK_IMPORTED_MODULE_0__["p"])(ev);
       };
 
-      var touchEnd = function touchEnd(ev) {
+      const touchEnd = ev => {
         // input cover touchend/mouseup
         if (!coord) {
           return;
         } // get where the touchend/mouseup ended
 
 
-        var endCoord = Object(_helpers_46f4a262_js__WEBPACK_IMPORTED_MODULE_0__["p"])(ev); // focus this input if the pointer hasn't moved XX pixels
+        const endCoord = Object(_helpers_46f4a262_js__WEBPACK_IMPORTED_MODULE_0__["p"])(ev); // focus this input if the pointer hasn't moved XX pixels
         // and the input doesn't already have focus
 
         if (!hasPointerMoved(6, coord, endCoord) && !isFocused(inputEl)) {
@@ -241,14 +233,14 @@
 
       componentEl.addEventListener('touchstart', touchStart, true);
       componentEl.addEventListener('touchend', touchEnd, true);
-      return function () {
+      return () => {
         componentEl.removeEventListener('touchstart', touchStart, true);
         componentEl.removeEventListener('touchend', touchEnd, true);
       };
     };
 
-    var jsSetFocus = function jsSetFocus(componentEl, inputEl, contentEl, keyboardHeight) {
-      var scrollData = getScrollData(componentEl, contentEl, keyboardHeight);
+    const jsSetFocus = (componentEl, inputEl, contentEl, keyboardHeight) => {
+      const scrollData = getScrollData(componentEl, contentEl, keyboardHeight);
 
       if (Math.abs(scrollData.scrollAmount) < 4) {
         // the text input is in a safe position that doesn't
@@ -263,7 +255,7 @@
       relocateInput(componentEl, inputEl, true, scrollData.inputSafeY);
       inputEl.focus(); // scroll the input into place
 
-      contentEl.scrollByPoint(0, scrollData.scrollAmount, scrollData.scrollDuration).then(function () {
+      contentEl.scrollByPoint(0, scrollData.scrollAmount, scrollData.scrollDuration).then(() => {
         // the scroll view is in the correct position now
         // give the native text input focus
         relocateInput(componentEl, inputEl, false, scrollData.inputSafeY); // ensure this is the focused input
@@ -272,39 +264,39 @@
       });
     };
 
-    var hasPointerMoved = function hasPointerMoved(threshold, startCoord, endCoord) {
+    const hasPointerMoved = (threshold, startCoord, endCoord) => {
       if (startCoord && endCoord) {
-        var deltaX = startCoord.x - endCoord.x;
-        var deltaY = startCoord.y - endCoord.y;
-        var distance = deltaX * deltaX + deltaY * deltaY;
+        const deltaX = startCoord.x - endCoord.x;
+        const deltaY = startCoord.y - endCoord.y;
+        const distance = deltaX * deltaX + deltaY * deltaY;
         return distance > threshold * threshold;
       }
 
       return false;
     };
 
-    var PADDING_TIMER_KEY = '$ionPaddingTimer';
+    const PADDING_TIMER_KEY = '$ionPaddingTimer';
 
-    var enableScrollPadding = function enableScrollPadding(keyboardHeight) {
-      var doc = document;
+    const enableScrollPadding = keyboardHeight => {
+      const doc = document;
 
-      var onFocusin = function onFocusin(ev) {
+      const onFocusin = ev => {
         setScrollPadding(ev.target, keyboardHeight);
       };
 
-      var onFocusout = function onFocusout(ev) {
+      const onFocusout = ev => {
         setScrollPadding(ev.target, 0);
       };
 
       doc.addEventListener('focusin', onFocusin);
       doc.addEventListener('focusout', onFocusout);
-      return function () {
+      return () => {
         doc.removeEventListener('focusin', onFocusin);
         doc.removeEventListener('focusout', onFocusout);
       };
     };
 
-    var setScrollPadding = function setScrollPadding(input, keyboardHeight) {
+    const setScrollPadding = (input, keyboardHeight) => {
       if (input.tagName !== 'INPUT') {
         return;
       }
@@ -317,13 +309,13 @@
         return;
       }
 
-      var el = input.closest('ion-content');
+      const el = input.closest('ion-content');
 
       if (el === null) {
         return;
       }
 
-      var timer = el[PADDING_TIMER_KEY];
+      const timer = el[PADDING_TIMER_KEY];
 
       if (timer) {
         clearTimeout(timer);
@@ -332,49 +324,48 @@
       if (keyboardHeight > 0) {
         el.style.setProperty('--keyboard-offset', "".concat(keyboardHeight, "px"));
       } else {
-        el[PADDING_TIMER_KEY] = setTimeout(function () {
+        el[PADDING_TIMER_KEY] = setTimeout(() => {
           el.style.setProperty('--keyboard-offset', '0px');
         }, 120);
       }
     };
 
-    var INPUT_BLURRING = true;
-    var SCROLL_PADDING = true;
+    const INPUT_BLURRING = true;
+    const SCROLL_PADDING = true;
 
-    var startInputShims = function startInputShims(config) {
-      var doc = document;
-      var keyboardHeight = config.getNumber('keyboardHeight', 290);
-      var scrollAssist = config.getBoolean('scrollAssist', true);
-      var hideCaret = config.getBoolean('hideCaretOnScroll', true);
-      var inputBlurring = config.getBoolean('inputBlurring', true);
-      var scrollPadding = config.getBoolean('scrollPadding', true);
-      var inputs = Array.from(doc.querySelectorAll('ion-input, ion-textarea'));
-      var hideCaretMap = new WeakMap();
-      var scrollAssistMap = new WeakMap();
+    const startInputShims = config => {
+      const doc = document;
+      const keyboardHeight = config.getNumber('keyboardHeight', 290);
+      const scrollAssist = config.getBoolean('scrollAssist', true);
+      const hideCaret = config.getBoolean('hideCaretOnScroll', true);
+      const inputBlurring = config.getBoolean('inputBlurring', true);
+      const scrollPadding = config.getBoolean('scrollPadding', true);
+      const inputs = Array.from(doc.querySelectorAll('ion-input, ion-textarea'));
+      const hideCaretMap = new WeakMap();
+      const scrollAssistMap = new WeakMap();
 
-      var registerInput = function registerInput(componentEl) {
-        var inputEl = (componentEl.shadowRoot || componentEl).querySelector('input') || (componentEl.shadowRoot || componentEl).querySelector('textarea');
-        var scrollEl = componentEl.closest('ion-content');
+      const registerInput = componentEl => {
+        const inputEl = (componentEl.shadowRoot || componentEl).querySelector('input') || (componentEl.shadowRoot || componentEl).querySelector('textarea');
+        const scrollEl = componentEl.closest('ion-content');
 
         if (!inputEl) {
           return;
         }
 
         if (!!scrollEl && hideCaret && !hideCaretMap.has(componentEl)) {
-          var rmFn = enableHideCaretOnScroll(componentEl, inputEl, scrollEl);
+          const rmFn = enableHideCaretOnScroll(componentEl, inputEl, scrollEl);
           hideCaretMap.set(componentEl, rmFn);
         }
 
         if (!!scrollEl && scrollAssist && !scrollAssistMap.has(componentEl)) {
-          var _rmFn = enableScrollAssist(componentEl, inputEl, scrollEl, keyboardHeight);
-
-          scrollAssistMap.set(componentEl, _rmFn);
+          const rmFn = enableScrollAssist(componentEl, inputEl, scrollEl, keyboardHeight);
+          scrollAssistMap.set(componentEl, rmFn);
         }
       };
 
-      var unregisterInput = function unregisterInput(componentEl) {
+      const unregisterInput = componentEl => {
         if (hideCaret) {
-          var fn = hideCaretMap.get(componentEl);
+          const fn = hideCaretMap.get(componentEl);
 
           if (fn) {
             fn();
@@ -384,10 +375,10 @@
         }
 
         if (scrollAssist) {
-          var _fn = scrollAssistMap.get(componentEl);
+          const fn = scrollAssistMap.get(componentEl);
 
-          if (_fn) {
-            _fn();
+          if (fn) {
+            fn();
           }
 
           scrollAssistMap.delete(componentEl);
@@ -405,15 +396,14 @@
       // and register them.
 
 
-      for (var _i = 0, _inputs = inputs; _i < _inputs.length; _i++) {
-        var input = _inputs[_i];
+      for (const input of inputs) {
         registerInput(input);
       }
 
-      doc.addEventListener('ionInputDidLoad', function (ev) {
+      doc.addEventListener('ionInputDidLoad', ev => {
         registerInput(ev.detail);
       });
-      doc.addEventListener('ionInputDidUnload', function (ev) {
+      doc.addEventListener('ionInputDidUnload', ev => {
         unregisterInput(ev.detail);
       });
     };

@@ -1,67 +1,29 @@
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[55], {
   /***/
-  "./node_modules/@ionic/core/dist/esm/ion-route_4.entry.js":
-  /*!****************************************************************!*\
-    !*** ./node_modules/@ionic/core/dist/esm/ion-route_4.entry.js ***!
-    \****************************************************************/
+  "./node_modules/@ionic/core/dist/esm/ion-searchbar-ios.entry.js":
+  /*!**********************************************************************!*\
+    !*** ./node_modules/@ionic/core/dist/esm/ion-searchbar-ios.entry.js ***!
+    \**********************************************************************/
 
-  /*! exports provided: ion_route, ion_route_redirect, ion_router, ion_router_link */
+  /*! exports provided: ion_searchbar */
 
   /***/
-  function node_modulesIonicCoreDistEsmIonRoute_4EntryJs(module, __webpack_exports__, __webpack_require__) {
+  function node_modulesIonicCoreDistEsmIonSearchbarIosEntryJs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
     /* harmony export (binding) */
 
 
-    __webpack_require__.d(__webpack_exports__, "ion_route", function () {
-      return Route;
-    });
-    /* harmony export (binding) */
-
-
-    __webpack_require__.d(__webpack_exports__, "ion_route_redirect", function () {
-      return RouteRedirect;
-    });
-    /* harmony export (binding) */
-
-
-    __webpack_require__.d(__webpack_exports__, "ion_router", function () {
-      return Router;
-    });
-    /* harmony export (binding) */
-
-
-    __webpack_require__.d(__webpack_exports__, "ion_router_link", function () {
-      return RouterLink;
+    __webpack_require__.d(__webpack_exports__, "ion_searchbar", function () {
+      return Searchbar;
     });
     /* harmony import */
 
 
-    var _core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! ./core-feeeff0d.js */
-    "./node_modules/@ionic/core/dist/esm/core-feeeff0d.js");
+    var _core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! ./core-0a8d4d2e.js */
+    "./node_modules/@ionic/core/dist/esm/core-0a8d4d2e.js");
     /* harmony import */
 
 
@@ -81,1510 +43,445 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /*! ./theme-18cbe2cc.js */
     "./node_modules/@ionic/core/dist/esm/theme-18cbe2cc.js");
 
-    var Route =
-    /*#__PURE__*/
-    function () {
-      function Route(hostRef) {
-        _classCallCheck(this, Route);
-
-        Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
+    const Searchbar = class {
+      constructor(hostRef) {
+        Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
+        this.isCancelVisible = false;
+        this.shouldAlignLeft = true;
+        this.focused = false;
+        this.noAnimate = true;
         /**
-         * Relative path that needs to match in order for this route to apply.
-         *
-         * Accepts paths similar to expressjs so that you can define parameters
-         * in the url /foo/:bar where bar would be available in incoming props.
+         * If `true`, enable searchbar animation.
          */
 
-        this.url = '';
-        this.ionRouteDataChanged = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionRouteDataChanged", 7);
-      }
+        this.animated = false;
+        /**
+         * Set the input's autocomplete property.
+         */
 
-      _createClass(Route, [{
-        key: "onUpdate",
-        value: function onUpdate(newValue) {
-          this.ionRouteDataChanged.emit(newValue);
-        }
-      }, {
-        key: "onComponentProps",
-        value: function onComponentProps(newValue, oldValue) {
-          if (newValue === oldValue) {
-            return;
-          }
+        this.autocomplete = 'off';
+        /**
+         * Set the input's autocorrect property.
+         */
 
-          var keys1 = newValue ? Object.keys(newValue) : [];
-          var keys2 = oldValue ? Object.keys(oldValue) : [];
+        this.autocorrect = 'off';
+        /**
+         * Set the cancel button icon. Only applies to `md` mode.
+         * Defaults to `"arrow-back-sharp"`.
+         */
 
-          if (keys1.length !== keys2.length) {
-            this.onUpdate(newValue);
-            return;
-          }
+        this.cancelButtonIcon = _config_3c7f3790_js__WEBPACK_IMPORTED_MODULE_1__["b"].get('backButtonIcon', 'arrow-back-sharp');
+        /**
+         * Set the the cancel button text. Only applies to `ios` mode.
+         */
 
-          var _iteratorNormalCompletion = true;
-          var _didIteratorError = false;
-          var _iteratorError = undefined;
+        this.cancelButtonText = 'Cancel';
+        /**
+         * Set the amount of time, in milliseconds, to wait to trigger the `ionChange` event after each keystroke.
+         */
 
-          try {
-            for (var _iterator = keys1[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-              var key = _step.value;
+        this.debounce = 250;
+        /**
+         * If `true`, the user cannot interact with the input.
+         */
 
-              if (newValue[key] !== oldValue[key]) {
-                this.onUpdate(newValue);
-                return;
-              }
+        this.disabled = false;
+        /**
+         * Set the input's placeholder.
+         * `placeholder` can accept either plaintext or HTML as a string.
+         * To display characters normally reserved for HTML, they
+         * must be escaped. For example `<Ionic>` would become
+         * `&lt;Ionic&gt;`
+         *
+         * For more information: [Security Documentation](https://ionicframework.com/docs/faq/security)
+         */
+
+        this.placeholder = 'Search';
+        /**
+         * Sets the behavior for the cancel button. Defaults to `"never"`.
+         * Setting to `"focus"` shows the cancel button on focus.
+         * Setting to `"never"` hides the cancel button.
+         * Setting to `"always"` shows the cancel button regardless
+         * of focus state.
+         */
+
+        this.showCancelButton = 'never';
+        /**
+         * If `true`, enable spellcheck on the input.
+         */
+
+        this.spellcheck = false;
+        /**
+         * Set the type of the input.
+         */
+
+        this.type = 'search';
+        /**
+         * the value of the searchbar.
+         */
+
+        this.value = '';
+        /**
+         * Clears the input field and triggers the control change.
+         */
+
+        this.onClearInput = ev => {
+          this.ionClear.emit();
+
+          if (ev) {
+            ev.preventDefault();
+            ev.stopPropagation();
+          } // setTimeout() fixes https://github.com/ionic-team/ionic/issues/7527
+          // wait for 4 frames
+
+
+          setTimeout(() => {
+            const value = this.getValue();
+
+            if (value !== '') {
+              this.value = '';
+              this.ionInput.emit();
             }
-          } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-          } finally {
-            try {
-              if (!_iteratorNormalCompletion && _iterator.return != null) {
-                _iterator.return();
-              }
-            } finally {
-              if (_didIteratorError) {
-                throw _iteratorError;
-              }
-            }
+          }, 16 * 4);
+        };
+        /**
+         * Clears the input field and tells the input to blur since
+         * the clearInput function doesn't want the input to blur
+         * then calls the custom cancel function if the user passed one in.
+         */
+
+
+        this.onCancelSearchbar = ev => {
+          if (ev) {
+            ev.preventDefault();
+            ev.stopPropagation();
           }
-        }
-      }, {
-        key: "connectedCallback",
-        value: function connectedCallback() {
-          this.ionRouteDataChanged.emit();
-        }
-      }], [{
-        key: "watchers",
-        get: function get() {
-          return {
-            "url": ["onUpdate"],
-            "component": ["onUpdate"],
-            "componentProps": ["onComponentProps"]
-          };
-        }
-      }]);
 
-      return Route;
-    }();
+          this.ionCancel.emit();
+          this.onClearInput();
 
-    var RouteRedirect =
-    /*#__PURE__*/
-    function () {
-      function RouteRedirect(hostRef) {
-        _classCallCheck(this, RouteRedirect);
-
-        Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
-        this.ionRouteRedirectChanged = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionRouteRedirectChanged", 7);
-      }
-
-      _createClass(RouteRedirect, [{
-        key: "propDidChange",
-        value: function propDidChange() {
-          this.ionRouteRedirectChanged.emit();
-        }
-      }, {
-        key: "connectedCallback",
-        value: function connectedCallback() {
-          this.ionRouteRedirectChanged.emit();
-        }
-      }], [{
-        key: "watchers",
-        get: function get() {
-          return {
-            "from": ["propDidChange"],
-            "to": ["propDidChange"]
-          };
-        }
-      }]);
-
-      return RouteRedirect;
-    }();
-
-    var ROUTER_INTENT_NONE = 'root';
-    var ROUTER_INTENT_FORWARD = 'forward';
-    var ROUTER_INTENT_BACK = 'back';
-
-    var generatePath = function generatePath(segments) {
-      var path = segments.filter(function (s) {
-        return s.length > 0;
-      }).join('/');
-      return '/' + path;
-    };
-
-    var chainToPath = function chainToPath(chain) {
-      var path = [];
-      var _iteratorNormalCompletion2 = true;
-      var _didIteratorError2 = false;
-      var _iteratorError2 = undefined;
-
-      try {
-        for (var _iterator2 = chain[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-          var route = _step2.value;
-          var _iteratorNormalCompletion3 = true;
-          var _didIteratorError3 = false;
-          var _iteratorError3 = undefined;
-
-          try {
-            for (var _iterator3 = route.path[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-              var segment = _step3.value;
-
-              if (segment[0] === ':') {
-                var param = route.params && route.params[segment.slice(1)];
-
-                if (!param) {
-                  return null;
-                }
-
-                path.push(param);
-              } else if (segment !== '') {
-                path.push(segment);
-              }
-            }
-          } catch (err) {
-            _didIteratorError3 = true;
-            _iteratorError3 = err;
-          } finally {
-            try {
-              if (!_iteratorNormalCompletion3 && _iterator3.return != null) {
-                _iterator3.return();
-              }
-            } finally {
-              if (_didIteratorError3) {
-                throw _iteratorError3;
-              }
-            }
+          if (this.nativeInput) {
+            this.nativeInput.blur();
           }
-        }
-      } catch (err) {
-        _didIteratorError2 = true;
-        _iteratorError2 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-            _iterator2.return();
+        };
+        /**
+         * Update the Searchbar input value when the input changes
+         */
+
+
+        this.onInput = ev => {
+          const input = ev.target;
+
+          if (input) {
+            this.value = input.value;
           }
-        } finally {
-          if (_didIteratorError2) {
-            throw _iteratorError2;
-          }
-        }
-      }
 
-      return path;
-    };
+          this.ionInput.emit(ev);
+        };
+        /**
+         * Sets the Searchbar to not focused and checks if it should align left
+         * based on whether there is a value in the searchbar or not.
+         */
 
-    var writePath = function writePath(history, root, useHash, path, direction, state) {
-      var url = generatePath([].concat(_toConsumableArray(parsePath(root)), _toConsumableArray(path)));
 
-      if (useHash) {
-        url = '#' + url;
-      }
+        this.onBlur = () => {
+          this.focused = false;
+          this.ionBlur.emit();
+          this.positionElements();
+        };
+        /**
+         * Sets the Searchbar to focused and active on input focus.
+         */
 
-      if (direction === ROUTER_INTENT_FORWARD) {
-        history.pushState(state, '', url);
-      } else {
-        history.replaceState(state, '', url);
-      }
-    };
 
-    var removePrefix = function removePrefix(prefix, path) {
-      if (prefix.length > path.length) {
-        return null;
-      }
-
-      if (prefix.length <= 1 && prefix[0] === '') {
-        return path;
-      }
-
-      for (var i = 0; i < prefix.length; i++) {
-        if (prefix[i].length > 0 && prefix[i] !== path[i]) {
-          return null;
-        }
-      }
-
-      if (path.length === prefix.length) {
-        return [''];
-      }
-
-      return path.slice(prefix.length);
-    };
-
-    var readPath = function readPath(loc, root, useHash) {
-      var pathname = loc.pathname;
-
-      if (useHash) {
-        var hash = loc.hash;
-        pathname = hash[0] === '#' ? hash.slice(1) : '';
-      }
-
-      var prefix = parsePath(root);
-      var path = parsePath(pathname);
-      return removePrefix(prefix, path);
-    };
-
-    var parsePath = function parsePath(path) {
-      if (path == null) {
-        return [''];
-      }
-
-      var segments = path.split('/').map(function (s) {
-        return s.trim();
-      }).filter(function (s) {
-        return s.length > 0;
-      });
-
-      if (segments.length === 0) {
-        return [''];
-      } else {
-        return segments;
-      }
-    };
-
-    var printRoutes = function printRoutes(routes) {
-      console.group("[ion-core] ROUTES[".concat(routes.length, "]"));
-      var _iteratorNormalCompletion4 = true;
-      var _didIteratorError4 = false;
-      var _iteratorError4 = undefined;
-
-      try {
-        var _loop = function _loop() {
-          var chain = _step4.value;
-          var path = [];
-          chain.forEach(function (r) {
-            return path.push.apply(path, _toConsumableArray(r.path));
-          });
-          var ids = chain.map(function (r) {
-            return r.id;
-          });
-          console.debug("%c ".concat(generatePath(path)), 'font-weight: bold; padding-left: 20px', '=>\t', "(".concat(ids.join(', '), ")"));
+        this.onFocus = () => {
+          this.focused = true;
+          this.ionFocus.emit();
+          this.positionElements();
         };
 
-        for (var _iterator4 = routes[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-          _loop();
-        }
-      } catch (err) {
-        _didIteratorError4 = true;
-        _iteratorError4 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion4 && _iterator4.return != null) {
-            _iterator4.return();
-          }
-        } finally {
-          if (_didIteratorError4) {
-            throw _iteratorError4;
-          }
-        }
+        this.ionInput = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionInput", 7);
+        this.ionChange = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionChange", 7);
+        this.ionCancel = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionCancel", 7);
+        this.ionClear = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionClear", 7);
+        this.ionBlur = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionBlur", 7);
+        this.ionFocus = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionFocus", 7);
+        this.ionStyle = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionStyle", 7);
       }
 
-      console.groupEnd();
-    };
-
-    var printRedirects = function printRedirects(redirects) {
-      console.group("[ion-core] REDIRECTS[".concat(redirects.length, "]"));
-      var _iteratorNormalCompletion5 = true;
-      var _didIteratorError5 = false;
-      var _iteratorError5 = undefined;
-
-      try {
-        for (var _iterator5 = redirects[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-          var redirect = _step5.value;
-
-          if (redirect.to) {
-            console.debug('FROM: ', "$c ".concat(generatePath(redirect.from)), 'font-weight: bold', ' TO: ', "$c ".concat(generatePath(redirect.to)), 'font-weight: bold');
-          }
-        }
-      } catch (err) {
-        _didIteratorError5 = true;
-        _iteratorError5 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion5 && _iterator5.return != null) {
-            _iterator5.return();
-          }
-        } finally {
-          if (_didIteratorError5) {
-            throw _iteratorError5;
-          }
-        }
+      debounceChanged() {
+        this.ionChange = Object(_helpers_46f4a262_js__WEBPACK_IMPORTED_MODULE_2__["d"])(this.ionChange, this.debounce);
       }
 
-      console.groupEnd();
-    };
+      valueChanged() {
+        const inputEl = this.nativeInput;
+        const value = this.getValue();
 
-    var _writeNavState =
-    /*#__PURE__*/
-    function () {
-      var _ref = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(root, chain, direction, index) {
-        var changed,
-            outlet,
-            route,
-            result,
-            _args = arguments;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                changed = _args.length > 4 && _args[4] !== undefined ? _args[4] : false;
-                _context.prev = 1;
-                // find next navigation outlet in the DOM
-                outlet = searchNavNode(root); // make sure we can continue interacting the DOM, otherwise abort
+        if (inputEl && inputEl.value !== value) {
+          inputEl.value = value;
+        }
 
-                if (!(index >= chain.length || !outlet)) {
-                  _context.next = 5;
-                  break;
-                }
-
-                return _context.abrupt("return", changed);
-
-              case 5:
-                _context.next = 7;
-                return outlet.componentOnReady();
-
-              case 7:
-                route = chain[index];
-                _context.next = 10;
-                return outlet.setRouteId(route.id, route.params, direction);
-
-              case 10:
-                result = _context.sent;
-
-                // if the outlet changed the page, reset navigation to neutral (no direction)
-                // this means nested outlets will not animate
-                if (result.changed) {
-                  direction = ROUTER_INTENT_NONE;
-                  changed = true;
-                } // recursively set nested outlets
-
-
-                _context.next = 14;
-                return _writeNavState(result.element, chain, direction, index + 1, changed);
-
-              case 14:
-                changed = _context.sent;
-
-                if (!result.markVisible) {
-                  _context.next = 18;
-                  break;
-                }
-
-                _context.next = 18;
-                return result.markVisible();
-
-              case 18:
-                return _context.abrupt("return", changed);
-
-              case 21:
-                _context.prev = 21;
-                _context.t0 = _context["catch"](1);
-                console.error(_context.t0);
-                return _context.abrupt("return", false);
-
-              case 25:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, null, [[1, 21]]);
-      }));
-
-      return function writeNavState(_x, _x2, _x3, _x4) {
-        return _ref.apply(this, arguments);
-      };
-    }();
-
-    var readNavState =
-    /*#__PURE__*/
-    function () {
-      var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(root) {
-        var ids, outlet, node, id;
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                ids = [];
-                node = root; // tslint:disable-next-line:no-constant-condition
-
-              case 2:
-                if (!true) {
-                  _context2.next = 20;
-                  break;
-                }
-
-                outlet = searchNavNode(node);
-
-                if (!outlet) {
-                  _context2.next = 17;
-                  break;
-                }
-
-                _context2.next = 7;
-                return outlet.getRouteId();
-
-              case 7:
-                id = _context2.sent;
-
-                if (!id) {
-                  _context2.next = 14;
-                  break;
-                }
-
-                node = id.element;
-                id.element = undefined;
-                ids.push(id);
-                _context2.next = 15;
-                break;
-
-              case 14:
-                return _context2.abrupt("break", 20);
-
-              case 15:
-                _context2.next = 18;
-                break;
-
-              case 17:
-                return _context2.abrupt("break", 20);
-
-              case 18:
-                _context2.next = 2;
-                break;
-
-              case 20:
-                return _context2.abrupt("return", {
-                  ids: ids,
-                  outlet: outlet
-                });
-
-              case 21:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }));
-
-      return function readNavState(_x5) {
-        return _ref2.apply(this, arguments);
-      };
-    }();
-
-    var waitUntilNavNode = function waitUntilNavNode() {
-      if (searchNavNode(document.body)) {
-        return Promise.resolve();
-      }
-
-      return new Promise(function (resolve) {
-        window.addEventListener('ionNavWillLoad', resolve, {
-          once: true
+        this.ionChange.emit({
+          value
         });
-      });
-    };
-
-    var QUERY = ':not([no-router]) ion-nav, :not([no-router]) ion-tabs, :not([no-router]) ion-router-outlet';
-
-    var searchNavNode = function searchNavNode(root) {
-      if (!root) {
-        return undefined;
       }
 
-      if (root.matches(QUERY)) {
-        return root;
+      showCancelButtonChanged() {
+        requestAnimationFrame(() => {
+          this.positionElements();
+          this.el.forceUpdate();
+        });
       }
 
-      var outlet = root.querySelector(QUERY);
-      return outlet ? outlet : undefined;
-    };
-
-    var matchesRedirect = function matchesRedirect(input, route) {
-      var from = route.from,
-          to = route.to;
-
-      if (to === undefined) {
-        return false;
+      connectedCallback() {
+        this.emitStyle();
       }
 
-      if (from.length > input.length) {
-        return false;
+      componentDidLoad() {
+        this.positionElements();
+        this.debounceChanged();
+        setTimeout(() => {
+          this.noAnimate = false;
+        }, 300);
       }
 
-      for (var i = 0; i < from.length; i++) {
-        var expected = from[i];
+      emitStyle() {
+        this.ionStyle.emit({
+          'searchbar': true
+        });
+      }
+      /**
+       * Sets focus on the specified `ion-searchbar`. Use this method instead of the global
+       * `input.focus()`.
+       */
 
-        if (expected === '*') {
-          return true;
+
+      async setFocus() {
+        if (this.nativeInput) {
+          this.nativeInput.focus();
+        }
+      }
+      /**
+       * Returns the native `<input>` element used under the hood.
+       */
+
+
+      getInputElement() {
+        return Promise.resolve(this.nativeInput);
+      }
+      /**
+       * Positions the input search icon, placeholder, and the cancel button
+       * based on the input value and if it is focused. (ios only)
+       */
+
+
+      positionElements() {
+        const value = this.getValue();
+        const prevAlignLeft = this.shouldAlignLeft;
+        const mode = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["c"])(this);
+        const shouldAlignLeft = !this.animated || value.trim() !== '' || !!this.focused;
+        this.shouldAlignLeft = shouldAlignLeft;
+
+        if (mode !== 'ios') {
+          return;
         }
 
-        if (expected !== input[i]) {
+        if (prevAlignLeft !== shouldAlignLeft) {
+          this.positionPlaceholder();
+        }
+
+        if (this.animated) {
+          this.positionCancelButton();
+        }
+      }
+      /**
+       * Positions the input placeholder
+       */
+
+
+      positionPlaceholder() {
+        const inputEl = this.nativeInput;
+
+        if (!inputEl) {
+          return;
+        }
+
+        const isRTL = document.dir === 'rtl';
+        const iconEl = (this.el.shadowRoot || this.el).querySelector('.searchbar-search-icon');
+
+        if (this.shouldAlignLeft) {
+          inputEl.removeAttribute('style');
+          iconEl.removeAttribute('style');
+        } else {
+          // Create a dummy span to get the placeholder width
+          const doc = document;
+          const tempSpan = doc.createElement('span');
+          tempSpan.innerText = this.placeholder || '';
+          doc.body.appendChild(tempSpan); // Get the width of the span then remove it
+
+          Object(_helpers_46f4a262_js__WEBPACK_IMPORTED_MODULE_2__["r"])(() => {
+            const textWidth = tempSpan.offsetWidth;
+            tempSpan.remove(); // Calculate the input padding
+
+            const inputLeft = 'calc(50% - ' + textWidth / 2 + 'px)'; // Calculate the icon margin
+
+            const iconLeft = 'calc(50% - ' + (textWidth / 2 + 30) + 'px)'; // Set the input padding start and icon margin start
+
+            if (isRTL) {
+              inputEl.style.paddingRight = inputLeft;
+              iconEl.style.marginRight = iconLeft;
+            } else {
+              inputEl.style.paddingLeft = inputLeft;
+              iconEl.style.marginLeft = iconLeft;
+            }
+          });
+        }
+      }
+      /**
+       * Show the iOS Cancel button on focus, hide it offscreen otherwise
+       */
+
+
+      positionCancelButton() {
+        const isRTL = document.dir === 'rtl';
+        const cancelButton = (this.el.shadowRoot || this.el).querySelector('.searchbar-cancel-button');
+        const shouldShowCancel = this.shouldShowCancelButton();
+
+        if (cancelButton && shouldShowCancel !== this.isCancelVisible) {
+          const cancelStyle = cancelButton.style;
+          this.isCancelVisible = shouldShowCancel;
+
+          if (shouldShowCancel) {
+            if (isRTL) {
+              cancelStyle.marginLeft = '0';
+            } else {
+              cancelStyle.marginRight = '0';
+            }
+          } else {
+            const offset = cancelButton.offsetWidth;
+
+            if (offset > 0) {
+              if (isRTL) {
+                cancelStyle.marginLeft = -offset + 'px';
+              } else {
+                cancelStyle.marginRight = -offset + 'px';
+              }
+            }
+          }
+        }
+      }
+
+      getValue() {
+        return this.value || '';
+      }
+
+      hasValue() {
+        return this.getValue() !== '';
+      }
+      /**
+       * Determines whether or not the cancel button should be visible onscreen.
+       * Cancel button should be shown if one of two conditions applies:
+       * 1. `showCancelButton` is set to `always`.
+       * 2. `showCancelButton` is set to `focus`, and the searchbar has been focused.
+       */
+
+
+      shouldShowCancelButton() {
+        if (this.showCancelButton === 'never' || this.showCancelButton === 'focus' && !this.focused) {
           return false;
         }
+
+        return true;
       }
 
-      return from.length === input.length;
-    };
+      render() {
+        const animated = this.animated && _config_3c7f3790_js__WEBPACK_IMPORTED_MODULE_1__["b"].getBoolean('animated', true);
 
-    var routeRedirect = function routeRedirect(path, routes) {
-      return routes.find(function (route) {
-        return matchesRedirect(path, route);
-      });
-    };
-
-    var matchesIDs = function matchesIDs(ids, chain) {
-      var len = Math.min(ids.length, chain.length);
-      var i = 0;
-
-      for (; i < len; i++) {
-        if (ids[i].toLowerCase() !== chain[i].id) {
-          break;
-        }
+        const mode = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["c"])(this);
+        const clearIcon = this.clearIcon || (mode === 'ios' ? 'close-circle' : 'close-sharp');
+        const searchIcon = this.searchIcon || (mode === 'ios' ? 'search-outline' : 'search-sharp');
+        const cancelButton = this.showCancelButton !== 'never' && Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("button", {
+          "aria-label": "cancel",
+          type: "button",
+          tabIndex: mode === 'ios' && !this.shouldShowCancelButton() ? -1 : undefined,
+          onMouseDown: this.onCancelSearchbar,
+          onTouchStart: this.onCancelSearchbar,
+          class: "searchbar-cancel-button"
+        }, Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", null, mode === 'md' ? Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-icon", {
+          "aria-hidden": "true",
+          mode: mode,
+          icon: this.cancelButtonIcon,
+          lazy: false
+        }) : this.cancelButtonText));
+        return Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
+          role: "search",
+          "aria-disabled": this.disabled ? 'true' : null,
+          class: Object.assign(Object.assign({}, Object(_theme_18cbe2cc_js__WEBPACK_IMPORTED_MODULE_3__["c"])(this.color)), {
+            [mode]: true,
+            'searchbar-animated': animated,
+            'searchbar-disabled': this.disabled,
+            'searchbar-no-animate': animated && this.noAnimate,
+            'searchbar-has-value': this.hasValue(),
+            'searchbar-left-aligned': this.shouldAlignLeft,
+            'searchbar-has-focus': this.focused,
+            'searchbar-should-show-cancel': this.shouldShowCancelButton()
+          })
+        }, Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+          class: "searchbar-input-container"
+        }, Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("input", {
+          "aria-label": "search text",
+          disabled: this.disabled,
+          ref: el => this.nativeInput = el,
+          class: "searchbar-input",
+          inputMode: this.inputmode,
+          onInput: this.onInput,
+          onBlur: this.onBlur,
+          onFocus: this.onFocus,
+          placeholder: this.placeholder,
+          type: this.type,
+          value: this.getValue(),
+          autoComplete: this.autocomplete,
+          autoCorrect: this.autocorrect,
+          spellCheck: this.spellcheck
+        }), mode === 'md' && cancelButton, Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-icon", {
+          mode: mode,
+          icon: searchIcon,
+          lazy: false,
+          class: "searchbar-search-icon"
+        }), Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("button", {
+          "aria-label": "reset",
+          type: "button",
+          "no-blur": true,
+          class: "searchbar-clear-button",
+          onMouseDown: this.onClearInput,
+          onTouchStart: this.onClearInput
+        }, Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-icon", {
+          "aria-hidden": "true",
+          mode: mode,
+          icon: clearIcon,
+          lazy: false,
+          class: "searchbar-clear-icon"
+        }))), mode === 'ios' && cancelButton);
       }
 
-      return i;
-    };
-
-    var matchesPath = function matchesPath(inputPath, chain) {
-      var segments = new RouterSegments(inputPath);
-      var matchesDefault = false;
-      var allparams;
-
-      for (var i = 0; i < chain.length; i++) {
-        var path = chain[i].path;
-
-        if (path[0] === '') {
-          matchesDefault = true;
-        } else {
-          var _iteratorNormalCompletion6 = true;
-          var _didIteratorError6 = false;
-          var _iteratorError6 = undefined;
-
-          try {
-            for (var _iterator6 = path[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-              var segment = _step6.value;
-              var data = segments.next(); // data param
-
-              if (segment[0] === ':') {
-                if (data === '') {
-                  return null;
-                }
-
-                allparams = allparams || [];
-                var params = allparams[i] || (allparams[i] = {});
-                params[segment.slice(1)] = data;
-              } else if (data !== segment) {
-                return null;
-              }
-            }
-          } catch (err) {
-            _didIteratorError6 = true;
-            _iteratorError6 = err;
-          } finally {
-            try {
-              if (!_iteratorNormalCompletion6 && _iterator6.return != null) {
-                _iterator6.return();
-              }
-            } finally {
-              if (_didIteratorError6) {
-                throw _iteratorError6;
-              }
-            }
-          }
-
-          matchesDefault = false;
-        }
+      get el() {
+        return Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this);
       }
 
-      var matches = matchesDefault ? matchesDefault === (segments.next() === '') : true;
-
-      if (!matches) {
-        return null;
-      }
-
-      if (allparams) {
-        return chain.map(function (route, i) {
-          return {
-            id: route.id,
-            path: route.path,
-            params: mergeParams(route.params, allparams[i])
-          };
-        });
-      }
-
-      return chain;
-    };
-
-    var mergeParams = function mergeParams(a, b) {
-      if (!a && b) {
-        return b;
-      } else if (a && !b) {
-        return a;
-      } else if (a && b) {
-        return Object.assign(Object.assign({}, a), b);
-      }
-
-      return undefined;
-    };
-
-    var routerIDsToChain = function routerIDsToChain(ids, chains) {
-      var match = null;
-      var maxMatches = 0;
-      var plainIDs = ids.map(function (i) {
-        return i.id;
-      });
-      var _iteratorNormalCompletion7 = true;
-      var _didIteratorError7 = false;
-      var _iteratorError7 = undefined;
-
-      try {
-        for (var _iterator7 = chains[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
-          var chain = _step7.value;
-          var score = matchesIDs(plainIDs, chain);
-
-          if (score > maxMatches) {
-            match = chain;
-            maxMatches = score;
-          }
-        }
-      } catch (err) {
-        _didIteratorError7 = true;
-        _iteratorError7 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion7 && _iterator7.return != null) {
-            _iterator7.return();
-          }
-        } finally {
-          if (_didIteratorError7) {
-            throw _iteratorError7;
-          }
-        }
-      }
-
-      if (match) {
-        return match.map(function (route, i) {
-          return {
-            id: route.id,
-            path: route.path,
-            params: mergeParams(route.params, ids[i] && ids[i].params)
-          };
-        });
-      }
-
-      return null;
-    };
-
-    var routerPathToChain = function routerPathToChain(path, chains) {
-      var match = null;
-      var matches = 0;
-      var _iteratorNormalCompletion8 = true;
-      var _didIteratorError8 = false;
-      var _iteratorError8 = undefined;
-
-      try {
-        for (var _iterator8 = chains[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
-          var chain = _step8.value;
-          var matchedChain = matchesPath(path, chain);
-
-          if (matchedChain !== null) {
-            var score = computePriority(matchedChain);
-
-            if (score > matches) {
-              matches = score;
-              match = matchedChain;
-            }
-          }
-        }
-      } catch (err) {
-        _didIteratorError8 = true;
-        _iteratorError8 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion8 && _iterator8.return != null) {
-            _iterator8.return();
-          }
-        } finally {
-          if (_didIteratorError8) {
-            throw _iteratorError8;
-          }
-        }
-      }
-
-      return match;
-    };
-
-    var computePriority = function computePriority(chain) {
-      var score = 1;
-      var level = 1;
-      var _iteratorNormalCompletion9 = true;
-      var _didIteratorError9 = false;
-      var _iteratorError9 = undefined;
-
-      try {
-        for (var _iterator9 = chain[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
-          var route = _step9.value;
-          var _iteratorNormalCompletion10 = true;
-          var _didIteratorError10 = false;
-          var _iteratorError10 = undefined;
-
-          try {
-            for (var _iterator10 = route.path[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
-              var path = _step10.value;
-
-              if (path[0] === ':') {
-                score += Math.pow(1, level);
-              } else if (path !== '') {
-                score += Math.pow(2, level);
-              }
-
-              level++;
-            }
-          } catch (err) {
-            _didIteratorError10 = true;
-            _iteratorError10 = err;
-          } finally {
-            try {
-              if (!_iteratorNormalCompletion10 && _iterator10.return != null) {
-                _iterator10.return();
-              }
-            } finally {
-              if (_didIteratorError10) {
-                throw _iteratorError10;
-              }
-            }
-          }
-        }
-      } catch (err) {
-        _didIteratorError9 = true;
-        _iteratorError9 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion9 && _iterator9.return != null) {
-            _iterator9.return();
-          }
-        } finally {
-          if (_didIteratorError9) {
-            throw _iteratorError9;
-          }
-        }
-      }
-
-      return score;
-    };
-
-    var RouterSegments =
-    /*#__PURE__*/
-    function () {
-      function RouterSegments(path) {
-        _classCallCheck(this, RouterSegments);
-
-        this.path = path.slice();
-      }
-
-      _createClass(RouterSegments, [{
-        key: "next",
-        value: function next() {
-          if (this.path.length > 0) {
-            return this.path.shift();
-          }
-
-          return '';
-        }
-      }]);
-
-      return RouterSegments;
-    }();
-
-    var readRedirects = function readRedirects(root) {
-      return Array.from(root.children).filter(function (el) {
-        return el.tagName === 'ION-ROUTE-REDIRECT';
-      }).map(function (el) {
-        var to = readProp(el, 'to');
+      static get watchers() {
         return {
-          from: parsePath(readProp(el, 'from')),
-          to: to == null ? undefined : parsePath(to)
-        };
-      });
-    };
-
-    var readRoutes = function readRoutes(root) {
-      return flattenRouterTree(readRouteNodes(root));
-    };
-
-    var readRouteNodes = function readRouteNodes(root) {
-      var node = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : root;
-      return Array.from(node.children).filter(function (el) {
-        return el.tagName === 'ION-ROUTE' && el.component;
-      }).map(function (el) {
-        var component = readProp(el, 'component');
-
-        if (component == null) {
-          throw new Error('component missing in ion-route');
-        }
-
-        return {
-          path: parsePath(readProp(el, 'url')),
-          id: component.toLowerCase(),
-          params: el.componentProps,
-          children: readRouteNodes(root, el)
-        };
-      });
-    };
-
-    var readProp = function readProp(el, prop) {
-      if (prop in el) {
-        return el[prop];
-      }
-
-      if (el.hasAttribute(prop)) {
-        return el.getAttribute(prop);
-      }
-
-      return null;
-    };
-
-    var flattenRouterTree = function flattenRouterTree(nodes) {
-      var routes = [];
-      var _iteratorNormalCompletion11 = true;
-      var _didIteratorError11 = false;
-      var _iteratorError11 = undefined;
-
-      try {
-        for (var _iterator11 = nodes[Symbol.iterator](), _step11; !(_iteratorNormalCompletion11 = (_step11 = _iterator11.next()).done); _iteratorNormalCompletion11 = true) {
-          var node = _step11.value;
-          flattenNode([], routes, node);
-        }
-      } catch (err) {
-        _didIteratorError11 = true;
-        _iteratorError11 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion11 && _iterator11.return != null) {
-            _iterator11.return();
-          }
-        } finally {
-          if (_didIteratorError11) {
-            throw _iteratorError11;
-          }
-        }
-      }
-
-      return routes;
-    };
-
-    var flattenNode = function flattenNode(chain, routes, node) {
-      var s = chain.slice();
-      s.push({
-        id: node.id,
-        path: node.path,
-        params: node.params
-      });
-
-      if (node.children.length === 0) {
-        routes.push(s);
-        return;
-      }
-
-      var _iteratorNormalCompletion12 = true;
-      var _didIteratorError12 = false;
-      var _iteratorError12 = undefined;
-
-      try {
-        for (var _iterator12 = node.children[Symbol.iterator](), _step12; !(_iteratorNormalCompletion12 = (_step12 = _iterator12.next()).done); _iteratorNormalCompletion12 = true) {
-          var sub = _step12.value;
-          flattenNode(s, routes, sub);
-        }
-      } catch (err) {
-        _didIteratorError12 = true;
-        _iteratorError12 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion12 && _iterator12.return != null) {
-            _iterator12.return();
-          }
-        } finally {
-          if (_didIteratorError12) {
-            throw _iteratorError12;
-          }
-        }
-      }
-    };
-
-    var Router =
-    /*#__PURE__*/
-    function () {
-      function Router(hostRef) {
-        _classCallCheck(this, Router);
-
-        Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
-        this.previousPath = null;
-        this.busy = false;
-        this.state = 0;
-        this.lastState = 0;
-        /**
-         * By default `ion-router` will match the routes at the root path ("/").
-         * That can be changed when
-         *
-         */
-
-        this.root = '/';
-        /**
-         * The router can work in two "modes":
-         * - With hash: `/index.html#/path/to/page`
-         * - Without hash: `/path/to/page`
-         *
-         * Using one or another might depend in the requirements of your app and/or where it's deployed.
-         *
-         * Usually "hash-less" navigation works better for SEO and it's more user friendly too, but it might
-         * requires additional server-side configuration in order to properly work.
-         *
-         * On the otherside hash-navigation is much easier to deploy, it even works over the file protocol.
-         *
-         * By default, this property is `true`, change to `false` to allow hash-less URLs.
-         */
-
-        this.useHash = true;
-        this.ionRouteWillChange = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionRouteWillChange", 7);
-        this.ionRouteDidChange = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionRouteDidChange", 7);
-      }
-
-      _createClass(Router, [{
-        key: "componentWillLoad",
-        value: function () {
-          var _componentWillLoad = _asyncToGenerator(
-          /*#__PURE__*/
-          regeneratorRuntime.mark(function _callee3() {
-            return regeneratorRuntime.wrap(function _callee3$(_context3) {
-              while (1) {
-                switch (_context3.prev = _context3.next) {
-                  case 0:
-                    console.debug('[ion-router] router will load');
-                    _context3.next = 3;
-                    return waitUntilNavNode();
-
-                  case 3:
-                    console.debug('[ion-router] found nav');
-                    _context3.next = 6;
-                    return this.onRoutesChanged();
-
-                  case 6:
-                  case "end":
-                    return _context3.stop();
-                }
-              }
-            }, _callee3, this);
-          }));
-
-          function componentWillLoad() {
-            return _componentWillLoad.apply(this, arguments);
-          }
-
-          return componentWillLoad;
-        }()
-      }, {
-        key: "componentDidLoad",
-        value: function componentDidLoad() {
-          window.addEventListener('ionRouteRedirectChanged', Object(_helpers_46f4a262_js__WEBPACK_IMPORTED_MODULE_2__["e"])(this.onRedirectChanged.bind(this), 10));
-          window.addEventListener('ionRouteDataChanged', Object(_helpers_46f4a262_js__WEBPACK_IMPORTED_MODULE_2__["e"])(this.onRoutesChanged.bind(this), 100));
-        }
-      }, {
-        key: "onPopState",
-        value: function onPopState() {
-          var direction = this.historyDirection();
-          var path = this.getPath();
-          console.debug('[ion-router] URL changed -> update nav', path, direction);
-          return this.writeNavStateRoot(path, direction);
-        }
-      }, {
-        key: "onBackButton",
-        value: function onBackButton(ev) {
-          var _this = this;
-
-          ev.detail.register(0, function () {
-            return _this.back();
-          });
-        }
-        /**
-         * Navigate to the specified URL.
-         *
-         * @param url The url to navigate to.
-         * @param direction The direction of the animation. Defaults to `"forward"`.
-         */
-
-      }, {
-        key: "push",
-        value: function push(url) {
-          var direction = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'forward';
-
-          if (url.startsWith('.')) {
-            url = new URL(url, window.location.href).pathname;
-          }
-
-          console.debug('[ion-router] URL pushed -> updating nav', url, direction);
-          var path = parsePath(url);
-          this.setPath(path, direction);
-          return this.writeNavStateRoot(path, direction);
-        }
-        /**
-         * Go back to previous page in the window.history.
-         */
-
-      }, {
-        key: "back",
-        value: function back() {
-          window.history.back();
-          return Promise.resolve(this.waitPromise);
-        }
-        /** @internal */
-
-      }, {
-        key: "printDebug",
-        value: function () {
-          var _printDebug = _asyncToGenerator(
-          /*#__PURE__*/
-          regeneratorRuntime.mark(function _callee4() {
-            return regeneratorRuntime.wrap(function _callee4$(_context4) {
-              while (1) {
-                switch (_context4.prev = _context4.next) {
-                  case 0:
-                    console.debug('CURRENT PATH', this.getPath());
-                    console.debug('PREVIOUS PATH', this.previousPath);
-                    printRoutes(readRoutes(this.el));
-                    printRedirects(readRedirects(this.el));
-
-                  case 4:
-                  case "end":
-                    return _context4.stop();
-                }
-              }
-            }, _callee4, this);
-          }));
-
-          function printDebug() {
-            return _printDebug.apply(this, arguments);
-          }
-
-          return printDebug;
-        }()
-        /** @internal */
-
-      }, {
-        key: "navChanged",
-        value: function () {
-          var _navChanged = _asyncToGenerator(
-          /*#__PURE__*/
-          regeneratorRuntime.mark(function _callee5(direction) {
-            var _ref3, ids, outlet, routes, chain, path;
-
-            return regeneratorRuntime.wrap(function _callee5$(_context5) {
-              while (1) {
-                switch (_context5.prev = _context5.next) {
-                  case 0:
-                    if (!this.busy) {
-                      _context5.next = 3;
-                      break;
-                    }
-
-                    console.warn('[ion-router] router is busy, navChanged was cancelled');
-                    return _context5.abrupt("return", false);
-
-                  case 3:
-                    _context5.next = 5;
-                    return readNavState(window.document.body);
-
-                  case 5:
-                    _ref3 = _context5.sent;
-                    ids = _ref3.ids;
-                    outlet = _ref3.outlet;
-                    routes = readRoutes(this.el);
-                    chain = routerIDsToChain(ids, routes);
-
-                    if (chain) {
-                      _context5.next = 13;
-                      break;
-                    }
-
-                    console.warn('[ion-router] no matching URL for ', ids.map(function (i) {
-                      return i.id;
-                    }));
-                    return _context5.abrupt("return", false);
-
-                  case 13:
-                    path = chainToPath(chain);
-
-                    if (path) {
-                      _context5.next = 17;
-                      break;
-                    }
-
-                    console.warn('[ion-router] router could not match path because some required param is missing');
-                    return _context5.abrupt("return", false);
-
-                  case 17:
-                    console.debug('[ion-router] nav changed -> update URL', ids, path);
-                    this.setPath(path, direction);
-                    _context5.next = 21;
-                    return this.safeWriteNavState(outlet, chain, ROUTER_INTENT_NONE, path, null, ids.length);
-
-                  case 21:
-                    return _context5.abrupt("return", true);
-
-                  case 22:
-                  case "end":
-                    return _context5.stop();
-                }
-              }
-            }, _callee5, this);
-          }));
-
-          function navChanged(_x6) {
-            return _navChanged.apply(this, arguments);
-          }
-
-          return navChanged;
-        }()
-      }, {
-        key: "onRedirectChanged",
-        value: function onRedirectChanged() {
-          var path = this.getPath();
-
-          if (path && routeRedirect(path, readRedirects(this.el))) {
-            this.writeNavStateRoot(path, ROUTER_INTENT_NONE);
-          }
-        }
-      }, {
-        key: "onRoutesChanged",
-        value: function onRoutesChanged() {
-          return this.writeNavStateRoot(this.getPath(), ROUTER_INTENT_NONE);
-        }
-      }, {
-        key: "historyDirection",
-        value: function historyDirection() {
-          var win = window;
-
-          if (win.history.state === null) {
-            this.state++;
-            win.history.replaceState(this.state, win.document.title, win.document.location && win.document.location.href);
-          }
-
-          var state = win.history.state;
-          var lastState = this.lastState;
-          this.lastState = state;
-
-          if (state > lastState) {
-            return ROUTER_INTENT_FORWARD;
-          } else if (state < lastState) {
-            return ROUTER_INTENT_BACK;
-          } else {
-            return ROUTER_INTENT_NONE;
-          }
-        }
-      }, {
-        key: "writeNavStateRoot",
-        value: function () {
-          var _writeNavStateRoot = _asyncToGenerator(
-          /*#__PURE__*/
-          regeneratorRuntime.mark(function _callee6(path, direction) {
-            var redirects, redirect, redirectFrom, routes, chain;
-            return regeneratorRuntime.wrap(function _callee6$(_context6) {
-              while (1) {
-                switch (_context6.prev = _context6.next) {
-                  case 0:
-                    if (path) {
-                      _context6.next = 3;
-                      break;
-                    }
-
-                    console.error('[ion-router] URL is not part of the routing set');
-                    return _context6.abrupt("return", false);
-
-                  case 3:
-                    // lookup redirect rule
-                    redirects = readRedirects(this.el);
-                    redirect = routeRedirect(path, redirects);
-                    redirectFrom = null;
-
-                    if (redirect) {
-                      this.setPath(redirect.to, direction);
-                      redirectFrom = redirect.from;
-                      path = redirect.to;
-                    } // lookup route chain
-
-
-                    routes = readRoutes(this.el);
-                    chain = routerPathToChain(path, routes);
-
-                    if (chain) {
-                      _context6.next = 12;
-                      break;
-                    }
-
-                    console.error('[ion-router] the path does not match any route');
-                    return _context6.abrupt("return", false);
-
-                  case 12:
-                    return _context6.abrupt("return", this.safeWriteNavState(document.body, chain, direction, path, redirectFrom));
-
-                  case 13:
-                  case "end":
-                    return _context6.stop();
-                }
-              }
-            }, _callee6, this);
-          }));
-
-          function writeNavStateRoot(_x7, _x8) {
-            return _writeNavStateRoot.apply(this, arguments);
-          }
-
-          return writeNavStateRoot;
-        }()
-      }, {
-        key: "safeWriteNavState",
-        value: function () {
-          var _safeWriteNavState = _asyncToGenerator(
-          /*#__PURE__*/
-          regeneratorRuntime.mark(function _callee7(node, chain, direction, path, redirectFrom) {
-            var index,
-                unlock,
-                changed,
-                _args7 = arguments;
-            return regeneratorRuntime.wrap(function _callee7$(_context7) {
-              while (1) {
-                switch (_context7.prev = _context7.next) {
-                  case 0:
-                    index = _args7.length > 5 && _args7[5] !== undefined ? _args7[5] : 0;
-                    _context7.next = 3;
-                    return this.lock();
-
-                  case 3:
-                    unlock = _context7.sent;
-                    changed = false;
-                    _context7.prev = 5;
-                    _context7.next = 8;
-                    return this.writeNavState(node, chain, direction, path, redirectFrom, index);
-
-                  case 8:
-                    changed = _context7.sent;
-                    _context7.next = 14;
-                    break;
-
-                  case 11:
-                    _context7.prev = 11;
-                    _context7.t0 = _context7["catch"](5);
-                    console.error(_context7.t0);
-
-                  case 14:
-                    unlock();
-                    return _context7.abrupt("return", changed);
-
-                  case 16:
-                  case "end":
-                    return _context7.stop();
-                }
-              }
-            }, _callee7, this, [[5, 11]]);
-          }));
-
-          function safeWriteNavState(_x9, _x10, _x11, _x12, _x13) {
-            return _safeWriteNavState.apply(this, arguments);
-          }
-
-          return safeWriteNavState;
-        }()
-      }, {
-        key: "lock",
-        value: function () {
-          var _lock = _asyncToGenerator(
-          /*#__PURE__*/
-          regeneratorRuntime.mark(function _callee8() {
-            var p, resolve;
-            return regeneratorRuntime.wrap(function _callee8$(_context8) {
-              while (1) {
-                switch (_context8.prev = _context8.next) {
-                  case 0:
-                    p = this.waitPromise;
-                    this.waitPromise = new Promise(function (r) {
-                      return resolve = r;
-                    });
-
-                    if (!(p !== undefined)) {
-                      _context8.next = 5;
-                      break;
-                    }
-
-                    _context8.next = 5;
-                    return p;
-
-                  case 5:
-                    return _context8.abrupt("return", resolve);
-
-                  case 6:
-                  case "end":
-                    return _context8.stop();
-                }
-              }
-            }, _callee8, this);
-          }));
-
-          function lock() {
-            return _lock.apply(this, arguments);
-          }
-
-          return lock;
-        }()
-      }, {
-        key: "writeNavState",
-        value: function () {
-          var _writeNavState2 = _asyncToGenerator(
-          /*#__PURE__*/
-          regeneratorRuntime.mark(function _callee9(node, chain, direction, path, redirectFrom) {
-            var index,
-                routeEvent,
-                changed,
-                _args9 = arguments;
-            return regeneratorRuntime.wrap(function _callee9$(_context9) {
-              while (1) {
-                switch (_context9.prev = _context9.next) {
-                  case 0:
-                    index = _args9.length > 5 && _args9[5] !== undefined ? _args9[5] : 0;
-
-                    if (!this.busy) {
-                      _context9.next = 4;
-                      break;
-                    }
-
-                    console.warn('[ion-router] router is busy, transition was cancelled');
-                    return _context9.abrupt("return", false);
-
-                  case 4:
-                    this.busy = true; // generate route event and emit will change
-
-                    routeEvent = this.routeChangeEvent(path, redirectFrom);
-
-                    if (routeEvent) {
-                      this.ionRouteWillChange.emit(routeEvent);
-                    }
-
-                    _context9.next = 9;
-                    return _writeNavState(node, chain, direction, index);
-
-                  case 9:
-                    changed = _context9.sent;
-                    this.busy = false;
-
-                    if (changed) {
-                      console.debug('[ion-router] route changed', path);
-                    } // emit did change
-
-
-                    if (routeEvent) {
-                      this.ionRouteDidChange.emit(routeEvent);
-                    }
-
-                    return _context9.abrupt("return", changed);
-
-                  case 14:
-                  case "end":
-                    return _context9.stop();
-                }
-              }
-            }, _callee9, this);
-          }));
-
-          function writeNavState(_x14, _x15, _x16, _x17, _x18) {
-            return _writeNavState2.apply(this, arguments);
-          }
-
-          return writeNavState;
-        }()
-      }, {
-        key: "setPath",
-        value: function setPath(path, direction) {
-          this.state++;
-          writePath(window.history, this.root, this.useHash, path, direction, this.state);
-        }
-      }, {
-        key: "getPath",
-        value: function getPath() {
-          return readPath(window.location, this.root, this.useHash);
-        }
-      }, {
-        key: "routeChangeEvent",
-        value: function routeChangeEvent(path, redirectFromPath) {
-          var from = this.previousPath;
-          var to = generatePath(path);
-          this.previousPath = to;
-
-          if (to === from) {
-            return null;
-          }
-
-          var redirectedFrom = redirectFromPath ? generatePath(redirectFromPath) : null;
-          return {
-            from: from,
-            redirectedFrom: redirectedFrom,
-            to: to
-          };
-        }
-      }, {
-        key: "el",
-        get: function get() {
-          return Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this);
-        }
-      }]);
-
-      return Router;
-    }();
-
-    var RouterLink =
-    /*#__PURE__*/
-    function () {
-      function RouterLink(hostRef) {
-        var _this2 = this;
-
-        _classCallCheck(this, RouterLink);
-
-        Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
-        /**
-         * When using a router, it specifies the transition direction when navigating to
-         * another page using `href`.
-         */
-
-        this.routerDirection = 'forward';
-
-        this.onClick = function (ev) {
-          Object(_theme_18cbe2cc_js__WEBPACK_IMPORTED_MODULE_3__["o"])(_this2.href, ev, _this2.routerDirection);
+          "debounce": ["debounceChanged"],
+          "value": ["valueChanged"],
+          "showCancelButton": ["showCancelButtonChanged"]
         };
       }
 
-      _createClass(RouterLink, [{
-        key: "render",
-        value: function render() {
-          var _Object$assign;
+      static get style() {
+        return ".sc-ion-searchbar-ios-h{--placeholder-color:initial;--placeholder-font-style:initial;--placeholder-font-weight:initial;--placeholder-opacity:.5;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:-ms-flexbox;display:flex;position:relative;-ms-flex-align:center;align-items:center;width:100%;color:var(--color);font-family:var(--ion-font-family,inherit);-webkit-box-sizing:border-box;box-sizing:border-box}.ion-color.sc-ion-searchbar-ios-h{color:var(--ion-color-contrast)}.ion-color.sc-ion-searchbar-ios-h .searchbar-input.sc-ion-searchbar-ios{background:var(--ion-color-base)}.ion-color.sc-ion-searchbar-ios-h .searchbar-cancel-button.sc-ion-searchbar-ios, .ion-color.sc-ion-searchbar-ios-h .searchbar-clear-button.sc-ion-searchbar-ios, .ion-color.sc-ion-searchbar-ios-h .searchbar-search-icon.sc-ion-searchbar-ios{color:inherit}.searchbar-search-icon.sc-ion-searchbar-ios{color:var(--icon-color);pointer-events:none}.searchbar-input-container.sc-ion-searchbar-ios{display:block;position:relative;-ms-flex-negative:1;flex-shrink:1;width:100%}.searchbar-input.sc-ion-searchbar-ios{font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-indent:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;display:block;width:100%;border:0;outline:none;background:var(--background);font-family:inherit;-webkit-box-shadow:var(--box-shadow);box-shadow:var(--box-shadow);-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-appearance:none;-moz-appearance:none;appearance:none}.searchbar-input.sc-ion-searchbar-ios::-webkit-input-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.searchbar-input.sc-ion-searchbar-ios::-moz-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.searchbar-input.sc-ion-searchbar-ios:-ms-input-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.searchbar-input.sc-ion-searchbar-ios::-ms-input-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.searchbar-input.sc-ion-searchbar-ios::placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.searchbar-input.sc-ion-searchbar-ios::-ms-clear, .searchbar-input.sc-ion-searchbar-ios::-webkit-search-cancel-button{display:none}.searchbar-cancel-button.sc-ion-searchbar-ios{margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;display:none;height:100%;border:0;outline:none;color:var(--cancel-button-color);cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none}.searchbar-cancel-button.sc-ion-searchbar-ios > div.sc-ion-searchbar-ios{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;width:100%;height:100%}.searchbar-clear-button.sc-ion-searchbar-ios{margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;padding-left:0;padding-right:0;padding-top:0;padding-bottom:0;display:none;min-height:0;outline:none;color:var(--clear-button-color);-webkit-appearance:none;-moz-appearance:none;appearance:none}.searchbar-has-value.searchbar-has-focus.sc-ion-searchbar-ios-h .searchbar-clear-button.sc-ion-searchbar-ios{display:block}.searchbar-disabled.sc-ion-searchbar-ios-h{cursor:default;opacity:.4;pointer-events:none}.sc-ion-searchbar-ios-h{--background:rgba(var(--ion-text-color-rgb,0,0,0),0.07);--box-shadow:none;--cancel-button-color:var(--ion-color-primary,#3880ff);--clear-button-color:var(--ion-color-step-600,#666);--color:var(--ion-text-color,#000);--icon-color:var(--ion-color-step-600,#666);padding-left:12px;padding-right:12px;padding-top:12px;padding-bottom:12px;height:60px;contain:strict}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.sc-ion-searchbar-ios-h{padding-left:unset;padding-right:unset;-webkit-padding-start:12px;padding-inline-start:12px;-webkit-padding-end:12px;padding-inline-end:12px}}.searchbar-input-container.sc-ion-searchbar-ios{height:36px}.searchbar-search-icon.sc-ion-searchbar-ios{margin-left:calc(50% - 60px);left:5px;top:0;position:absolute;width:22px;height:100%;contain:strict}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.searchbar-search-icon.sc-ion-searchbar-ios{margin-left:unset;-webkit-margin-start:calc(50% - 60px);margin-inline-start:calc(50% - 60px)}}[dir=rtl].sc-ion-searchbar-ios-h .searchbar-search-icon.sc-ion-searchbar-ios, [dir=rtl] .sc-ion-searchbar-ios-h .searchbar-search-icon.sc-ion-searchbar-ios, [dir=rtl].sc-ion-searchbar-ios .searchbar-search-icon.sc-ion-searchbar-ios{left:unset;right:unset;right:5px}.searchbar-input.sc-ion-searchbar-ios{padding-left:28px;padding-right:28px;padding-top:0;padding-bottom:0;border-radius:10px;height:100%;font-size:17px;font-weight:400;contain:strict}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.searchbar-input.sc-ion-searchbar-ios{padding-left:unset;padding-right:unset;-webkit-padding-start:28px;padding-inline-start:28px;-webkit-padding-end:28px;padding-inline-end:28px}}.searchbar-clear-button.sc-ion-searchbar-ios{right:0;top:0;background-position:50%;position:absolute;width:30px;height:100%;border:0;background-color:transparent}[dir=rtl].sc-ion-searchbar-ios-h .searchbar-clear-button.sc-ion-searchbar-ios, [dir=rtl] .sc-ion-searchbar-ios-h .searchbar-clear-button.sc-ion-searchbar-ios, [dir=rtl].sc-ion-searchbar-ios .searchbar-clear-button.sc-ion-searchbar-ios{left:unset;right:unset;left:0}.searchbar-clear-icon.sc-ion-searchbar-ios{width:18px;height:100%}.searchbar-cancel-button.sc-ion-searchbar-ios{padding-left:8px;padding-right:0;padding-top:0;padding-bottom:0;-ms-flex-negative:0;flex-shrink:0;background-color:transparent;font-size:16px}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.searchbar-cancel-button.sc-ion-searchbar-ios{padding-left:unset;padding-right:unset;-webkit-padding-start:8px;padding-inline-start:8px;-webkit-padding-end:0;padding-inline-end:0}}.searchbar-left-aligned.sc-ion-searchbar-ios-h .searchbar-search-icon.sc-ion-searchbar-ios{margin-left:0}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.searchbar-left-aligned.sc-ion-searchbar-ios-h .searchbar-search-icon.sc-ion-searchbar-ios{margin-left:unset;-webkit-margin-start:0;margin-inline-start:0}}.searchbar-left-aligned.sc-ion-searchbar-ios-h .searchbar-input.sc-ion-searchbar-ios{padding-left:30px}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.searchbar-left-aligned.sc-ion-searchbar-ios-h .searchbar-input.sc-ion-searchbar-ios{padding-left:unset;-webkit-padding-start:30px;padding-inline-start:30px}}.searchbar-animated.sc-ion-searchbar-ios-h .searchbar-cancel-button.sc-ion-searchbar-ios, .searchbar-has-focus.sc-ion-searchbar-ios-h .searchbar-cancel-button.sc-ion-searchbar-ios, .searchbar-should-show-cancel.sc-ion-searchbar-ios-h .searchbar-cancel-button.sc-ion-searchbar-ios{display:block}.searchbar-animated.sc-ion-searchbar-ios-h .searchbar-input.sc-ion-searchbar-ios, .searchbar-animated.sc-ion-searchbar-ios-h .searchbar-search-icon.sc-ion-searchbar-ios{-webkit-transition:all .3s ease;transition:all .3s ease}.searchbar-animated.searchbar-has-focus.sc-ion-searchbar-ios-h .searchbar-cancel-button.sc-ion-searchbar-ios, .searchbar-animated.searchbar-should-show-cancel.sc-ion-searchbar-ios-h .searchbar-cancel-button.sc-ion-searchbar-ios{opacity:1;pointer-events:auto}.searchbar-animated.sc-ion-searchbar-ios-h .searchbar-cancel-button.sc-ion-searchbar-ios{margin-right:-100%;-webkit-transform:translateZ(0);transform:translateZ(0);-webkit-transition:all .3s ease;transition:all .3s ease;opacity:0;pointer-events:none}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.searchbar-animated.sc-ion-searchbar-ios-h .searchbar-cancel-button.sc-ion-searchbar-ios{margin-right:unset;-webkit-margin-end:-100%;margin-inline-end:-100%}}.searchbar-no-animate.sc-ion-searchbar-ios-h .searchbar-cancel-button.sc-ion-searchbar-ios, .searchbar-no-animate.sc-ion-searchbar-ios-h .searchbar-input.sc-ion-searchbar-ios, .searchbar-no-animate.sc-ion-searchbar-ios-h .searchbar-search-icon.sc-ion-searchbar-ios{-webkit-transition-duration:0ms;transition-duration:0ms}.ion-color.sc-ion-searchbar-ios-h .searchbar-cancel-button.sc-ion-searchbar-ios{color:var(--ion-color-base)}\@media (any-hover:hover){.ion-color.sc-ion-searchbar-ios-h .searchbar-cancel-button.sc-ion-searchbar-ios:hover{color:var(--ion-color-tint)}}ion-toolbar.sc-ion-searchbar-ios-h, ion-toolbar .sc-ion-searchbar-ios-h{padding-top:1px;padding-bottom:15px;height:52px}ion-toolbar.ion-color.sc-ion-searchbar-ios-h:not(.ion-color), ion-toolbar.ion-color .sc-ion-searchbar-ios-h:not(.ion-color){color:inherit}ion-toolbar.ion-color.sc-ion-searchbar-ios-h:not(.ion-color) .searchbar-cancel-button.sc-ion-searchbar-ios, ion-toolbar.ion-color .sc-ion-searchbar-ios-h:not(.ion-color) .searchbar-cancel-button.sc-ion-searchbar-ios{color:currentColor}ion-toolbar.ion-color.sc-ion-searchbar-ios-h .searchbar-search-icon.sc-ion-searchbar-ios, ion-toolbar.ion-color .sc-ion-searchbar-ios-h .searchbar-search-icon.sc-ion-searchbar-ios{color:currentColor;opacity:.5}ion-toolbar.ion-color.sc-ion-searchbar-ios-h:not(.ion-color) .searchbar-input.sc-ion-searchbar-ios, ion-toolbar.ion-color .sc-ion-searchbar-ios-h:not(.ion-color) .searchbar-input.sc-ion-searchbar-ios{background:rgba(var(--ion-color-contrast-rgb),.07);color:currentColor}ion-toolbar.ion-color.sc-ion-searchbar-ios-h:not(.ion-color) .searchbar-clear-button.sc-ion-searchbar-ios, ion-toolbar.ion-color .sc-ion-searchbar-ios-h:not(.ion-color) .searchbar-clear-button.sc-ion-searchbar-ios{color:currentColor;opacity:.5}";
+      }
 
-          var mode = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["c"])(this);
-          var attrs = {
-            href: this.href,
-            rel: this.rel,
-            target: this.target
-          };
-          return Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
-            onClick: this.onClick,
-            class: Object.assign(Object.assign({}, Object(_theme_18cbe2cc_js__WEBPACK_IMPORTED_MODULE_3__["c"])(this.color)), (_Object$assign = {}, _defineProperty(_Object$assign, mode, true), _defineProperty(_Object$assign, 'ion-activatable', true), _Object$assign))
-          }, Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])("a", Object.assign({}, attrs), Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null)));
-        }
-      }], [{
-        key: "style",
-        get: function get() {
-          return ":host{--background:transparent;--color:var(--ion-color-primary,#3880ff);background:var(--background);color:var(--color)}:host(.ion-color){color:var(--ion-color-base)}a{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit}";
-        }
-      }]);
-
-      return RouterLink;
-    }();
+    };
     /***/
-
   }
 }]);
 //# sourceMappingURL=55-es5.js.map

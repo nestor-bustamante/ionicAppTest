@@ -1,0 +1,47 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-ionic-webview": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-facebook4": {
+      "APP_ID": "529097207953458",
+      "APP_NAME": "IonicMapTest",
+      "FACEBOOK_HYBRID_APP_EVENTS": "false",
+      "FACEBOOK_ANDROID_SDK_VERSION": "5.13.0",
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-googleplus": {
+      "WEB_APPLICATION_CLIENT_ID": "417895518758-737c2rn4s51k1is9foq2sv8jdfde7lqk.apps.googleusercontent.com",
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.ionicmaptest.miapp"
+    }
+  },
+  "dependent_plugins": {}
+}

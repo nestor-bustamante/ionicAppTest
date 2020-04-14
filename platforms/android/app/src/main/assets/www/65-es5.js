@@ -1,22 +1,14 @@
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[65], {
   /***/
-  "./node_modules/@ionic/core/dist/esm/ion-split-pane-ios.entry.js":
-  /*!***********************************************************************!*\
-    !*** ./node_modules/@ionic/core/dist/esm/ion-split-pane-ios.entry.js ***!
-    \***********************************************************************/
+  "./node_modules/@ionic/core/dist/esm/ion-split-pane-md.entry.js":
+  /*!**********************************************************************!*\
+    !*** ./node_modules/@ionic/core/dist/esm/ion-split-pane-md.entry.js ***!
+    \**********************************************************************/
 
   /*! exports provided: ion_split_pane */
 
   /***/
-  function node_modulesIonicCoreDistEsmIonSplitPaneIosEntryJs(module, __webpack_exports__, __webpack_require__) {
+  function node_modulesIonicCoreDistEsmIonSplitPaneMdEntryJs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
@@ -29,9 +21,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony import */
 
 
-    var _core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! ./core-feeeff0d.js */
-    "./node_modules/@ionic/core/dist/esm/core-feeeff0d.js");
+    var _core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! ./core-0a8d4d2e.js */
+    "./node_modules/@ionic/core/dist/esm/core-0a8d4d2e.js");
     /* harmony import */
 
 
@@ -39,9 +31,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /*! ./config-3c7f3790.js */
     "./node_modules/@ionic/core/dist/esm/config-3c7f3790.js");
 
-    var SPLIT_PANE_MAIN = 'split-pane-main';
-    var SPLIT_PANE_SIDE = 'split-pane-side';
-    var QUERY = {
+    const SPLIT_PANE_MAIN = 'split-pane-main';
+    const SPLIT_PANE_SIDE = 'split-pane-side';
+    const QUERY = {
       'xs': '(min-width: 0px)',
       'sm': '(min-width: 576px)',
       'md': '(min-width: 768px)',
@@ -49,14 +41,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       'xl': '(min-width: 1200px)',
       'never': ''
     };
-
-    var SplitPane =
-    /*#__PURE__*/
-    function () {
-      function SplitPane(hostRef) {
-        _classCallCheck(this, SplitPane);
-
-        Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
+    const SplitPane = class {
+      constructor(hostRef) {
+        Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
         this.visible = false;
         /**
          * If `true`, the split pane will be hidden.
@@ -70,161 +57,140 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          */
 
         this.when = QUERY['lg'];
-        this.ionSplitPaneVisible = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionSplitPaneVisible", 7);
+        this.ionSplitPaneVisible = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionSplitPaneVisible", 7);
       }
 
-      _createClass(SplitPane, [{
-        key: "visibleChanged",
-        value: function visibleChanged(visible) {
-          var detail = {
-            visible: visible,
-            isPane: this.isPane.bind(this)
+      visibleChanged(visible) {
+        const detail = {
+          visible,
+          isPane: this.isPane.bind(this)
+        };
+        this.ionSplitPaneVisible.emit(detail);
+      }
+
+      connectedCallback() {
+        this.styleChildren();
+        this.updateState();
+      }
+
+      disconnectedCallback() {
+        if (this.rmL) {
+          this.rmL();
+          this.rmL = undefined;
+        }
+      }
+
+      updateState() {
+        if (this.rmL) {
+          this.rmL();
+          this.rmL = undefined;
+        } // Check if the split-pane is disabled
+
+
+        if (this.disabled) {
+          this.visible = false;
+          return;
+        } // When query is a boolean
+
+
+        const query = this.when;
+
+        if (typeof query === 'boolean') {
+          this.visible = query;
+          return;
+        } // When query is a string, let's find first if it is a shortcut
+
+
+        const mediaQuery = QUERY[query] || query; // Media query is empty or null, we hide it
+
+        if (mediaQuery.length === 0) {
+          this.visible = false;
+          return;
+        }
+
+        if (window.matchMedia) {
+          // Listen on media query
+          const callback = q => {
+            this.visible = q.matches;
           };
-          this.ionSplitPaneVisible.emit(detail);
+
+          const mediaList = window.matchMedia(mediaQuery);
+          mediaList.addListener(callback);
+
+          this.rmL = () => mediaList.removeListener(callback);
+
+          this.visible = mediaList.matches;
         }
-      }, {
-        key: "connectedCallback",
-        value: function connectedCallback() {
-          this.styleChildren();
-          this.updateState();
+      }
+
+      isPane(element) {
+        if (!this.visible) {
+          return false;
         }
-      }, {
-        key: "disconnectedCallback",
-        value: function disconnectedCallback() {
-          if (this.rmL) {
-            this.rmL();
-            this.rmL = undefined;
-          }
-        }
-      }, {
-        key: "componentWillLoad",
-        value: function componentWillLoad() {
-          if (this.contentId === undefined) {
-            console.warn("[DEPRECATED][ion-split-pane] Using the [main] attribute is deprecated, please use the \"contentId\" property instead:\nBEFORE:\n  <ion-split-pane>\n    ...\n    <div main>...</div>\n  </ion-split-pane>\n\nAFTER:\n  <ion-split-pane contentId=\"main-content\">\n    ...\n    <div id=\"main-content\">...</div>\n  </ion-split-pane>\n");
-          }
-        }
-      }, {
-        key: "updateState",
-        value: function updateState() {
-          var _this = this;
 
-          if (this.rmL) {
-            this.rmL();
-            this.rmL = undefined;
-          } // Check if the split-pane is disabled
+        return element.parentElement === this.el && element.classList.contains(SPLIT_PANE_SIDE);
+      }
 
+      styleChildren() {
+        const contentId = this.contentId;
+        const children = this.el.children;
+        const nu = this.el.childElementCount;
+        let foundMain = false;
 
-          if (this.disabled) {
-            this.visible = false;
-            return;
-          } // When query is a boolean
+        for (let i = 0; i < nu; i++) {
+          const child = children[i];
+          const isMain = contentId !== undefined && child.id === contentId;
 
-
-          var query = this.when;
-
-          if (typeof query === 'boolean') {
-            this.visible = query;
-            return;
-          } // When query is a string, let's find first if it is a shortcut
-
-
-          var mediaQuery = QUERY[query] || query; // Media query is empty or null, we hide it
-
-          if (mediaQuery.length === 0) {
-            this.visible = false;
-            return;
-          }
-
-          if (window.matchMedia) {
-            // Listen on media query
-            var callback = function callback(q) {
-              _this.visible = q.matches;
-            };
-
-            var mediaList = window.matchMedia(mediaQuery);
-            mediaList.addListener(callback);
-
-            this.rmL = function () {
-              return mediaList.removeListener(callback);
-            };
-
-            this.visible = mediaList.matches;
-          }
-        }
-      }, {
-        key: "isPane",
-        value: function isPane(element) {
-          if (!this.visible) {
-            return false;
-          }
-
-          return element.parentElement === this.el && element.classList.contains(SPLIT_PANE_SIDE);
-        }
-      }, {
-        key: "styleChildren",
-        value: function styleChildren() {
-          var contentId = this.contentId;
-          var children = this.el.children;
-          var nu = this.el.childElementCount;
-          var foundMain = false;
-
-          for (var i = 0; i < nu; i++) {
-            var child = children[i];
-            var isMain = contentId !== undefined ? child.id === contentId : child.hasAttribute('main');
-
-            if (isMain) {
-              if (foundMain) {
-                console.warn('split pane cannot have more than one main node');
-                return;
-              }
-
-              foundMain = true;
+          if (isMain) {
+            if (foundMain) {
+              console.warn('split pane cannot have more than one main node');
+              return;
             }
 
-            setPaneClass(child, isMain);
+            foundMain = true;
           }
 
-          if (!foundMain) {
-            console.warn('split pane does not have a specified main node');
+          setPaneClass(child, isMain);
+        }
+
+        if (!foundMain) {
+          console.warn('split pane does not have a specified main node');
+        }
+      }
+
+      render() {
+        const mode = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["c"])(this);
+        return Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
+          class: {
+            [mode]: true,
+            // Used internally for styling
+            ["split-pane-".concat(mode)]: true,
+            'split-pane-visible': this.visible
           }
-        }
-      }, {
-        key: "render",
-        value: function render() {
-          var _class;
+        }, Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null));
+      }
 
-          var mode = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["c"])(this);
-          return Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
-            class: (_class = {}, _defineProperty(_class, mode, true), _defineProperty(_class, "split-pane-".concat(mode), true), _defineProperty(_class, 'split-pane-visible', this.visible), _class)
-          });
-        }
-      }, {
-        key: "el",
-        get: function get() {
-          return Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this);
-        }
-      }], [{
-        key: "watchers",
-        get: function get() {
-          return {
-            "visible": ["visibleChanged"],
-            "disabled": ["updateState"],
-            "when": ["updateState"]
-          };
-        }
-      }, {
-        key: "style",
-        get: function get() {
-          return "ion-split-pane{left:0;right:0;top:0;bottom:0;display:-ms-flexbox;display:flex;position:absolute;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:nowrap;flex-wrap:nowrap;contain:strict}.split-pane-visible>.split-pane-main,.split-pane-visible>.split-pane-side{left:0;right:0;top:0;bottom:0;position:relative;-ms-flex:1;flex:1;-webkit-box-shadow:none!important;box-shadow:none!important;z-index:0}.split-pane-visible>.split-pane-side:not(ion-menu),.split-pane-visible>ion-menu.split-pane-side.menu-enabled{display:-ms-flexbox;display:flex;-ms-flex-negative:0;flex-shrink:0}.split-pane-side:not(ion-menu){display:none}.split-pane-visible>.split-pane-side{-ms-flex-order:-1;order:-1}.split-pane-visible>.split-pane-side[side=end]{-ms-flex-order:1;order:1}.split-pane-ios{--border:0.55px solid var(--ion-item-border-color,var(--ion-border-color,var(--ion-color-step-250,#c8c7cc)))}.split-pane-ios.split-pane-visible>.split-pane-side{min-width:270px;max-width:28%;border-right:var(--border);border-left:0}.split-pane-ios.split-pane-visible>.split-pane-side[side=end]{min-width:270px;max-width:28%;border-right:0;border-left:var(--border)}";
-        }
-      }]);
+      get el() {
+        return Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this);
+      }
 
-      return SplitPane;
-    }();
+      static get watchers() {
+        return {
+          "visible": ["visibleChanged"],
+          "disabled": ["updateState"],
+          "when": ["updateState"]
+        };
+      }
 
-    var setPaneClass = function setPaneClass(el, isMain) {
-      var toAdd;
-      var toRemove;
+      static get style() {
+        return ":host{--side-width:100%;left:0;right:0;top:0;bottom:0;display:-ms-flexbox;display:flex;position:absolute;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:nowrap;flex-wrap:nowrap;contain:strict}::slotted(ion-menu.menu-pane-visible){-ms-flex:0 1 auto;flex:0 1 auto;width:var(--side-width);min-width:var(--side-min-width);max-width:var(--side-max-width)}:host(.split-pane-visible) ::slotted(.split-pane-main),:host(.split-pane-visible) ::slotted(.split-pane-side){left:0;right:0;top:0;bottom:0;position:relative;-webkit-box-shadow:none!important;box-shadow:none!important;z-index:0}:host(.split-pane-visible) ::slotted(.split-pane-main){-ms-flex:1;flex:1}:host(.split-pane-visible) ::slotted(.split-pane-side:not(ion-menu)),:host(.split-pane-visible) ::slotted(ion-menu.split-pane-side.menu-enabled){display:-ms-flexbox;display:flex;-ms-flex-negative:0;flex-shrink:0}::slotted(.split-pane-side:not(ion-menu)){display:none}:host(.split-pane-visible) ::slotted(.split-pane-side){-ms-flex-order:-1;order:-1}:host(.split-pane-visible) ::slotted(.split-pane-side[side=end]){-ms-flex-order:1;order:1}:host{--border:1px solid var(--ion-item-border-color,var(--ion-border-color,var(--ion-color-step-150,rgba(0,0,0,0.13))));--side-min-width:270px;--side-max-width:28%}:host(.split-pane-visible) ::slotted(.split-pane-side){min-width:var(--side-min-width);max-width:var(--side-max-width);border-right:var(--border);border-left:0}:host(.split-pane-visible) ::slotted(.split-pane-side[side=end]){min-width:var(--side-min-width);max-width:var(--side-max-width);border-right:0;border-left:var(--border)}";
+      }
+
+    };
+
+    const setPaneClass = (el, isMain) => {
+      let toAdd;
+      let toRemove;
 
       if (isMain) {
         toAdd = SPLIT_PANE_MAIN;
@@ -234,7 +200,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         toRemove = SPLIT_PANE_MAIN;
       }
 
-      var classList = el.classList;
+      const classList = el.classList;
       classList.add(toAdd);
       classList.remove(toRemove);
     };

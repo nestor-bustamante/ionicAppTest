@@ -1,47 +1,29 @@
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[47], {
   /***/
-  "./node_modules/@ionic/core/dist/esm/ion-radio_2-md.entry.js":
-  /*!*******************************************************************!*\
-    !*** ./node_modules/@ionic/core/dist/esm/ion-radio_2-md.entry.js ***!
-    \*******************************************************************/
+  "./node_modules/@ionic/core/dist/esm/ion-range-ios.entry.js":
+  /*!******************************************************************!*\
+    !*** ./node_modules/@ionic/core/dist/esm/ion-range-ios.entry.js ***!
+    \******************************************************************/
 
-  /*! exports provided: ion_radio, ion_radio_group */
+  /*! exports provided: ion_range */
 
   /***/
-  function node_modulesIonicCoreDistEsmIonRadio_2MdEntryJs(module, __webpack_exports__, __webpack_require__) {
+  function node_modulesIonicCoreDistEsmIonRangeIosEntryJs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
     /* harmony export (binding) */
 
 
-    __webpack_require__.d(__webpack_exports__, "ion_radio", function () {
-      return Radio;
-    });
-    /* harmony export (binding) */
-
-
-    __webpack_require__.d(__webpack_exports__, "ion_radio_group", function () {
-      return RadioGroup;
+    __webpack_require__.d(__webpack_exports__, "ion_range", function () {
+      return Range;
     });
     /* harmony import */
 
 
-    var _core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! ./core-feeeff0d.js */
-    "./node_modules/@ionic/core/dist/esm/core-feeeff0d.js");
+    var _core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! ./core-0a8d4d2e.js */
+    "./node_modules/@ionic/core/dist/esm/core-0a8d4d2e.js");
     /* harmony import */
 
 
@@ -60,424 +42,529 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var _theme_18cbe2cc_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! ./theme-18cbe2cc.js */
     "./node_modules/@ionic/core/dist/esm/theme-18cbe2cc.js");
-    /* harmony import */
 
+    const Range = class {
+      constructor(hostRef) {
+        Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
+        this.noUpdate = false;
+        this.hasFocus = false;
+        this.ratioA = 0;
+        this.ratioB = 0;
+        /**
+         * How long, in milliseconds, to wait to trigger the
+         * `ionChange` event after each change in the range value.
+         */
 
-    var _watch_options_2af96011_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-    /*! ./watch-options-2af96011.js */
-    "./node_modules/@ionic/core/dist/esm/watch-options-2af96011.js");
-
-    var Radio =
-    /*#__PURE__*/
-    function () {
-      function Radio(hostRef) {
-        var _this = this;
-
-        _classCallCheck(this, Radio);
-
-        Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
-        this.inputId = "ion-rb-".concat(radioButtonIds++);
+        this.debounce = 0;
         /**
          * The name of the control, which is submitted with the form data.
          */
 
-        this.name = this.inputId;
+        this.name = '';
         /**
-         * If `true`, the user cannot interact with the radio.
+         * Show two knobs.
+         */
+
+        this.dualKnobs = false;
+        /**
+         * Minimum integer value of the range.
+         */
+
+        this.min = 0;
+        /**
+         * Maximum integer value of the range.
+         */
+
+        this.max = 100;
+        /**
+         * If `true`, a pin with integer value is shown when the knob
+         * is pressed.
+         */
+
+        this.pin = false;
+        /**
+         * If `true`, the knob snaps to tick marks evenly spaced based
+         * on the step property value.
+         */
+
+        this.snaps = false;
+        /**
+         * Specifies the value granularity.
+         */
+
+        this.step = 1;
+        /**
+         * If `true`, tick marks are displayed based on the step value.
+         * Only applies when `snaps` is `true`.
+         */
+
+        this.ticks = true;
+        /**
+         * If `true`, the user cannot interact with the range.
          */
 
         this.disabled = false;
         /**
-         * If `true`, the radio is selected.
+         * the value of the range.
          */
 
-        this.checked = false;
+        this.value = 0;
 
-        this.onFocus = function () {
-          _this.ionFocus.emit();
+        this.clampBounds = value => {
+          return Object(_helpers_46f4a262_js__WEBPACK_IMPORTED_MODULE_2__["c"])(this.min, value, this.max);
         };
 
-        this.onBlur = function () {
-          _this.ionBlur.emit();
-        };
-
-        this.onClick = function () {
-          if (_this.checked) {
-            _this.ionDeselect.emit();
+        this.ensureValueInBounds = value => {
+          if (this.dualKnobs) {
+            return {
+              lower: this.clampBounds(value.lower),
+              upper: this.clampBounds(value.upper)
+            };
           } else {
-            _this.checked = true;
+            return this.clampBounds(value);
           }
         };
 
-        this.ionStyle = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionStyle", 7);
-        this.ionSelect = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionSelect", 7);
-        this.ionDeselect = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionDeselect", 7);
-        this.ionFocus = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionFocus", 7);
-        this.ionBlur = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionBlur", 7);
+        this.handleKeyboard = (knob, isIncrease) => {
+          let step = this.step;
+          step = step > 0 ? step : 1;
+          step = step / (this.max - this.min);
+
+          if (!isIncrease) {
+            step *= -1;
+          }
+
+          if (knob === 'A') {
+            this.ratioA = Object(_helpers_46f4a262_js__WEBPACK_IMPORTED_MODULE_2__["c"])(0, this.ratioA + step, 1);
+          } else {
+            this.ratioB = Object(_helpers_46f4a262_js__WEBPACK_IMPORTED_MODULE_2__["c"])(0, this.ratioB + step, 1);
+          }
+
+          this.updateValue();
+        };
+
+        this.onBlur = () => {
+          if (this.hasFocus) {
+            this.hasFocus = false;
+            this.ionBlur.emit();
+            this.emitStyle();
+          }
+        };
+
+        this.onFocus = () => {
+          if (!this.hasFocus) {
+            this.hasFocus = true;
+            this.ionFocus.emit();
+            this.emitStyle();
+          }
+        };
+
+        this.ionChange = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionChange", 7);
+        this.ionStyle = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionStyle", 7);
+        this.ionFocus = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionFocus", 7);
+        this.ionBlur = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionBlur", 7);
       }
 
-      _createClass(Radio, [{
-        key: "colorChanged",
-        value: function colorChanged() {
-          this.emitStyle();
-        }
-      }, {
-        key: "checkedChanged",
-        value: function checkedChanged(isChecked) {
-          if (isChecked) {
-            this.ionSelect.emit({
-              checked: true,
-              value: this.value
-            });
-          }
-
-          this.emitStyle();
-        }
-      }, {
-        key: "disabledChanged",
-        value: function disabledChanged() {
-          this.emitStyle();
-        }
-      }, {
-        key: "componentWillLoad",
-        value: function componentWillLoad() {
-          if (this.value === undefined) {
-            this.value = this.inputId;
-          }
-
-          this.emitStyle();
-        }
-      }, {
-        key: "emitStyle",
-        value: function emitStyle() {
-          this.ionStyle.emit({
-            'radio-checked': this.checked,
-            'interactive-disabled': this.disabled
-          });
-        }
-      }, {
-        key: "render",
-        value: function render() {
-          var _Object$assign;
-
-          var inputId = this.inputId,
-              disabled = this.disabled,
-              checked = this.checked,
-              color = this.color,
-              el = this.el;
-          var mode = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["c"])(this);
-          var labelId = inputId + '-lbl';
-          var label = Object(_helpers_46f4a262_js__WEBPACK_IMPORTED_MODULE_2__["f"])(el);
-
-          if (label) {
-            label.id = labelId;
-          }
-
-          return Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
-            onClick: this.onClick,
-            role: "radio",
-            "aria-disabled": disabled ? 'true' : null,
-            "aria-checked": "".concat(checked),
-            "aria-labelledby": labelId,
-            class: Object.assign(Object.assign({}, Object(_theme_18cbe2cc_js__WEBPACK_IMPORTED_MODULE_3__["c"])(color)), (_Object$assign = {}, _defineProperty(_Object$assign, mode, true), _defineProperty(_Object$assign, 'in-item', Object(_theme_18cbe2cc_js__WEBPACK_IMPORTED_MODULE_3__["h"])('ion-item', el)), _defineProperty(_Object$assign, 'interactive', true), _defineProperty(_Object$assign, 'radio-checked', checked), _defineProperty(_Object$assign, 'radio-disabled', disabled), _Object$assign))
-          }, Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
-            class: "radio-icon"
-          }, Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
-            class: "radio-inner"
-          })), Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])("button", {
-            type: "button",
-            onFocus: this.onFocus,
-            onBlur: this.onBlur,
-            disabled: disabled
-          }));
-        }
-      }, {
-        key: "el",
-        get: function get() {
-          return Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this);
-        }
-      }], [{
-        key: "watchers",
-        get: function get() {
-          return {
-            "color": ["colorChanged"],
-            "checked": ["checkedChanged"],
-            "disabled": ["disabledChanged"]
-          };
-        }
-      }, {
-        key: "style",
-        get: function get() {
-          return ":host{display:inline-block;position:relative;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;z-index:2}:host(.radio-disabled){pointer-events:none}.radio-icon{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;contain:layout size style}.radio-icon,button{width:100%;height:100%}button{left:0;top:0;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;position:absolute;border:0;background:transparent;cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:none}:host-context([dir=rtl]) button,[dir=rtl] button{left:unset;right:unset;right:0}button::-moz-focus-inner{border:0}.radio-icon,.radio-inner{-webkit-box-sizing:border-box;box-sizing:border-box}:host{--color:var(--ion-color-step-400,#999);--color-checked:var(--ion-color-primary,#3880ff);--border-width:2px;--border-style:solid;width:20px;height:20px}:host(.ion-color) .radio-inner{background:var(--ion-color-base)}:host(.ion-color.radio-checked) .radio-icon{border-color:var(--ion-color-base)}.radio-icon{margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;border-radius:50%;border-width:var(--border-width);border-style:var(--border-style);border-color:var(--color)}.radio-inner{border-radius:50%;width:calc(50% + var(--border-width));height:calc(50% + var(--border-width));-webkit-transform:scale3d(0,0,0);transform:scale3d(0,0,0);-webkit-transition:-webkit-transform .28s cubic-bezier(.4,0,.2,1);transition:-webkit-transform .28s cubic-bezier(.4,0,.2,1);transition:transform .28s cubic-bezier(.4,0,.2,1);transition:transform .28s cubic-bezier(.4,0,.2,1),-webkit-transform .28s cubic-bezier(.4,0,.2,1);background:var(--color-checked)}:host(.radio-checked) .radio-icon{border-color:var(--color-checked)}:host(.radio-checked) .radio-inner{-webkit-transform:scaleX(1);transform:scaleX(1)}:host(.radio-disabled){opacity:.3}:host(.ion-focused) .radio-icon:after{border-radius:50%;left:-12px;top:-12px;display:block;position:absolute;width:36px;height:36px;background:var(--ion-color-primary-tint,#4c8dff);content:\"\";opacity:.2}:host-context([dir=rtl]).ion-focused .radio-icon:after,:host-context([dir=rtl]):host(.ion-focused) .radio-icon:after{left:unset;right:unset;right:-12px}:host(.in-item){margin-left:0;margin-right:0;margin-top:9px;margin-bottom:9px;display:block;position:static}:host(.in-item[slot=start]){margin-left:4px;margin-right:36px;margin-top:11px;margin-bottom:10px}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){:host(.in-item[slot=start]){margin-left:unset;margin-right:unset;-webkit-margin-start:4px;margin-inline-start:4px;-webkit-margin-end:36px;margin-inline-end:36px}}";
-        }
-      }]);
-
-      return Radio;
-    }();
-
-    var radioButtonIds = 0;
-
-    var RadioGroup =
-    /*#__PURE__*/
-    function () {
-      function RadioGroup(hostRef) {
-        var _this2 = this;
-
-        _classCallCheck(this, RadioGroup);
-
-        Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
-        this.inputId = "ion-rg-".concat(radioGroupIds++);
-        this.labelId = "".concat(this.inputId, "-lbl");
-        /**
-         * If `true`, the radios can be deselected.
-         */
-
-        this.allowEmptySelection = false;
-        /**
-         * The name of the control, which is submitted with the form data.
-         */
-
-        this.name = this.inputId;
-
-        this.onSelect = function (ev) {
-          var selectedRadio = ev.target;
-
-          if (selectedRadio) {
-            _this2.value = selectedRadio.value;
-          }
-        };
-
-        this.onDeselect = function (ev) {
-          var selectedRadio = ev.target;
-
-          if (selectedRadio) {
-            selectedRadio.checked = false;
-            _this2.value = undefined;
-          }
-        };
-
-        this.ionChange = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionChange", 7);
+      debounceChanged() {
+        this.ionChange = Object(_helpers_46f4a262_js__WEBPACK_IMPORTED_MODULE_2__["d"])(this.ionChange, this.debounce);
       }
 
-      _createClass(RadioGroup, [{
-        key: "valueChanged",
-        value: function valueChanged(value) {
-          this.updateRadios();
-          this.ionChange.emit({
-            value: value
+      minChanged() {
+        if (!this.noUpdate) {
+          this.updateRatio();
+        }
+      }
+
+      maxChanged() {
+        if (!this.noUpdate) {
+          this.updateRatio();
+        }
+      }
+
+      disabledChanged() {
+        if (this.gesture) {
+          this.gesture.enable(!this.disabled);
+        }
+
+        this.emitStyle();
+      }
+
+      valueChanged(value) {
+        if (!this.noUpdate) {
+          this.updateRatio();
+        }
+
+        value = this.ensureValueInBounds(value);
+        this.ionChange.emit({
+          value
+        });
+      }
+
+      connectedCallback() {
+        this.updateRatio();
+        this.debounceChanged();
+        this.disabledChanged();
+      }
+
+      disconnectedCallback() {
+        if (this.gesture) {
+          this.gesture.destroy();
+          this.gesture = undefined;
+        }
+      }
+
+      async componentDidLoad() {
+        const rangeSlider = this.rangeSlider;
+
+        if (rangeSlider) {
+          this.gesture = (await Promise.resolve().then(__webpack_require__.bind(null,
+          /*! ./index-c38df685.js */
+          "./node_modules/@ionic/core/dist/esm/index-c38df685.js"))).createGesture({
+            el: rangeSlider,
+            gestureName: 'range',
+            gesturePriority: 100,
+            threshold: 0,
+            onStart: ev => this.onStart(ev),
+            onMove: ev => this.onMove(ev),
+            onEnd: ev => this.onEnd(ev)
           });
+          this.gesture.enable(!this.disabled);
         }
-      }, {
-        key: "connectedCallback",
-        value: function () {
-          var _connectedCallback = _asyncToGenerator(
-          /*#__PURE__*/
-          regeneratorRuntime.mark(function _callee() {
-            var _this3 = this;
+      }
 
-            var el, header, label, radio;
-            return regeneratorRuntime.wrap(function _callee$(_context) {
-              while (1) {
-                switch (_context.prev = _context.next) {
-                  case 0:
-                    // Get the list header if it exists and set the id
-                    // this is used to set aria-labelledby
-                    el = this.el;
-                    header = el.querySelector('ion-list-header') || el.querySelector('ion-item-divider');
+      getValue() {
+        const value = this.value || 0;
 
-                    if (header) {
-                      label = header.querySelector('ion-label');
-
-                      if (label) {
-                        this.labelId = label.id = this.name + '-lbl';
-                      }
-                    }
-
-                    if (!(this.value === undefined)) {
-                      _context.next = 9;
-                      break;
-                    }
-
-                    radio = Object(_watch_options_2af96011_js__WEBPACK_IMPORTED_MODULE_4__["f"])(el, 'ion-radio');
-
-                    if (!(radio !== undefined)) {
-                      _context.next = 9;
-                      break;
-                    }
-
-                    _context.next = 8;
-                    return radio.componentOnReady();
-
-                  case 8:
-                    if (this.value === undefined) {
-                      this.value = radio.value;
-                    }
-
-                  case 9:
-                    this.mutationO = Object(_watch_options_2af96011_js__WEBPACK_IMPORTED_MODULE_4__["w"])(el, 'ion-radio', function (newOption) {
-                      if (newOption !== undefined) {
-                        newOption.componentOnReady().then(function () {
-                          _this3.value = newOption.value;
-                        });
-                      } else {
-                        _this3.updateRadios();
-                      }
-                    });
-                    this.updateRadios();
-
-                  case 11:
-                  case "end":
-                    return _context.stop();
-                }
-              }
-            }, _callee, this);
-          }));
-
-          function connectedCallback() {
-            return _connectedCallback.apply(this, arguments);
+        if (this.dualKnobs) {
+          if (typeof value === 'object') {
+            return value;
           }
 
-          return connectedCallback;
-        }()
-      }, {
-        key: "disconnectedCallback",
-        value: function disconnectedCallback() {
-          if (this.mutationO) {
-            this.mutationO.disconnect();
-            this.mutationO = undefined;
-          }
-        }
-      }, {
-        key: "updateRadios",
-        value: function () {
-          var _updateRadios = _asyncToGenerator(
-          /*#__PURE__*/
-          regeneratorRuntime.mark(function _callee2() {
-            var radios, value, hasChecked, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, radio;
-
-            return regeneratorRuntime.wrap(function _callee2$(_context2) {
-              while (1) {
-                switch (_context2.prev = _context2.next) {
-                  case 0:
-                    _context2.next = 2;
-                    return this.getRadios();
-
-                  case 2:
-                    radios = _context2.sent;
-                    value = this.value;
-                    hasChecked = false; // Walk the DOM in reverse order, since the last selected one wins!
-
-                    _iteratorNormalCompletion = true;
-                    _didIteratorError = false;
-                    _iteratorError = undefined;
-                    _context2.prev = 8;
-
-                    for (_iterator = radios[Symbol.iterator](); !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                      radio = _step.value;
-
-                      if (!hasChecked && radio.value === value) {
-                        // correct value for this radio
-                        // but this radio isn't checked yet
-                        // and we haven't found a checked yet
-                        hasChecked = true;
-                        radio.checked = true;
-                      } else {
-                        // this radio doesn't have the correct value
-                        // or the radio group has been already checked
-                        radio.checked = false;
-                      }
-                    } // Reset value if
-
-
-                    _context2.next = 16;
-                    break;
-
-                  case 12:
-                    _context2.prev = 12;
-                    _context2.t0 = _context2["catch"](8);
-                    _didIteratorError = true;
-                    _iteratorError = _context2.t0;
-
-                  case 16:
-                    _context2.prev = 16;
-                    _context2.prev = 17;
-
-                    if (!_iteratorNormalCompletion && _iterator.return != null) {
-                      _iterator.return();
-                    }
-
-                  case 19:
-                    _context2.prev = 19;
-
-                    if (!_didIteratorError) {
-                      _context2.next = 22;
-                      break;
-                    }
-
-                    throw _iteratorError;
-
-                  case 22:
-                    return _context2.finish(19);
-
-                  case 23:
-                    return _context2.finish(16);
-
-                  case 24:
-                    if (!hasChecked) {
-                      this.value = undefined;
-                    }
-
-                  case 25:
-                  case "end":
-                    return _context2.stop();
-                }
-              }
-            }, _callee2, this, [[8, 12, 16, 24], [17,, 19, 23]]);
-          }));
-
-          function updateRadios() {
-            return _updateRadios.apply(this, arguments);
-          }
-
-          return updateRadios;
-        }()
-      }, {
-        key: "getRadios",
-        value: function getRadios() {
-          return Promise.all(Array.from(this.el.querySelectorAll('ion-radio')).map(function (r) {
-            return r.componentOnReady();
-          }));
-        }
-      }, {
-        key: "render",
-        value: function render() {
-          return Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
-            role: "radiogroup",
-            "aria-labelledby": this.labelId,
-            onIonSelect: this.onSelect,
-            onIonDeselect: this.allowEmptySelection ? this.onDeselect : undefined,
-            class: Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["c"])(this)
-          });
-        }
-      }, {
-        key: "el",
-        get: function get() {
-          return Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this);
-        }
-      }], [{
-        key: "watchers",
-        get: function get() {
           return {
-            "value": ["valueChanged"]
+            lower: 0,
+            upper: value
           };
+        } else {
+          if (typeof value === 'object') {
+            return value.upper;
+          }
+
+          return value;
         }
-      }]);
+      }
 
-      return RadioGroup;
-    }();
+      emitStyle() {
+        this.ionStyle.emit({
+          'interactive': true,
+          'interactive-disabled': this.disabled
+        });
+      }
 
-    var radioGroupIds = 0;
+      onStart(detail) {
+        const rect = this.rect = this.rangeSlider.getBoundingClientRect();
+        const currentX = detail.currentX; // figure out which knob they started closer to
+
+        let ratio = Object(_helpers_46f4a262_js__WEBPACK_IMPORTED_MODULE_2__["c"])(0, (currentX - rect.left) / rect.width, 1);
+
+        if (document.dir === 'rtl') {
+          ratio = 1 - ratio;
+        }
+
+        this.pressedKnob = !this.dualKnobs || Math.abs(this.ratioA - ratio) < Math.abs(this.ratioB - ratio) ? 'A' : 'B';
+        this.setFocus(this.pressedKnob); // update the active knob's position
+
+        this.update(currentX);
+      }
+
+      onMove(detail) {
+        this.update(detail.currentX);
+      }
+
+      onEnd(detail) {
+        this.update(detail.currentX);
+        this.pressedKnob = undefined;
+      }
+
+      update(currentX) {
+        // figure out where the pointer is currently at
+        // update the knob being interacted with
+        const rect = this.rect;
+        let ratio = Object(_helpers_46f4a262_js__WEBPACK_IMPORTED_MODULE_2__["c"])(0, (currentX - rect.left) / rect.width, 1);
+
+        if (document.dir === 'rtl') {
+          ratio = 1 - ratio;
+        }
+
+        if (this.snaps) {
+          // snaps the ratio to the current value
+          ratio = valueToRatio(ratioToValue(ratio, this.min, this.max, this.step), this.min, this.max);
+        } // update which knob is pressed
+
+
+        if (this.pressedKnob === 'A') {
+          this.ratioA = ratio;
+        } else {
+          this.ratioB = ratio;
+        } // Update input value
+
+
+        this.updateValue();
+      }
+
+      get valA() {
+        return ratioToValue(this.ratioA, this.min, this.max, this.step);
+      }
+
+      get valB() {
+        return ratioToValue(this.ratioB, this.min, this.max, this.step);
+      }
+
+      get ratioLower() {
+        if (this.dualKnobs) {
+          return Math.min(this.ratioA, this.ratioB);
+        }
+
+        return 0;
+      }
+
+      get ratioUpper() {
+        if (this.dualKnobs) {
+          return Math.max(this.ratioA, this.ratioB);
+        }
+
+        return this.ratioA;
+      }
+
+      updateRatio() {
+        const value = this.getValue();
+        const {
+          min,
+          max
+        } = this;
+
+        if (this.dualKnobs) {
+          this.ratioA = valueToRatio(value.lower, min, max);
+          this.ratioB = valueToRatio(value.upper, min, max);
+        } else {
+          this.ratioA = valueToRatio(value, min, max);
+        }
+      }
+
+      updateValue() {
+        this.noUpdate = true;
+        const {
+          valA,
+          valB
+        } = this;
+        this.value = !this.dualKnobs ? valA : {
+          lower: Math.min(valA, valB),
+          upper: Math.max(valA, valB)
+        };
+        this.noUpdate = false;
+      }
+
+      setFocus(knob) {
+        if (this.el.shadowRoot) {
+          const knobEl = this.el.shadowRoot.querySelector(knob === 'A' ? '.range-knob-a' : '.range-knob-b');
+
+          if (knobEl) {
+            knobEl.focus();
+          }
+        }
+      }
+
+      render() {
+        const {
+          min,
+          max,
+          step,
+          el,
+          handleKeyboard,
+          pressedKnob,
+          disabled,
+          pin,
+          ratioLower,
+          ratioUpper
+        } = this;
+        const mode = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["c"])(this);
+        const barStart = "".concat(ratioLower * 100, "%");
+        const barEnd = "".concat(100 - ratioUpper * 100, "%");
+        const doc = document;
+        const isRTL = doc.dir === 'rtl';
+        const start = isRTL ? 'right' : 'left';
+        const end = isRTL ? 'left' : 'right';
+
+        const tickStyle = tick => {
+          return {
+            [start]: tick[start]
+          };
+        };
+
+        const barStyle = {
+          [start]: barStart,
+          [end]: barEnd
+        };
+        const ticks = [];
+
+        if (this.snaps && this.ticks) {
+          for (let value = min; value <= max; value += step) {
+            const ratio = valueToRatio(value, min, max);
+            const tick = {
+              ratio,
+              active: ratio >= ratioLower && ratio <= ratioUpper
+            };
+            tick[start] = "".concat(ratio * 100, "%");
+            ticks.push(tick);
+          }
+        }
+
+        Object(_helpers_46f4a262_js__WEBPACK_IMPORTED_MODULE_2__["a"])(true, el, this.name, JSON.stringify(this.getValue()), disabled);
+        return Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
+          onFocusin: this.onFocus,
+          onFocusout: this.onBlur,
+          class: Object.assign(Object.assign({}, Object(_theme_18cbe2cc_js__WEBPACK_IMPORTED_MODULE_3__["c"])(this.color)), {
+            [mode]: true,
+            'in-item': Object(_theme_18cbe2cc_js__WEBPACK_IMPORTED_MODULE_3__["h"])('ion-item', el),
+            'range-disabled': disabled,
+            'range-pressed': pressedKnob !== undefined,
+            'range-has-pin': pin
+          })
+        }, Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", {
+          name: "start"
+        }), Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+          class: "range-slider",
+          ref: rangeEl => this.rangeSlider = rangeEl
+        }, ticks.map(tick => Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+          style: tickStyle(tick),
+          role: "presentation",
+          class: {
+            'range-tick': true,
+            'range-tick-active': tick.active
+          }
+        })), Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+          class: "range-bar",
+          role: "presentation"
+        }), Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+          class: "range-bar range-bar-active",
+          role: "presentation",
+          style: barStyle
+        }), renderKnob(isRTL, {
+          knob: 'A',
+          pressed: pressedKnob === 'A',
+          value: this.valA,
+          ratio: this.ratioA,
+          pin,
+          disabled,
+          handleKeyboard,
+          min,
+          max
+        }), this.dualKnobs && renderKnob(isRTL, {
+          knob: 'B',
+          pressed: pressedKnob === 'B',
+          value: this.valB,
+          ratio: this.ratioB,
+          pin,
+          disabled,
+          handleKeyboard,
+          min,
+          max
+        })), Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", {
+          name: "end"
+        }));
+      }
+
+      get el() {
+        return Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this);
+      }
+
+      static get watchers() {
+        return {
+          "debounce": ["debounceChanged"],
+          "min": ["minChanged"],
+          "max": ["maxChanged"],
+          "disabled": ["disabledChanged"],
+          "value": ["valueChanged"]
+        };
+      }
+
+      static get style() {
+        return ":host{--knob-handle-size:calc(var(--knob-size) * 2);display:-ms-flexbox;display:flex;position:relative;-ms-flex:3;flex:3;-ms-flex-align:center;align-items:center;font-family:var(--ion-font-family,inherit);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;z-index:2}:host(.range-disabled){pointer-events:none}::slotted(ion-label){-ms-flex:initial;flex:initial}::slotted(ion-icon[slot]){font-size:24px}.range-slider{position:relative;-ms-flex:1;flex:1;width:100%;height:var(--height);contain:size layout style;cursor:-webkit-grab;cursor:grab;-ms-touch-action:pan-y;touch-action:pan-y}:host(.range-pressed) .range-slider{cursor:-webkit-grabbing;cursor:grabbing}.range-pin{position:absolute;background:var(--ion-color-base);color:var(--ion-color-contrast);-webkit-box-sizing:border-box;box-sizing:border-box}.range-knob-handle{left:0;top:calc((var(--height) - var(--knob-handle-size)) / 2);margin-left:calc(0px - var(--knob-handle-size) / 2);position:absolute;width:var(--knob-handle-size);height:var(--knob-handle-size);text-align:center}:host-context([dir=rtl]) .range-knob-handle,[dir=rtl] .range-knob-handle{right:unset;right:0}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.range-knob-handle{margin-left:unset;-webkit-margin-start:calc(0px - var(--knob-handle-size) / 2);margin-inline-start:calc(0px - var(--knob-handle-size) / 2)}}:host-context([dir=rtl]) .range-knob-handle,[dir=rtl] .range-knob-handle{left:unset}.range-knob-handle:active,.range-knob-handle:focus{outline:none}.range-bar{border-radius:var(--bar-border-radius);left:0;top:calc((var(--height) - var(--bar-height)) / 2);position:absolute;width:100%;height:var(--bar-height);background:var(--bar-background);pointer-events:none}:host-context([dir=rtl]) .range-bar,[dir=rtl] .range-bar{right:unset;right:0;left:unset}.range-knob{border-radius:var(--knob-border-radius);left:calc(50% - var(--knob-size) / 2);top:calc(50% - var(--knob-size) / 2);position:absolute;width:var(--knob-size);height:var(--knob-size);background:var(--knob-background);-webkit-box-shadow:var(--knob-box-shadow);box-shadow:var(--knob-box-shadow);z-index:2;pointer-events:none}:host-context([dir=rtl]) .range-knob,[dir=rtl] .range-knob{right:unset;right:calc(50% - var(--knob-size) / 2);left:unset}:host(.range-pressed) .range-bar-active{will-change:left,right}:host(.in-item){width:100%}:host(.in-item) ::slotted(ion-label){-ms-flex-item-align:center;align-self:center}:host{--knob-border-radius:50%;--knob-background:#fff;--knob-box-shadow:0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02);--knob-size:28px;--bar-height:2px;--bar-background:rgba(var(--ion-text-color-rgb,0,0,0),0.1);--bar-background-active:var(--ion-color-primary,#3880ff);--bar-border-radius:0;--height:42px;padding-left:16px;padding-right:16px;padding-top:8px;padding-bottom:8px}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){:host{padding-left:unset;padding-right:unset;-webkit-padding-start:16px;padding-inline-start:16px;-webkit-padding-end:16px;padding-inline-end:16px}}:host(.ion-color) .range-bar-active,:host(.ion-color) .range-tick-active{background:var(--ion-color-base)}::slotted([slot=start]){margin-left:0;margin-right:16px;margin-top:0;margin-bottom:0}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){::slotted([slot=start]){margin-left:unset;margin-right:unset;-webkit-margin-start:0;margin-inline-start:0;-webkit-margin-end:16px;margin-inline-end:16px}}::slotted([slot=end]){margin-left:16px;margin-right:0;margin-top:0;margin-bottom:0}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){::slotted([slot=end]){margin-left:unset;margin-right:unset;-webkit-margin-start:16px;margin-inline-start:16px;-webkit-margin-end:0;margin-inline-end:0}}:host(.range-has-pin){padding-top:20px}.range-bar-active{bottom:0;width:auto;background:var(--bar-background-active)}.range-tick{margin-left:-1px;border-radius:0;position:absolute;top:18px;width:2px;height:8px;background:rgba(var(--ion-text-color-rgb,0,0,0),.1);pointer-events:none}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.range-tick{margin-left:unset;-webkit-margin-start:-1px;margin-inline-start:-1px}}.range-tick-active{background:var(--bar-background-active)}.range-pin{-webkit-transform:translate3d(0,28px,0) scale(.01);transform:translate3d(0,28px,0) scale(.01);padding-left:8px;padding-right:8px;padding-top:8px;padding-bottom:8px;display:inline-block;position:relative;top:-20px;min-width:28px;-webkit-transition:-webkit-transform .12s ease;transition:-webkit-transform .12s ease;transition:transform .12s ease;transition:transform .12s ease,-webkit-transform .12s ease;background:transparent;color:var(--ion-text-color,#000);font-size:12px;text-align:center}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.range-pin{padding-left:unset;padding-right:unset;-webkit-padding-start:8px;padding-inline-start:8px;-webkit-padding-end:8px;padding-inline-end:8px}}.range-knob-pressed .range-pin{-webkit-transform:translateZ(0) scale(1);transform:translateZ(0) scale(1)}:host(.range-disabled){opacity:.5}";
+      }
+
+    };
+
+    const renderKnob = (isRTL, {
+      knob,
+      value,
+      ratio,
+      min,
+      max,
+      disabled,
+      pressed,
+      pin,
+      handleKeyboard
+    }) => {
+      const start = isRTL ? 'right' : 'left';
+
+      const knobStyle = () => {
+        const style = {};
+        style[start] = "".concat(ratio * 100, "%");
+        return style;
+      };
+
+      return Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+        onKeyDown: ev => {
+          const key = ev.key;
+
+          if (key === 'ArrowLeft' || key === 'ArrowDown') {
+            handleKeyboard(knob, false);
+            ev.preventDefault();
+            ev.stopPropagation();
+          } else if (key === 'ArrowRight' || key === 'ArrowUp') {
+            handleKeyboard(knob, true);
+            ev.preventDefault();
+            ev.stopPropagation();
+          }
+        },
+        class: {
+          'range-knob-handle': true,
+          'range-knob-a': knob === 'A',
+          'range-knob-b': knob === 'B',
+          'range-knob-pressed': pressed,
+          'range-knob-min': value === min,
+          'range-knob-max': value === max
+        },
+        style: knobStyle(),
+        role: "slider",
+        tabindex: disabled ? -1 : 0,
+        "aria-valuemin": min,
+        "aria-valuemax": max,
+        "aria-disabled": disabled ? 'true' : null,
+        "aria-valuenow": value
+      }, pin && Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+        class: "range-pin",
+        role: "presentation"
+      }, Math.round(value)), Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+        class: "range-knob",
+        role: "presentation"
+      }));
+    };
+
+    const ratioToValue = (ratio, min, max, step) => {
+      let value = (max - min) * ratio;
+
+      if (step > 0) {
+        value = Math.round(value / step) * step + min;
+      }
+
+      return Object(_helpers_46f4a262_js__WEBPACK_IMPORTED_MODULE_2__["c"])(min, value, max);
+    };
+
+    const valueToRatio = (value, min, max) => {
+      return Object(_helpers_46f4a262_js__WEBPACK_IMPORTED_MODULE_2__["c"])(0, (value - min) / (max - min), 1);
+    };
     /***/
+
   }
 }]);
 //# sourceMappingURL=47-es5.js.map

@@ -1,11 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.ionicmaptest.miapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <feature name="BrowserTab">
-        <param name="android-package" value="com.google.cordova.plugin.browsertab.BrowserTab" />
-    </feature>
-    <feature name="BuildInfo">
-        <param name="android-package" value="org.apache.cordova.buildinfo.BuildInfo" />
-    </feature>
     <feature name="Device">
         <param name="android-package" value="org.apache.cordova.device.Device" />
     </feature>
@@ -29,12 +23,6 @@
     <feature name="InAppBrowser">
         <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
     </feature>
-    <feature name="SpinnerDialog">
-        <param name="android-package" value="com.greybax.spinnerdialog.SpinnerDialog" />
-    </feature>
-    <feature name="Sim">
-        <param name="android-package" value="com.pbakondy.Sim" />
-    </feature>
     <feature name="SplashScreen">
         <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
         <param name="onload" value="true" />
@@ -43,19 +31,9 @@
         <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
         <param name="onload" value="true" />
     </feature>
-    <feature name="StreamingMedia">
-        <param name="android-package" value="com.hutchind.cordova.plugins.streamingmedia.StreamingMedia" />
-    </feature>
     <feature name="Whitelist">
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
-    </feature>
-    <feature name="UniversalLinks">
-        <param name="android-package" value="com.nordnetab.cordova.ul.UniversalLinksPlugin" />
-        <param name="onload" value="true" />
-    </feature>
-    <feature name="EmailComposer">
-        <param name="android-package" value="de.appplant.cordova.emailcomposer.EmailComposer" />
     </feature>
     <feature name="CDVIonicKeyboard">
         <param name="android-package" onload="true" value="io.ionic.keyboard.CDVIonicKeyboard" />
@@ -66,7 +44,7 @@
     <feature name="IonicWebView">
         <param name="android-package" value="com.ionicframework.cordova.webview.IonicWebView" />
     </feature>
-    <name>MyApp</name>
+    <name>AppMap</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
     <universal-links>
@@ -84,7 +62,7 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
-        <application android:usesCleartextTraffic="true" />
+        <application android:networkSecurityConfig="@xml/network_security_config" />
     </edit-config>
     <resource-file src="resources/android/xml/network_security_config.xml" target="app/src/main/res/xml/network_security_config.xml" />
     <allow-intent href="market:*" />

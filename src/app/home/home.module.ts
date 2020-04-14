@@ -1,4 +1,3 @@
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
@@ -6,8 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
-import { ModalComponent } from '../components/modal/modal.component';
-
 
 @NgModule({
   imports: [
@@ -19,14 +16,8 @@ import { ModalComponent } from '../components/modal/modal.component';
         path: '',
         component: HomePage
       }
-    ]),
-    FormsModule
+    ])
   ],
-  providers: [],
-  declarations: [
-    HomePage,
-    ModalComponent
-  ],
-  entryComponents: [ ModalComponent ]
+  declarations: [HomePage]
 })
 export class HomePageModule {}

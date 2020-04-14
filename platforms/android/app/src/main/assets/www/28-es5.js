@@ -1,47 +1,29 @@
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[28], {
   /***/
-  "./node_modules/@ionic/core/dist/esm/ion-infinite-scroll_2-md.entry.js":
-  /*!*****************************************************************************!*\
-    !*** ./node_modules/@ionic/core/dist/esm/ion-infinite-scroll_2-md.entry.js ***!
-    \*****************************************************************************/
+  "./node_modules/@ionic/core/dist/esm/ion-input-ios.entry.js":
+  /*!******************************************************************!*\
+    !*** ./node_modules/@ionic/core/dist/esm/ion-input-ios.entry.js ***!
+    \******************************************************************/
 
-  /*! exports provided: ion_infinite_scroll, ion_infinite_scroll_content */
+  /*! exports provided: ion_input */
 
   /***/
-  function node_modulesIonicCoreDistEsmIonInfiniteScroll_2MdEntryJs(module, __webpack_exports__, __webpack_require__) {
+  function node_modulesIonicCoreDistEsmIonInputIosEntryJs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
     /* harmony export (binding) */
 
 
-    __webpack_require__.d(__webpack_exports__, "ion_infinite_scroll", function () {
-      return InfiniteScroll;
-    });
-    /* harmony export (binding) */
-
-
-    __webpack_require__.d(__webpack_exports__, "ion_infinite_scroll_content", function () {
-      return InfiniteScrollContent;
+    __webpack_require__.d(__webpack_exports__, "ion_input", function () {
+      return Input;
     });
     /* harmony import */
 
 
-    var _core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! ./core-feeeff0d.js */
-    "./node_modules/@ionic/core/dist/esm/core-feeeff0d.js");
+    var _core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! ./core-0a8d4d2e.js */
+    "./node_modules/@ionic/core/dist/esm/core-0a8d4d2e.js");
     /* harmony import */
 
 
@@ -51,366 +33,318 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony import */
 
 
-    var _index_3476b023_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! ./index-3476b023.js */
-    "./node_modules/@ionic/core/dist/esm/index-3476b023.js");
+    var _helpers_46f4a262_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ./helpers-46f4a262.js */
+    "./node_modules/@ionic/core/dist/esm/helpers-46f4a262.js");
+    /* harmony import */
 
-    var InfiniteScroll =
-    /*#__PURE__*/
-    function () {
-      function InfiniteScroll(hostRef) {
-        var _this = this;
 
-        _classCallCheck(this, InfiniteScroll);
+    var _theme_18cbe2cc_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ./theme-18cbe2cc.js */
+    "./node_modules/@ionic/core/dist/esm/theme-18cbe2cc.js");
 
-        Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
-        this.thrPx = 0;
-        this.thrPc = 0;
-        this.didFire = false;
-        this.isBusy = false;
-        this.isLoading = false;
+    const Input = class {
+      constructor(hostRef) {
+        Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
+        this.inputId = "ion-input-".concat(inputIds++);
+        this.didBlurAfterEdit = false;
+        this.hasFocus = false;
         /**
-         * The threshold distance from the bottom
-         * of the content to call the `infinite` output event when scrolled.
-         * The threshold value can be either a percent, or
-         * in pixels. For example, use the value of `10%` for the `infinite`
-         * output event to get called when the user has scrolled 10%
-         * from the bottom of the page. Use the value `100px` when the
-         * scroll is within 100 pixels from the bottom of the page.
+         * Indicates whether and how the text value should be automatically capitalized as it is entered/edited by the user.
          */
 
-        this.threshold = '15%';
+        this.autocapitalize = 'off';
         /**
-         * If `true`, the infinite scroll will be hidden and scroll event listeners
-         * will be removed.
-         *
-         * Set this to true to disable the infinite scroll from actively
-         * trying to receive new data while scrolling. This is useful
-         * when it is known that there is no more data that can be added, and
-         * the infinite scroll is no longer needed.
+         * Indicates whether the value of the control can be automatically completed by the browser.
+         */
+
+        this.autocomplete = 'off';
+        /**
+         * Whether auto correction should be enabled when the user is entering/editing the text value.
+         */
+
+        this.autocorrect = 'off';
+        /**
+         * This Boolean attribute lets you specify that a form control should have input focus when the page loads.
+         */
+
+        this.autofocus = false;
+        /**
+         * If `true`, a clear icon will appear in the input when there is a value. Clicking it clears the input.
+         */
+
+        this.clearInput = false;
+        /**
+         * Set the amount of time, in milliseconds, to wait to trigger the `ionChange` event after each keystroke.
+         */
+
+        this.debounce = 0;
+        /**
+         * If `true`, the user cannot interact with the input.
          */
 
         this.disabled = false;
         /**
-         * The position of the infinite scroll element.
-         * The value can be either `top` or `bottom`.
+         * The name of the control, which is submitted with the form data.
          */
 
-        this.position = 'bottom';
+        this.name = this.inputId;
+        /**
+         * If `true`, the user cannot modify the value.
+         */
 
-        this.onScroll = function () {
-          var scrollEl = _this.scrollEl;
+        this.readonly = false;
+        /**
+         * If `true`, the user must fill in a value before submitting a form.
+         */
 
-          if (!scrollEl || !_this.canStart()) {
-            return 1;
+        this.required = false;
+        /**
+         * If `true`, the element will have its spelling and grammar checked.
+         */
+
+        this.spellcheck = false;
+        /**
+         * The type of control to display. The default type is text.
+         */
+
+        this.type = 'text';
+        /**
+         * The value of the input.
+         */
+
+        this.value = '';
+
+        this.onInput = ev => {
+          const input = ev.target;
+
+          if (input) {
+            this.value = input.value || '';
           }
 
-          var infiniteHeight = _this.el.offsetHeight;
-
-          if (infiniteHeight === 0) {
-            // if there is no height of this element then do nothing
-            return 2;
-          }
-
-          var scrollTop = scrollEl.scrollTop;
-          var scrollHeight = scrollEl.scrollHeight;
-          var height = scrollEl.offsetHeight;
-          var threshold = _this.thrPc !== 0 ? height * _this.thrPc : _this.thrPx;
-          var distanceFromInfinite = _this.position === 'bottom' ? scrollHeight - infiniteHeight - scrollTop - threshold - height : scrollTop - infiniteHeight - threshold;
-
-          if (distanceFromInfinite < 0) {
-            if (!_this.didFire) {
-              _this.isLoading = true;
-              _this.didFire = true;
-
-              _this.ionInfinite.emit();
-
-              return 3;
-            }
-          } else {
-            _this.didFire = false;
-          }
-
-          return 4;
+          this.ionInput.emit(ev);
         };
 
-        this.ionInfinite = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionInfinite", 7);
+        this.onBlur = () => {
+          this.hasFocus = false;
+          this.focusChanged();
+          this.emitStyle();
+          this.ionBlur.emit();
+        };
+
+        this.onFocus = () => {
+          this.hasFocus = true;
+          this.focusChanged();
+          this.emitStyle();
+          this.ionFocus.emit();
+        };
+
+        this.onKeydown = ev => {
+          if (this.shouldClearOnEdit()) {
+            // Did the input value change after it was blurred and edited?
+            // Do not clear if user is hitting Enter to submit form
+            if (this.didBlurAfterEdit && this.hasValue() && ev.key !== 'Enter') {
+              // Clear the input
+              this.clearTextInput();
+            } // Reset the flag
+
+
+            this.didBlurAfterEdit = false;
+          }
+        };
+
+        this.clearTextInput = ev => {
+          if (this.clearInput && !this.readonly && !this.disabled && ev) {
+            ev.preventDefault();
+            ev.stopPropagation();
+          }
+
+          this.value = '';
+          /**
+           * This is needed for clearOnEdit
+           * Otherwise the value will not be cleared
+           * if user is inside the input
+           */
+
+          if (this.nativeInput) {
+            this.nativeInput.value = '';
+          }
+        };
+
+        this.ionInput = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionInput", 7);
+        this.ionChange = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionChange", 7);
+        this.ionBlur = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionBlur", 7);
+        this.ionFocus = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionFocus", 7);
+        this.ionInputDidLoad = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionInputDidLoad", 7);
+        this.ionInputDidUnload = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionInputDidUnload", 7);
+        this.ionStyle = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this, "ionStyle", 7);
       }
 
-      _createClass(InfiniteScroll, [{
-        key: "thresholdChanged",
-        value: function thresholdChanged() {
-          var val = this.threshold;
-
-          if (val.lastIndexOf('%') > -1) {
-            this.thrPx = 0;
-            this.thrPc = parseFloat(val) / 100;
-          } else {
-            this.thrPx = parseFloat(val);
-            this.thrPc = 0;
-          }
-        }
-      }, {
-        key: "disabledChanged",
-        value: function disabledChanged() {
-          var disabled = this.disabled;
-
-          if (disabled) {
-            this.isLoading = false;
-            this.isBusy = false;
-          }
-
-          this.enableScrollEvents(!disabled);
-        }
-      }, {
-        key: "connectedCallback",
-        value: function () {
-          var _connectedCallback = _asyncToGenerator(
-          /*#__PURE__*/
-          regeneratorRuntime.mark(function _callee() {
-            var _this2 = this;
-
-            var contentEl;
-            return regeneratorRuntime.wrap(function _callee$(_context) {
-              while (1) {
-                switch (_context.prev = _context.next) {
-                  case 0:
-                    contentEl = this.el.closest('ion-content');
-
-                    if (contentEl) {
-                      _context.next = 4;
-                      break;
-                    }
-
-                    console.error('<ion-infinite-scroll> must be used inside an <ion-content>');
-                    return _context.abrupt("return");
-
-                  case 4:
-                    _context.next = 6;
-                    return contentEl.getScrollElement();
-
-                  case 6:
-                    this.scrollEl = _context.sent;
-                    this.thresholdChanged();
-                    this.disabledChanged();
-
-                    if (this.position === 'top') {
-                      Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["w"])(function () {
-                        if (_this2.scrollEl) {
-                          _this2.scrollEl.scrollTop = _this2.scrollEl.scrollHeight - _this2.scrollEl.clientHeight;
-                        }
-                      });
-                    }
-
-                  case 10:
-                  case "end":
-                    return _context.stop();
-                }
-              }
-            }, _callee, this);
-          }));
-
-          function connectedCallback() {
-            return _connectedCallback.apply(this, arguments);
-          }
-
-          return connectedCallback;
-        }()
-      }, {
-        key: "disconnectedCallback",
-        value: function disconnectedCallback() {
-          this.enableScrollEvents(false);
-          this.scrollEl = undefined;
-        }
-        /**
-         * Call `complete()` within the `ionInfinite` output event handler when
-         * your async operation has completed. For example, the `loading`
-         * state is while the app is performing an asynchronous operation,
-         * such as receiving more data from an AJAX request to add more items
-         * to a data list. Once the data has been received and UI updated, you
-         * then call this method to signify that the loading has completed.
-         * This method will change the infinite scroll's state from `loading`
-         * to `enabled`.
-         */
-
-      }, {
-        key: "complete",
-        value: function () {
-          var _complete = _asyncToGenerator(
-          /*#__PURE__*/
-          regeneratorRuntime.mark(function _callee2() {
-            var _this3 = this;
-
-            var scrollEl, prev;
-            return regeneratorRuntime.wrap(function _callee2$(_context2) {
-              while (1) {
-                switch (_context2.prev = _context2.next) {
-                  case 0:
-                    scrollEl = this.scrollEl;
-
-                    if (!(!this.isLoading || !scrollEl)) {
-                      _context2.next = 3;
-                      break;
-                    }
-
-                    return _context2.abrupt("return");
-
-                  case 3:
-                    this.isLoading = false;
-
-                    if (this.position === 'top') {
-                      /**
-                       * New content is being added at the top, but the scrollTop position stays the same,
-                       * which causes a scroll jump visually. This algorithm makes sure to prevent this.
-                       * (Frame 1)
-                       *    - complete() is called, but the UI hasn't had time to update yet.
-                       *    - Save the current content dimensions.
-                       *    - Wait for the next frame using _dom.read, so the UI will be updated.
-                       * (Frame 2)
-                       *    - Read the new content dimensions.
-                       *    - Calculate the height difference and the new scroll position.
-                       *    - Delay the scroll position change until other possible dom reads are done using _dom.write to be performant.
-                       * (Still frame 2, if I'm correct)
-                       *    - Change the scroll position (= visually maintain the scroll position).
-                       *    - Change the state to re-enable the InfiniteScroll.
-                       *    - This should be after changing the scroll position, or it could
-                       *    cause the InfiniteScroll to be triggered again immediately.
-                       * (Frame 3)
-                       *    Done.
-                       */
-                      this.isBusy = true; // ******** DOM READ ****************
-                      // Save the current content dimensions before the UI updates
-
-                      prev = scrollEl.scrollHeight - scrollEl.scrollTop; // ******** DOM READ ****************
-
-                      requestAnimationFrame(function () {
-                        Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["f"])(function () {
-                          // UI has updated, save the new content dimensions
-                          var scrollHeight = scrollEl.scrollHeight; // New content was added on top, so the scroll position should be changed immediately to prevent it from jumping around
-
-                          var newScrollTop = scrollHeight - prev; // ******** DOM WRITE ****************
-
-                          requestAnimationFrame(function () {
-                            Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["w"])(function () {
-                              scrollEl.scrollTop = newScrollTop;
-                              _this3.isBusy = false;
-                            });
-                          });
-                        });
-                      });
-                    }
-
-                  case 5:
-                  case "end":
-                    return _context2.stop();
-                }
-              }
-            }, _callee2, this);
-          }));
-
-          function complete() {
-            return _complete.apply(this, arguments);
-          }
-
-          return complete;
-        }()
-      }, {
-        key: "canStart",
-        value: function canStart() {
-          return !this.disabled && !this.isBusy && !!this.scrollEl && !this.isLoading;
-        }
-      }, {
-        key: "enableScrollEvents",
-        value: function enableScrollEvents(shouldListen) {
-          if (this.scrollEl) {
-            if (shouldListen) {
-              this.scrollEl.addEventListener('scroll', this.onScroll);
-            } else {
-              this.scrollEl.removeEventListener('scroll', this.onScroll);
-            }
-          }
-        }
-      }, {
-        key: "render",
-        value: function render() {
-          var _class;
-
-          var mode = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["c"])(this);
-          var disabled = this.disabled;
-          return Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
-            class: (_class = {}, _defineProperty(_class, mode, true), _defineProperty(_class, 'infinite-scroll-loading', this.isLoading), _defineProperty(_class, 'infinite-scroll-enabled', !disabled), _class)
-          });
-        }
-      }, {
-        key: "el",
-        get: function get() {
-          return Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this);
-        }
-      }], [{
-        key: "watchers",
-        get: function get() {
-          return {
-            "threshold": ["thresholdChanged"],
-            "disabled": ["disabledChanged"]
-          };
-        }
-      }, {
-        key: "style",
-        get: function get() {
-          return "ion-infinite-scroll{display:none;width:100%}.infinite-scroll-enabled{display:block}";
-        }
-      }]);
-
-      return InfiniteScroll;
-    }();
-
-    var InfiniteScrollContent =
-    /*#__PURE__*/
-    function () {
-      function InfiniteScrollContent(hostRef) {
-        _classCallCheck(this, InfiniteScrollContent);
-
-        Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
+      debounceChanged() {
+        this.ionChange = Object(_helpers_46f4a262_js__WEBPACK_IMPORTED_MODULE_2__["d"])(this.ionChange, this.debounce);
       }
 
-      _createClass(InfiniteScrollContent, [{
-        key: "componentDidLoad",
-        value: function componentDidLoad() {
-          if (this.loadingSpinner === undefined) {
-            var mode = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["c"])(this);
-            this.loadingSpinner = _config_3c7f3790_js__WEBPACK_IMPORTED_MODULE_1__["b"].get('infiniteLoadingSpinner', _config_3c7f3790_js__WEBPACK_IMPORTED_MODULE_1__["b"].get('spinner', mode === 'ios' ? 'lines' : 'crescent'));
-          }
-        }
-      }, {
-        key: "render",
-        value: function render() {
-          var _class2;
+      disabledChanged() {
+        this.emitStyle();
+      }
+      /**
+       * Update the native input element when the value changes
+       */
 
-          var mode = Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["c"])(this);
-          return Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
-            class: (_class2 = {}, _defineProperty(_class2, mode, true), _defineProperty(_class2, "infinite-scroll-content-".concat(mode), true), _class2)
-          }, Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
-            class: "infinite-loading"
-          }, this.loadingSpinner && Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
-            class: "infinite-loading-spinner"
-          }, Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-spinner", {
-            name: this.loadingSpinner
-          })), this.loadingText && Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
-            class: "infinite-loading-text",
-            innerHTML: Object(_index_3476b023_js__WEBPACK_IMPORTED_MODULE_2__["s"])(this.loadingText)
-          })));
-        }
-      }], [{
-        key: "style",
-        get: function get() {
-          return "ion-infinite-scroll-content{display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column;-ms-flex-pack:center;justify-content:center;min-height:84px;text-align:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.infinite-loading{margin-left:0;margin-right:0;margin-top:0;margin-bottom:32px;display:none;width:100%}.infinite-loading-text{margin-left:32px;margin-right:32px;margin-top:4px;margin-bottom:0}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.infinite-loading-text{margin-left:unset;margin-right:unset;-webkit-margin-start:32px;margin-inline-start:32px;-webkit-margin-end:32px;margin-inline-end:32px}}.infinite-scroll-loading ion-infinite-scroll-content>.infinite-loading{display:block}.infinite-scroll-content-md .infinite-loading-text{color:var(--ion-color-step-600,#666)}.infinite-scroll-content-md .infinite-loading-spinner .spinner-crescent circle,.infinite-scroll-content-md .infinite-loading-spinner .spinner-lines-md line,.infinite-scroll-content-md .infinite-loading-spinner .spinner-lines-small-md line{stroke:var(--ion-color-step-600,#666)}.infinite-scroll-content-md .infinite-loading-spinner .spinner-bubbles circle,.infinite-scroll-content-md .infinite-loading-spinner .spinner-circles circle,.infinite-scroll-content-md .infinite-loading-spinner .spinner-dots circle{fill:var(--ion-color-step-600,#666)}";
-        }
-      }]);
 
-      return InfiniteScrollContent;
-    }();
+      valueChanged() {
+        this.emitStyle();
+        this.ionChange.emit({
+          value: this.value == null ? this.value : this.value.toString()
+        });
+      }
+
+      connectedCallback() {
+        this.emitStyle();
+        this.debounceChanged();
+        {
+          this.el.dispatchEvent(new CustomEvent('ionInputDidLoad', {
+            detail: this.el
+          }));
+        }
+      }
+
+      disconnectedCallback() {
+        {
+          document.dispatchEvent(new CustomEvent('ionInputDidUnload', {
+            detail: this.el
+          }));
+        }
+      }
+      /**
+       * Sets focus on the specified `ion-input`. Use this method instead of the global
+       * `input.focus()`.
+       */
+
+
+      async setFocus() {
+        if (this.nativeInput) {
+          this.nativeInput.focus();
+        }
+      }
+      /**
+       * Returns the native `<input>` element used under the hood.
+       */
+
+
+      getInputElement() {
+        return Promise.resolve(this.nativeInput);
+      }
+
+      shouldClearOnEdit() {
+        const {
+          type,
+          clearOnEdit
+        } = this;
+        return clearOnEdit === undefined ? type === 'password' : clearOnEdit;
+      }
+
+      getValue() {
+        return typeof this.value === 'number' ? this.value.toString() : (this.value || '').toString();
+      }
+
+      emitStyle() {
+        this.ionStyle.emit({
+          'interactive': true,
+          'input': true,
+          'has-placeholder': this.placeholder != null,
+          'has-value': this.hasValue(),
+          'has-focus': this.hasFocus,
+          'interactive-disabled': this.disabled
+        });
+      }
+
+      focusChanged() {
+        // If clearOnEdit is enabled and the input blurred but has a value, set a flag
+        if (!this.hasFocus && this.shouldClearOnEdit() && this.hasValue()) {
+          this.didBlurAfterEdit = true;
+        }
+      }
+
+      hasValue() {
+        return this.getValue().length > 0;
+      }
+
+      render() {
+        const mode = Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["c"])(this);
+        const value = this.getValue();
+        const labelId = this.inputId + '-lbl';
+        const label = Object(_helpers_46f4a262_js__WEBPACK_IMPORTED_MODULE_2__["f"])(this.el);
+
+        if (label) {
+          label.id = labelId;
+        }
+
+        return Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
+          "aria-disabled": this.disabled ? 'true' : null,
+          class: Object.assign(Object.assign({}, Object(_theme_18cbe2cc_js__WEBPACK_IMPORTED_MODULE_3__["c"])(this.color)), {
+            [mode]: true,
+            'has-value': this.hasValue(),
+            'has-focus': this.hasFocus
+          })
+        }, Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("input", {
+          class: "native-input",
+          ref: input => this.nativeInput = input,
+          "aria-labelledby": labelId,
+          disabled: this.disabled,
+          accept: this.accept,
+          autoCapitalize: this.autocapitalize,
+          autoComplete: this.autocomplete,
+          autoCorrect: this.autocorrect,
+          autoFocus: this.autofocus,
+          inputMode: this.inputmode,
+          min: this.min,
+          max: this.max,
+          minLength: this.minlength,
+          maxLength: this.maxlength,
+          multiple: this.multiple,
+          name: this.name,
+          pattern: this.pattern,
+          placeholder: this.placeholder || '',
+          readOnly: this.readonly,
+          required: this.required,
+          spellCheck: this.spellcheck,
+          step: this.step,
+          size: this.size,
+          type: this.type,
+          value: value,
+          onInput: this.onInput,
+          onBlur: this.onBlur,
+          onFocus: this.onFocus,
+          onKeyDown: this.onKeydown
+        }), this.clearInput && !this.readonly && !this.disabled && Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["h"])("button", {
+          type: "button",
+          class: "input-clear-icon",
+          tabindex: "-1",
+          onTouchStart: this.clearTextInput,
+          onMouseDown: this.clearTextInput
+        }));
+      }
+
+      get el() {
+        return Object(_core_0a8d4d2e_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this);
+      }
+
+      static get watchers() {
+        return {
+          "debounce": ["debounceChanged"],
+          "disabled": ["disabledChanged"],
+          "value": ["valueChanged"]
+        };
+      }
+
+      static get style() {
+        return ".sc-ion-input-ios-h{--placeholder-color:initial;--placeholder-font-style:initial;--placeholder-font-weight:initial;--placeholder-opacity:.5;--padding-top:0;--padding-end:0;--padding-bottom:0;--background:transparent;--color:initial;display:-ms-flexbox;display:flex;position:relative;-ms-flex:1;flex:1;-ms-flex-align:center;align-items:center;width:100%;padding:0!important;background:var(--background);color:var(--color);font-family:var(--ion-font-family,inherit);z-index:2}ion-item.sc-ion-input-ios-h:not(.item-label), ion-item:not(.item-label) .sc-ion-input-ios-h{--padding-start:0}.ion-color.sc-ion-input-ios-h{color:var(--ion-color-base)}.native-input.sc-ion-input-ios{border-radius:var(--border-radius);padding-left:var(--padding-start);padding-right:var(--padding-end);padding-top:var(--padding-top);padding-bottom:var(--padding-bottom);font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-indent:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;display:inline-block;-ms-flex:1;flex:1;width:100%;max-width:100%;max-height:100%;border:0;outline:none;background:transparent;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-appearance:none;-moz-appearance:none;appearance:none}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.native-input.sc-ion-input-ios{padding-left:unset;padding-right:unset;-webkit-padding-start:var(--padding-start);padding-inline-start:var(--padding-start);-webkit-padding-end:var(--padding-end);padding-inline-end:var(--padding-end)}}.native-input.sc-ion-input-ios::-webkit-input-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.native-input.sc-ion-input-ios::-moz-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.native-input.sc-ion-input-ios:-ms-input-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.native-input.sc-ion-input-ios::-ms-input-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.native-input.sc-ion-input-ios::placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.native-input.sc-ion-input-ios:-webkit-autofill{background-color:transparent}.native-input.sc-ion-input-ios:invalid{-webkit-box-shadow:none;box-shadow:none}.native-input.sc-ion-input-ios::-ms-clear{display:none}.native-input[disabled].sc-ion-input-ios{opacity:.4}.cloned-input.sc-ion-input-ios{left:0;top:0;position:absolute;pointer-events:none}[dir=rtl].sc-ion-input-ios-h .cloned-input.sc-ion-input-ios, [dir=rtl] .sc-ion-input-ios-h .cloned-input.sc-ion-input-ios, [dir=rtl].sc-ion-input-ios .cloned-input.sc-ion-input-ios{left:unset;right:unset;right:0}.input-clear-icon.sc-ion-input-ios{margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;padding-left:0;padding-right:0;padding-top:0;padding-bottom:0;background-position:50%;border:0;outline:none;background-color:transparent;background-repeat:no-repeat;visibility:hidden;-webkit-appearance:none;-moz-appearance:none;appearance:none}.has-focus.has-value.sc-ion-input-ios-h .input-clear-icon.sc-ion-input-ios{visibility:visible}.has-focus.sc-ion-input-ios-h{pointer-events:none}.has-focus.sc-ion-input-ios-h a.sc-ion-input-ios, .has-focus.sc-ion-input-ios-h button.sc-ion-input-ios, .has-focus.sc-ion-input-ios-h input.sc-ion-input-ios{pointer-events:auto}.sc-ion-input-ios-h{--padding-top:10px;--padding-end:10px;--padding-bottom:10px;--padding-start:0;font-size:inherit}.item-label-floating.sc-ion-input-ios-h, .item-label-floating .sc-ion-input-ios-h, .item-label-stacked.sc-ion-input-ios-h, .item-label-stacked .sc-ion-input-ios-h{--padding-top:8px;--padding-bottom:8px;--padding-start:0px}.input-clear-icon.sc-ion-input-ios{background-image:url(\"data:image/svg+xml;charset=utf-8,<svg%20xmlns=\'http://www.w3.org/2000/svg\'%20viewBox=\'0%200%20512%20512\'><path%20fill=\'var(--ion-color-step-600,%20%23666666)\'%20d=\'M403.1,108.9c-81.2-81.2-212.9-81.2-294.2,0s-81.2,212.9,0,294.2c81.2,81.2,212.9,81.2,294.2,0S484.3,190.1,403.1,108.9z%20M352,340.2L340.2,352l-84.4-84.2l-84,83.8L160,339.8l84-83.8l-84-83.8l11.8-11.8l84,83.8l84.4-84.2l11.8,11.8L267.6,256L352,340.2z\'/></svg>\");width:30px;height:30px;background-size:18px}";
+      }
+
+    };
+    let inputIds = 0;
     /***/
-
   }
 }]);
 //# sourceMappingURL=28-es5.js.map

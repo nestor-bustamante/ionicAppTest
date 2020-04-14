@@ -1,8 +1,8 @@
 {
   "_from": "cordova-plugin-facebook4",
-  "_id": "cordova-plugin-facebook4@6.2.0",
+  "_id": "cordova-plugin-facebook4@6.3.0",
   "_inBundle": false,
-  "_integrity": "sha512-PDqm4Qzi126RwD23aIgefuHui2UQic0Y0ApDcC3OLy5D6QMuFlirgzwqycJeB35B4I8cj/7EdKoyDLj1AiTJ2Q==",
+  "_integrity": "sha512-tEwyttR4ta2KFNjVMYYjUrEbMFltexho0P9k8k1WBBarvzwXXUoFJKPYxLPoS3tYfffF6YSG2o0/N4qEu1E1uA==",
   "_location": "/cordova-plugin-facebook4",
   "_phantomChildren": {},
   "_requested": {
@@ -19,10 +19,10 @@
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/cordova-plugin-facebook4/-/cordova-plugin-facebook4-6.2.0.tgz",
-  "_shasum": "0d2427556343a71cfdd96d4bd25e095371c6bb46",
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-facebook4/-/cordova-plugin-facebook4-6.3.0.tgz",
+  "_shasum": "ab34589b8ab8d0f9e9c6b335a0a128fc38ab78e6",
   "_spec": "cordova-plugin-facebook4",
-  "_where": "/Users/nestorbustamante/Documents/PROJECTS/AppTest",
+  "_where": "/Users/nestorbustamante/Documents/PROJECTS/videoApp",
   "bugs": {
     "url": "https://github.com/jeduan/cordova-plugin-facebook4/issues"
   },
@@ -55,5 +55,5 @@
     "type": "git",
     "url": "git+https://github.com/jeduan/cordova-plugin-facebook4.git"
   },
-  "version": "6.2.0"
+  "version": "6.3.0"
 }

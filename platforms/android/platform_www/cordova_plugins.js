@@ -1,35 +1,11 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
   module.exports = [
     {
-      "id": "cordova-plugin-browsertab.BrowserTab",
-      "file": "plugins/cordova-plugin-browsertab/www/browsertab.js",
-      "pluginId": "cordova-plugin-browsertab",
-      "clobbers": [
-        "cordova.plugins.browsertab"
-      ]
-    },
-    {
-      "id": "cordova-plugin-buildinfo.BuildInfo",
-      "file": "plugins/cordova-plugin-buildinfo/www/buildinfo.js",
-      "pluginId": "cordova-plugin-buildinfo",
-      "clobbers": [
-        "BuildInfo"
-      ]
-    },
-    {
       "id": "cordova-plugin-device.device",
       "file": "plugins/cordova-plugin-device/www/device.js",
       "pluginId": "cordova-plugin-device",
       "clobbers": [
         "device"
-      ]
-    },
-    {
-      "id": "cordova-plugin-email-composer.EmailComposer",
-      "file": "plugins/cordova-plugin-email-composer/www/email_composer.js",
-      "pluginId": "cordova-plugin-email-composer",
-      "clobbers": [
-        "cordova.plugins.email"
       ]
     },
     {
@@ -88,30 +64,6 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       ]
     },
     {
-      "id": "cordova-plugin-native-spinner.SpinnerDialog",
-      "file": "plugins/cordova-plugin-native-spinner/www/SpinnerDialog.js",
-      "pluginId": "cordova-plugin-native-spinner",
-      "clobbers": [
-        "SpinnerDialog"
-      ]
-    },
-    {
-      "id": "cordova-plugin-sim.Sim",
-      "file": "plugins/cordova-plugin-sim/www/sim.js",
-      "pluginId": "cordova-plugin-sim",
-      "merges": [
-        "window.plugins.sim"
-      ]
-    },
-    {
-      "id": "cordova-plugin-sim.SimAndroid",
-      "file": "plugins/cordova-plugin-sim/www/android/sim.js",
-      "pluginId": "cordova-plugin-sim",
-      "merges": [
-        "window.plugins.sim"
-      ]
-    },
-    {
       "id": "cordova-plugin-splashscreen.SplashScreen",
       "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
       "pluginId": "cordova-plugin-splashscreen",
@@ -126,41 +78,18 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "clobbers": [
         "window.StatusBar"
       ]
-    },
-    {
-      "id": "cordova-plugin-streaming-media.StreamingMedia",
-      "file": "plugins/cordova-plugin-streaming-media/www/StreamingMedia.js",
-      "pluginId": "cordova-plugin-streaming-media",
-      "clobbers": [
-        "streamingMedia"
-      ]
-    },
-    {
-      "id": "cordova-universal-links-plugin.universalLinks",
-      "file": "plugins/cordova-universal-links-plugin/www/universal_links.js",
-      "pluginId": "cordova-universal-links-plugin",
-      "clobbers": [
-        "universalLinks"
-      ]
     }
   ];
   module.exports.metadata = {
-    "cordova-plugin-browsertab": "0.2.0",
-    "cordova-plugin-buildinfo": "4.0.0",
     "cordova-plugin-device": "2.0.2",
-    "cordova-plugin-email-composer": "0.9.2",
-    "cordova-plugin-facebook4": "6.2.0",
+    "cordova-plugin-facebook4": "6.3.0",
     "cordova-plugin-geolocation": "4.0.2",
     "cordova-plugin-googleplus": "8.4.0",
     "cordova-plugin-inappbrowser": "3.2.0",
     "cordova-plugin-ionic-keyboard": "2.2.0",
     "cordova-plugin-ionic-webview": "4.1.3",
-    "cordova-plugin-native-spinner": "1.1.3",
-    "cordova-plugin-sim": "1.3.3",
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "2.4.2",
-    "cordova-plugin-streaming-media": "2.2.0",
-    "cordova-plugin-whitelist": "1.3.3",
-    "cordova-universal-links-plugin": "1.2.1"
+    "cordova-plugin-whitelist": "1.3.4"
   };
 });

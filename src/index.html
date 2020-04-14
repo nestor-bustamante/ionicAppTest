@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="ios">
+<html lang="en">
 
 <head>
   <meta charset="utf-8" />
@@ -16,12 +16,42 @@
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+  <style>
+    .userData.leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content .user-map {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin: 9px -19px 0 -19px;
+      padding: 13px 13px 0 13px;
+      border-top: 1px solid #ddd;
+    }
+
+    .userData.leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content .user-map .user-img {
+      flex: none;
+      padding: 0 10px 0 0;
+      max-width: 34px;
+      box-sizing: border-box;
+    }
+    
+    .userData.leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content .user-map .user-img img {
+      width: 24px;
+      height: 24px;
+      overflow: hidden;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .userData.leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content .user-map .user-name {
+      font: 300 10px 'Roboto';
+    }
+
+  </style>
+
 </head>
 
 <body>
   <app-root></app-root>
-
-  <script src="https://apis.google.com/js/api.js"></script>
 </body>
 
 </html>
